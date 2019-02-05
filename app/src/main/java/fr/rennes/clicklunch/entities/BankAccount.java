@@ -12,4 +12,6 @@ public class BankAccount extends EntityBase {
     private String bic;
     private String bankName;
     private String titularName;
+
+    private Shop shop;
 }

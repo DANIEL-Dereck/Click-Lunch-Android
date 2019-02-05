@@ -1,5 +1,7 @@
 package fr.rennes.clicklunch.entities;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
@@ -15,4 +17,9 @@ public class Shop extends EntityBase {
     private String email;
     private double longitude;
     private double latitude;
+
+    private Professional professional;
+    private BankAccount bankAccount;
+    private List<Configuration> configurations;
+    private List<Category> categories;
 }

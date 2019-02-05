@@ -13,4 +13,6 @@ public abstract class User extends EntityBase{
     protected String password;
     protected String email;
     protected String phoneNumber;
+
+    protected Address address;
 }

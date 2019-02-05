@@ -16,4 +16,6 @@ public class Address extends EntityBase {
     private String addOn;
     private String streetName;
     private City city;
+
+    private User user;
 }

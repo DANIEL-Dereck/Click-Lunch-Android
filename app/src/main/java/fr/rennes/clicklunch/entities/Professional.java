@@ -6,6 +6,7 @@ import lombok.experimental.Accessors;
 
 @Accessors
 @NoArgsConstructor
-//@AllArgsConstructor
+@AllArgsConstructor
 public class Professional extends User{
+    private Shop shop;
 }

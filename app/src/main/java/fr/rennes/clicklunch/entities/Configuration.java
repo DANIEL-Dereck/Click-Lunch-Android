@@ -10,6 +10,7 @@ import lombok.experimental.Accessors;
 public class Configuration extends EntityBase {
     private String key;
     private String value;
+    private Shop shop;
 
     public Configuration setConfiguration(String key, String value)
     {
