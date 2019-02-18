@@ -21,5 +21,5 @@ public class Shop extends EntityBase {
     private Professional professional;
     private BankAccount bankAccount;
     private List<Configuration> configurations;
-    private List<Category> categories;
+    private List<CategoryShop> categories;
 }

@@ -11,4 +11,5 @@ public class Product extends Menu {
     private String name;
     private double price;
     private String description;
+    private Category category;
 }

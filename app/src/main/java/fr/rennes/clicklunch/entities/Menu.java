@@ -9,7 +9,7 @@ import lombok.experimental.Accessors;
 @Accessors
 @NoArgsConstructor
 @AllArgsConstructor
-public class Menu extends EntityBase {
+public abstract class Menu extends EntityBase {
     private List<Product> products;
 
     public Menu addProduct(Product product)

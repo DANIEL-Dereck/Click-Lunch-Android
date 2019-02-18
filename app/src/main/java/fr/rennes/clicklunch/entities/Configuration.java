@@ -33,4 +33,5 @@ public class Configuration extends EntityBase {
     {
         return this.setConfiguration(key, Boolean.toString(value));
     }
+
 }

@@ -6,6 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity">
 
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Switch"
+        tools:layout_editor_absoluteX="312dp"
+        tools:layout_editor_absoluteY="29dp" />
 
+    <ScrollView
+        android:layout_width="395dp"
+        android:layout_height="659dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="64dp">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
 </android.support.constraint.ConstraintLayout>

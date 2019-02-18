@@ -9,4 +9,7 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 public class Bill extends EntityBase {
     private int number;
+    private Command command;
+    private Shop shop;
+    private Client client;
 }
