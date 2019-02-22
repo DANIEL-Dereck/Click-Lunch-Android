@@ -1,9 +1,16 @@
+/*************************************
+ * Author: Dereck Daniel <daniel.dereck@gmail.com>
+ * Date: 22/02/2019
+ *************************************/
+
 package fr.rennes.clicklunch.contrat.entities;
 
+import fr.rennes.clicklunch.contrat.BaseContract;
+
 /**
- * Contract for EntityBase.
+ * Contract class for EntityBase.
  */
-public abstract class EntityBaseContract {
+public abstract class EntityBaseContract extends BaseContract {
     /**
      * Column id.
      */

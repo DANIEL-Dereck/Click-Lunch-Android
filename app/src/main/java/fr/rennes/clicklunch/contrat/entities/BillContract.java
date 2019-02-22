@@ -3,11 +3,10 @@
  * Date: 22/02/2019
  *************************************/
 
-package fr.rennes.clicklunch.enums;
+package fr.rennes.clicklunch.contrat.entities;
 
-public enum State {
-    CANCELED,
-    FINISHED,
-    ACCEPTED,
-    PAID,
+/**
+ * Contract class for Bill.
+ */
+public final class BillContract extends EntityBaseContract {
 }

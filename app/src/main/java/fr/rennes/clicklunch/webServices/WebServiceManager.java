@@ -13,12 +13,18 @@ import com.loopj.android.http.RequestParams;
 
 import org.json.JSONObject;
 
+import java.net.URL;
+
 import cz.msebera.android.httpclient.Header;
 
 /**
  * Web service Manager.
  */
 public class WebServiceManager {
+    public static final String TAG = "WebServiceManager";
+    public static final String API_DEFAULT_ROUTE = "http://localhost:80/api/";
+    protected static final WebServiceManager instance = new WebServiceManager();
+
     public enum WSType
     {
         PUT,
@@ -27,8 +33,6 @@ public class WebServiceManager {
         DELETE
     }
 
-    public static final String TAG = "WebServiceManager";
-    protected static final WebServiceManager instance = new WebServiceManager();
     private WebServiceManager() {}
 
     public static WebServiceManager getInstance()
@@ -46,12 +50,8 @@ public class WebServiceManager {
     {
         boolean result = false;
 
-        Log.i(TAG,"Check if is connect.");
-
-        // récupération du manager :
+        Log.i(TAG,"Check if webservice is connect.");
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        //récupération de l'état de la connexion :
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
 
         if (networkInfo != null)
@@ -62,42 +62,35 @@ public class WebServiceManager {
         return result;
     }
 
-    public static void callWS(WSType type) {
-        RequestParams requestParams = new RequestParams();
-        requestParams.put("parametre", "1234");
+    public static void callWS(WSType type, String route, RequestParams requestParams) {
+        String finalRoute = API_DEFAULT_ROUTE + route;
+//        requestParams.put(requestParams, "1234");
 
-        if (type == WSType.POST)
-        {
-            post(requestParams);
+        if (type == WSType.POST) {
+            post(requestParams, finalRoute);
+        } else if (type == WSType.GET) {
+            get(requestParams, finalRoute);
+        } else if (type == WSType.PUT) {
+            put(requestParams, finalRoute);
+        } else if (type == WSType.DELETE) {
+            delete(requestParams, finalRoute);
         }
     }
 
-    private static void post(RequestParams requestParams)
+    private static void post(RequestParams requestParams, String route)
     {
-        getClient().post("", requestParams, new AsyncHttpResponseHandler()
+        getClient().post(route, requestParams, new AsyncHttpResponseHandler()
         {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-//                String retour = new String(response);
-//                Log.i(TAG, retour);
-
-                // Recupérer un retour ett le mettre en Json
                 String retour = new String(responseBody);
                 try
                 {
                     JSONObject jsonObject = new JSONObject(retour);
-                    Log.i(TAG, jsonObject.getString("info"));
-
-                    Bitmap bitmap = BitmapFactory.decodeByteArray(
-                            responseBody,
-                            0,
-                            responseBody.length);
-
                 }
                 catch (Exception e)
                 {
                     e.printStackTrace();
-
                 }
             }
 
@@ -109,4 +102,60 @@ public class WebServiceManager {
 
     }
 
+    private static void put(RequestParams requestParams, String route) {
+        getClient().put(route, requestParams, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                String retour = new String(responseBody);
+                try {
+                    JSONObject jsonObject = new JSONObject(retour);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Log.e(TAG, error.toString());
+            }
+        });
+    }
+
+    private static void get(RequestParams requestParams, String route) {
+        getClient().get(route, requestParams, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                String retour = new String(responseBody);
+                try {
+                    JSONObject jsonObject = new JSONObject(retour);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Log.e(TAG, error.toString());
+            }
+        });
+    }
+
+    private static void delete(RequestParams requestParams, String route) {
+        getClient().get(route, requestParams, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                String retour = new String(responseBody);
+                try {
+                    JSONObject jsonObject = new JSONObject(retour);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Log.e(TAG, error.toString());
+            }
+        });
+    }
 }

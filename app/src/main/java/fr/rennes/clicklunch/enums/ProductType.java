@@ -1,10 +1,15 @@
+/*************************************
+ * Author: Dereck Daniel <daniel.dereck@gmail.com>
+ * Date: 22/02/2019
+ *************************************/
+
 package fr.rennes.clicklunch.enums;
 
 public enum ProductType {
-    STARTER, // 0
-    DISH, // 1
-    DESSERT, // 2
-    DRINK, // 3
-    OTHER, // 4
-    MENU, // 5
+    STARTER,
+    DISH,
+    DESSERT,
+    DRINK,
+    OTHER,
+    MENU,
 }

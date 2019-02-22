@@ -6,10 +6,7 @@
 package fr.rennes.clicklunch.contrat.entities;
 
 /**
- * Contract class for Address.
+ * Contract class for BankAccount.
  */
-public final class AddressContract extends EntityBaseContract {
-    public static final String TABLE_NAME = "address";
-
-    public static final String COLUMN = "";
+public final class BankAccountContract extends EntityBaseContract {
 }
