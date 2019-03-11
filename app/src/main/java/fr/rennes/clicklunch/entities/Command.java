@@ -6,15 +6,17 @@
 package fr.rennes.clicklunch.entities;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 /**
  * Class Command.
  */
-@Accessors
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
+@Accessors
 public class Command extends EntityBase {
     private int number;
 }

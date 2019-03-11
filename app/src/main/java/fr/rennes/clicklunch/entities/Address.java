@@ -6,15 +6,17 @@
 package fr.rennes.clicklunch.entities;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 /**
  * Class Address.
  */
-@Accessors
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
+@Accessors
 public class Address extends EntityBase {
     private String streetNumber;
     private String addOn;

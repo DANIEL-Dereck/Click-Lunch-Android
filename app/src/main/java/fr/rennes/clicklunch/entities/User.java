@@ -6,15 +6,17 @@
 package fr.rennes.clicklunch.entities;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 /**
  * Class User.
  */
-@Accessors
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
+@Accessors
 public abstract class User extends EntityBase{
     protected String firstname;
     protected String lastname;

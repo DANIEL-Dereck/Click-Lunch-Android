@@ -1,8 +1,6 @@
-package fr.rennes.clicklunch.webServices;
+package fr.rennes.clicklunch.web_services;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
@@ -12,8 +10,6 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import org.json.JSONObject;
-
-import java.net.URL;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -30,7 +26,8 @@ public class WebServiceManager {
         PUT,
         POST,
         GET,
-        DELETE
+        DELETE,
+        PATCH
     }
 
     private WebServiceManager() {}

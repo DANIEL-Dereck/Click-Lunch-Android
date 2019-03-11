@@ -6,15 +6,17 @@
 package fr.rennes.clicklunch.entities;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 /**
  * Class Professional.
  */
-@Accessors
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
+@Accessors
 public class Professional extends User{
     private Shop shop;
 }

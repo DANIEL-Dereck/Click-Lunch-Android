@@ -8,15 +8,17 @@ package fr.rennes.clicklunch.entities;
 import org.joda.time.DateTime;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 /**
  * Class EntityBase.
  */
-@Accessors
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
+@Accessors
 public abstract class EntityBase {
     protected int id;
     protected boolean isDeleted;

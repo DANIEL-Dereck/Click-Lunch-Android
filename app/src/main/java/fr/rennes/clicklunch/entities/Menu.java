@@ -8,15 +8,17 @@ package fr.rennes.clicklunch.entities;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 /**
  * Class Menu.
  */
-@Accessors
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
+@Accessors
 public abstract class Menu extends EntityBase {
     private List<Product> products;
 
