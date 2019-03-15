@@ -6,7 +6,7 @@
     <dimen name="dimenPaddingSearchBar">12dp</dimen>
 
     <dimen name="dimenMarginItemTopBottom">2dp</dimen>
-    <dimen name="dimenMarginItemLeftRight">5dp</dimen>
+    <dimen name="dimenMarginItemLeftRight">25dp</dimen>
 
 
     <dimen name="dimenMarginItemPhoto">45dp</dimen>
