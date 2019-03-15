@@ -18,7 +18,7 @@ import cz.msebera.android.httpclient.Header;
  */
 public class WebServiceManager {
     public static final String TAG = "WebServiceManager";
-    public static final String API_DEFAULT_ROUTE = "http://localhost:80/api/";
+    public static final String API_DEFAULT_ROUTE = "https://clickandlunch.herokuapp.com/api/v1/";
     protected static final WebServiceManager instance = new WebServiceManager();
 
     public enum WSType

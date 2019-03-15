@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Click&amp;Lunch</string>
     <string name="app_hello">Bonjour</string>
+    <string name="app_list_shop_search">Restaurant, catégorie</string>
 </resources>

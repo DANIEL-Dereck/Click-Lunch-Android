@@ -3,49 +3,70 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="250dp">
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
 
     <TextView
         android:id="@+id/tv_list_shop_item_name"
-        android:layout_margin="@dimen/dimenMarginSearchBar"
         android:textColor="@color/colorOrangeText"
+        android:layout_marginTop="@dimen/dimenMarginItemTopBottom"
+        android:layout_marginBottom="@dimen/dimenMarginItemTopBottom"
+        android:layout_marginLeft="@dimen/dimenMarginItemLeftRight"
+        android:layout_marginRight="@dimen/dimenMarginItemLeftRight"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/dimenTextSize"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_gravity="top"
         />
 
     <ImageView
         android:id="@+id/iv_list_shop_item_image"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
+        android:layout_height="150dp"
+        android:background="@color/colorImageEmpty"
         android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dimenMarginItemTopBottom"
+        android:layout_marginBottom="@dimen/dimenMarginItemTopBottom"
+        android:layout_marginLeft="@dimen/dimenMarginItemPhoto"
+        android:layout_marginRight="@dimen/dimenMarginItemPhoto"
         />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom">
-        <TextView
-            android:id="@+id/tv_list_shop_item_distance"
-            android:layout_margin="@dimen/dimenMarginSearchBar"
-            android:textColor="@color/colorBlack"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/dimenTextSize"
-            android:layout_weight="1"
-            />
+            android:orientation="horizontal"
+            >
 
-        <TextView
-            android:id="@+id/tv_list_shop_item_category"
-            android:layout_margin="@dimen/dimenMarginSearchBar"
-            android:textColor="@color/colorBlack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/dimenTextSize"
-            android:layout_weight="1"
-            />
+            <TextView
+                android:id="@+id/tv_list_shop_item_distance"
+                android:layout_marginTop="@dimen/dimenMarginItemTopBottom"
+                android:layout_marginBottom="@dimen/dimenMarginItemTopBottom"
+                android:layout_marginLeft="@dimen/dimenMarginItemLeftRight"
+                android:layout_marginRight="@dimen/dimenMarginItemLeftRight"
+                android:textColor="@color/colorBlack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/dimenTextSize"
+                android:layout_weight="1"
+                />
+
+            <TextView
+                android:id="@+id/tv_list_shop_item_category"
+                android:layout_marginTop="@dimen/dimenMarginItemTopBottom"
+                android:layout_marginBottom="@dimen/dimenMarginItemTopBottom"
+                android:layout_marginLeft="@dimen/dimenMarginItemLeftRight"
+                android:layout_marginRight="@dimen/dimenMarginItemLeftRight"
+                android:textColor="@color/colorBlack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/dimenTextSize"
+                android:layout_weight="1"
+                />
+        </LinearLayout>
     </LinearLayout>
 </FrameLayout>

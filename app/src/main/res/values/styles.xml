@@ -1,18 +1,12 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="android:Theme.Material.Light.DarkActionBar">
+    <style name="AppTheme" parent="android:Theme.Material.NoActionBar">
         <!-- Customize your theme here. -->
-4        <item name="android:colorPrimary">@color/colorGreen</item>
-        <item name="android:colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="android:colorAccent">@color/colorAccent</item>
-    </style>
-
-    <style name="ClickAndLunchTheme" parent="android:Theme.Material.Light.DarkActionBar">
+        <item name="windowNoTitle">true</item>
         <item name="android:colorPrimary">@color/colorGreenMain</item>
         <item name="android:colorPrimaryDark">@color/colorGreenMainDark</item>
         <item name="android:colorAccent">@color/colorOrangeText</item>
-        <item name="android:editTextStyle">@drawable/search_bar_item</item>
     </style>
 
 </resources>

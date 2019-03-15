@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Layout size -->
-    <dimen name="dimenMarginSearchBar">25dp</dimen>
+    <dimen name="dimenDefault">0dp</dimen>
+    <dimen name="dimenMarginSearchBar">10dp</dimen>
+    <dimen name="dimenPaddingSearchBar">12dp</dimen>
+
+    <dimen name="dimenMarginItemTopBottom">2dp</dimen>
+    <dimen name="dimenMarginItemLeftRight">5dp</dimen>
+
+
+    <dimen name="dimenMarginItemPhoto">45dp</dimen>
+
+    <dimen name="searchBarRadius">5dp</dimen>
 
     <!-- Text size -->
     <dimen name="dimenTextSize">18sp</dimen>

@@ -2,4 +2,5 @@
 <resources>
     <string name="app_name">Click&amp;Lunch</string>
     <string name="app_hello">Hello</string>
+    <string name="app_list_shop_search">Shop, Categorie</string>
 </resources>
