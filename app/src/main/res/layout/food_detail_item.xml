@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:id="@+id/a"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@color/colorImageEmpty"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dimenMarginItemTopBottom"
+        android:layout_marginBottom="@dimen/dimenMarginItemTopBottom"
+        android:layout_marginLeft="@dimen/dimenMarginItemFood"
+        android:layout_marginRight="@dimen/dimenMarginItemFood"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+    <TextView
+        android:id="@+id/b"
+        android:text="10 €"
+        android:textColor="@color/colorBlack"
+        android:layout_marginTop="@dimen/dimenMarginItemTopBottom"
+        android:layout_marginBottom="@dimen/dimenMarginItemTopBottom"
+        android:layout_marginLeft="@dimen/dimenMarginItemFood"
+        android:layout_marginRight="@dimen/dimenMarginItemFood"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/dimenTextSize"
+        android:layout_gravity="top"
+        app:layout_constraintTop_toBottomOf="@id/a"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+    <TextView
+        android:id="@+id/c"
+        android:text="Express"
+        android:textColor="@color/colorBlack"
+        android:layout_marginTop="@dimen/dimenMarginItemTopBottom"
+        android:layout_marginBottom="@dimen/dimenMarginItemTopBottom"
+        android:layout_marginLeft="@dimen/dimenMarginItemFood"
+        android:layout_marginRight="@dimen/dimenMarginItemFood"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/dimenTextSize"
+        android:layout_gravity="top"
+        app:layout_constraintTop_toBottomOf="@id/b"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+
+
+
+</android.support.constraint.ConstraintLayout>

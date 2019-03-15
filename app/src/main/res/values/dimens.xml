@@ -7,6 +7,7 @@
 
     <dimen name="dimenMarginItemTopBottom">2dp</dimen>
     <dimen name="dimenMarginItemLeftRight">5dp</dimen>
+    <dimen name="dimenMarginItemFood">27dp</dimen>
 
 
     <dimen name="dimenMarginItemPhoto">45dp</dimen>
@@ -15,4 +16,5 @@
 
     <!-- Text size -->
     <dimen name="dimenTextSize">18sp</dimen>
+    <dimen name="dimenTitleSize">24sp</dimen>
 </resources>
