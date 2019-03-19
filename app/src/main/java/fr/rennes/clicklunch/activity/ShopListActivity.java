@@ -66,7 +66,6 @@ public class ShopListActivity extends Activity {
         this.listShopItemAdapter = new ListShopItemAdapter(tmpShopList);
         this.lv_shop_list_shops.setHasFixedSize(true);
 
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         this.lv_shop_list_shops.setLayoutManager(layoutManager);
 
