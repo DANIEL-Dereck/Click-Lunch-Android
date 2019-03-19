@@ -16,6 +16,8 @@ import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
+import fr.rennes.clicklunch.App;
+
 public class GPSTracker extends Service implements LocationListener {
 
     private final Context mContext;
@@ -204,5 +206,23 @@ public class GPSTracker extends Service implements LocationListener {
     @Override
     public IBinder onBind(Intent arg0) {
         return null;
+    }
+
+    public static String getDistance(Location location)
+    {
+        String result = "";
+        Location currentLocation = new GPSTracker(App.getAppContext()).getLocation();
+
+        if (currentLocation != null  && location != null) {
+            int distanceBetween = (int)currentLocation.distanceTo(location);
+
+            if (distanceBetween / 1000 >= 1) {
+                result = (distanceBetween / 1000) + "," + (distanceBetween % 1000) + "km";
+            } else {
+                result = (int)currentLocation.distanceTo(location) + "m";
+            }
+        }
+
+        return result;
     }
 }
