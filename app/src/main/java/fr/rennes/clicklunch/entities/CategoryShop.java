@@ -17,6 +17,6 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @Data
 @Accessors
-public class CategoryShop {
+public class CategoryShop extends EntityBase {
     private String name;
 }

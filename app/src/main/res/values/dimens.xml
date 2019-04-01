@@ -9,15 +9,22 @@
 
     <!-- Layout size -->
     <dimen name="dimenDefault">0dp</dimen>
-    <dimen name="dimenMarginSearchBar">10dp</dimen>
+
+    <!-- Padding -->
     <dimen name="dimenPaddingSearchBar">12dp</dimen>
 
+    <!-- Margin -->
+    <dimen name="dimenMarginSearchBar">10dp</dimen>
     <dimen name="dimenMarginItemTopBottom">2dp</dimen>
     <dimen name="dimenMarginItemLeftRight">25dp</dimen>
-    <dimen name="dimenMarginItemFood">27dp</dimen>
 
+    <dimen name="dimenMarginItemLeft">2dp</dimen>
+    <dimen name="dimenMarginItemRight">2dp</dimen>
+
+    <dimen name="dimenMarginItemFood">27dp</dimen>
     <dimen name="dimenMarginItemPhoto">45dp</dimen>
 
+    <!-- Radius -->
     <dimen name="searchBarRadius">5dp</dimen>
 
     <!-- Text size -->

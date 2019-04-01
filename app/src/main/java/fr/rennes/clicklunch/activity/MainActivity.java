@@ -28,15 +28,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static final int MY_ACTIVITY_CODE = 0; // Activity code
 
     private Button btn_tmp_goto_shop_list;
-<<<<<<< Updated upstream
     private Button btn_tmp_goto_shop_detail;
-=======
     private Toolbar toolbar;
     private FloatingActionButton fab;
     private DrawerLayout drawer;
     private ActionBarDrawerToggle toggle;
     private NavigationView navigationView;
->>>>>>> Stashed changes
 
     public static Class<?> cls;
     public static int acCode;
@@ -44,14 +41,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void initComponent()
     {
         this.btn_tmp_goto_shop_list = findViewById(R.id.btn_tmp_goto_shop_list);
-<<<<<<< Updated upstream
         this.btn_tmp_goto_shop_detail = findViewById(R.id.btn_tmp_goto_shop_detail);
-=======
         this.toolbar = findViewById(R.id.toolbar);
         this.fab = findViewById(R.id.fab);
         this.drawer = findViewById(R.id.drawer_layout);
         this.navigationView = findViewById(R.id.nav_view);
->>>>>>> Stashed changes
     }
 
     private void goToView(Button btn, Class<?> clazz, int activityCode)
@@ -74,11 +68,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         initComponent();
-<<<<<<< Updated upstream
 //
 //        this.goToView(this.btn_tmp_goto_shop_list, ShopListActivity.class, ShopListActivity.MY_ACTIVITY_CODE);
 //        this.goToView(this.btn_tmp_goto_shop_detail, ShopDetailActivity.class, ShopDetailActivity.MY_ACTIVITY_CODE);
-=======
         setSupportActionBar(toolbar);
 
         this.fab.setOnClickListener(new View.OnClickListener() {
@@ -94,7 +86,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
->>>>>>> Stashed changes
 
         this.btn_tmp_goto_shop_list.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,14 +94,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 MainActivity.this.startActivityForResult(intent, ShopListActivity.MY_ACTIVITY_CODE);
             }
         } );
-
-        this.btn_tmp_goto_shop_detail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ShopDetailActivity.class);
-                MainActivity.this.startActivityForResult(intent, ShopDetailActivity.MY_ACTIVITY_CODE);
-            }
-        });
     }
 
     @Override

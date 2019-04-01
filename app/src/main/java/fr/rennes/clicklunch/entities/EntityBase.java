@@ -7,6 +7,8 @@ package fr.rennes.clicklunch.entities;
 
 import org.joda.time.DateTime;
 
+import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,7 +21,7 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @Data
 @Accessors
-public abstract class EntityBase {
+public abstract class EntityBase implements Serializable {
     protected int id;
     protected boolean isDeleted;
     protected DateTime createdAt;

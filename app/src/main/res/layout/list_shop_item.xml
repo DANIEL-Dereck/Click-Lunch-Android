@@ -39,6 +39,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/dimenMarginItemLeftRight"
+            android:paddingRight="@dimen/dimenMarginItemLeftRight"
             android:orientation="horizontal"
             >
 
@@ -46,12 +48,13 @@
                 android:id="@+id/tv_list_shop_item_distance"
                 android:layout_marginTop="@dimen/dimenMarginItemTopBottom"
                 android:layout_marginBottom="@dimen/dimenMarginItemTopBottom"
-                android:layout_marginLeft="@dimen/dimenMarginItemLeftRight"
-                android:layout_marginRight="@dimen/dimenMarginItemLeftRight"
+                android:layout_marginRight="@dimen/dimenMarginItemRight"
                 android:textColor="@color/colorBlack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/dimenTextSize"
+                android:textAlignment="viewStart"
+                android:maxLines="1"
                 android:layout_weight="1"
                 />
 
@@ -59,12 +62,12 @@
                 android:id="@+id/tv_list_shop_item_category"
                 android:layout_marginTop="@dimen/dimenMarginItemTopBottom"
                 android:layout_marginBottom="@dimen/dimenMarginItemTopBottom"
-                android:layout_marginLeft="@dimen/dimenMarginItemLeftRight"
-                android:layout_marginRight="@dimen/dimenMarginItemLeftRight"
+                android:layout_marginLeft="@dimen/dimenMarginItemRight"
                 android:textColor="@color/colorBlack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/dimenTextSize"
+                android:textAlignment="viewEnd"
                 android:layout_weight="1"
                 />
         </LinearLayout>
