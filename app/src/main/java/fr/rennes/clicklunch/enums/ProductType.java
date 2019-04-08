@@ -6,10 +6,10 @@
 package fr.rennes.clicklunch.enums;
 
 public enum ProductType {
+    MENU,
     STARTER,
     DISH,
     DESSERT,
     DRINK,
     OTHER,
-    MENU,
 }

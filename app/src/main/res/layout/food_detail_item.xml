@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <ImageView
-        android:id="@+id/a"
+        android:id="@+id/iv_food_detail_image"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:background="@color/colorImageEmpty"
@@ -18,7 +18,7 @@
         app:layout_constraintRight_toRightOf="parent"
         />
     <TextView
-        android:id="@+id/b"
+        android:id="@+id/tv_food_detail_price"
         android:text="10 €"
         android:textColor="@color/colorBlack"
         android:layout_marginTop="@dimen/dimenMarginItemTopBottom"
@@ -29,12 +29,12 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/dimenTextSize"
         android:layout_gravity="top"
-        app:layout_constraintTop_toBottomOf="@id/a"
+        app:layout_constraintTop_toBottomOf="@id/iv_food_detail_image"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         />
     <TextView
-        android:id="@+id/c"
+        android:id="@+id/tv_food_detail_name"
         android:text="Express"
         android:textColor="@color/colorBlack"
         android:layout_marginTop="@dimen/dimenMarginItemTopBottom"
@@ -45,12 +45,9 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/dimenTextSize"
         android:layout_gravity="top"
-        app:layout_constraintTop_toBottomOf="@id/b"
+        app:layout_constraintTop_toBottomOf="@id/tv_food_detail_price"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         />
-
-
-
 
 </android.support.constraint.ConstraintLayout>

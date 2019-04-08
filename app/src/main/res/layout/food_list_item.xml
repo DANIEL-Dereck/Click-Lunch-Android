@@ -8,15 +8,17 @@
         android:text="Formules"
         android:textSize="@dimen/dimenTextSize"
         android:textColor="@color/colorOrangeText"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/dimenDefault"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimenMarginSearchBar"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
-    <android.support.v7.widget.RecyclerView
 
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_food_list_products"
+        android:layout_width="@dimen/dimenDefault"
+        android:layout_height="@dimen/dimenDefault"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

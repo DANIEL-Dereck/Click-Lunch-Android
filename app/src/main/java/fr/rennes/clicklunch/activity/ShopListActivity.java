@@ -18,11 +18,11 @@ public class ShopListActivity extends Activity {
 
     public static final int MY_ACTIVITY_CODE = 1; // Activity code
 
-    public ArrayList<Shop> tmpShopList = new ArrayList<>();
-    private ListShopItemAdapter listShopItemAdapter;
-
     private RecyclerView lv_shop_list_shops;
     private EditText et_shop_list_search_bar;
+
+    public ArrayList<Shop> tmpShopList = new ArrayList<>();
+    private ListShopItemAdapter listShopItemAdapter;
 
     private void initTmpList()
     {

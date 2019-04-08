@@ -5,6 +5,7 @@
 
 package fr.rennes.clicklunch.entities;
 
+import fr.rennes.clicklunch.enums.ProductType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,4 +23,6 @@ public class Product extends Menu {
     private double price;
     private String description;
     private Category category;
+    private ProductType productType;
+    private Photo photo;
 }
