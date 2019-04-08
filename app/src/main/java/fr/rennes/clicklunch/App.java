@@ -21,7 +21,7 @@ public class App extends Application {
         context = this.getApplicationContext();
     }
 
-    public static Context getContext() {
+    public static Context getAppContext() {
         return context;
     }
 }

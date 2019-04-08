@@ -1,11 +1,6 @@
 package fr.rennes.clicklunch.adapter;
 
-import android.content.Context;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.net.Uri;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,10 +17,12 @@ import fr.rennes.clicklunch.entities.Shop;
 import fr.rennes.clicklunch.utils.GPSTracker;
 import fr.rennes.clicklunch.view_holder.ListShopViewHolder;
 
-public class ListShopItemAdapter extends RecyclerView.Adapter<ListShopViewHolder> {
+public class ListShopItemAdapter extends RecyclerView.Adapter<ListShopViewHolder>{
 
     public List<Shop> shops;
     public Location locUser;
+    private View.OnClickListener onClickListener;
+
     public ListShopItemAdapter() {
         this.shops = new ArrayList<>();
     }
@@ -38,37 +35,42 @@ public class ListShopItemAdapter extends RecyclerView.Adapter<ListShopViewHolder
     @NonNull
     @Override
     public ListShopViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View viewList = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.list_shop_item, viewGroup, false);
+        View viewList = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_shop_item, viewGroup, false);
+        ListShopViewHolder viewHolder = new ListShopViewHolder(viewList);
 
-        this.locUser = new GPSTracker(viewGroup.getContext()).getLocation();
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickListener.onClick(v);
+            }
+        });
 
-        return new ListShopViewHolder(viewList);
+        return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ListShopViewHolder listShopViewHolder, int i) {
-        Shop selectedShop = this.shops.get(i);
-        String distance = "";
+        final Shop selectedShop = this.shops.get(i);
 
         Location locShop = new Location("Shop");
         locShop.setLatitude(selectedShop.getLatitude());
         locShop.setLongitude(selectedShop.getLongitude());
 
-        if (locUser != null  && locShop != null) {
-            int distanceBetween = (int)locUser.distanceTo(locShop);
+        String distance = GPSTracker.getDistance(locShop);
 
-            if (distanceBetween / 1000 >= 1) {
-                distance = (distanceBetween / 1000) + "km";
-            } else {
-                distance = (int)locUser.distanceTo(locShop) + "m";
-            }
+        if (!distance.isEmpty()) {
+            listShopViewHolder.getTv_list_shop_item_distance().setText(distance);
+            listShopViewHolder.getTv_list_shop_item_distance().setVisibility(View.VISIBLE);
+            listShopViewHolder.getTv_list_shop_item_category().setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
+        } else {
+            listShopViewHolder.getTv_list_shop_item_distance().setVisibility(View.GONE);
+            listShopViewHolder.getTv_list_shop_item_category().setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         }
 
         // Set text data.
         listShopViewHolder.getTv_list_shop_item_name().setText(selectedShop.getName());
         listShopViewHolder.getTv_list_shop_item_category().setText(selectedShop.getCategoriesString());
-        listShopViewHolder.getTv_list_shop_item_distance().setText(distance);
+
 
         // Clear image.
         listShopViewHolder.getIv_list_shop_item_image().setImageResource(0);
@@ -84,5 +86,9 @@ public class ListShopItemAdapter extends RecyclerView.Adapter<ListShopViewHolder
     @Override
     public int getItemCount() {
         return this.shops.size();
+    }
+
+    public void setOnClickListener(View.OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
     }
 }

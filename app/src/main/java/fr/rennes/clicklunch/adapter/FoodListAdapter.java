@@ -56,7 +56,7 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListViewHolder> {
             // Set list of product.
             foodListViewHolder.getRv_food_list_products().setAdapter(new FoodDetailAdapter(item.getProducts()));
             foodListViewHolder.getRv_food_list_products().setHasFixedSize(true);
-            LinearLayoutManager layoutManager = new LinearLayoutManager(App.getContext(), LinearLayoutManager.HORIZONTAL, false);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(App.getAppContext(), LinearLayoutManager.HORIZONTAL, false);
             foodListViewHolder.getRv_food_list_products().setLayoutManager(layoutManager);
         }
     }

@@ -1,16 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
+    <dimen name="nav_header_height">176dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
     <!-- Layout size -->
     <dimen name="dimenDefault">0dp</dimen>
-    <dimen name="dimenMarginSearchBar">10dp</dimen>
+
+    <!-- Padding -->
     <dimen name="dimenPaddingSearchBar">12dp</dimen>
 
+    <!-- Margin -->
+    <dimen name="dimenMarginSearchBar">10dp</dimen>
     <dimen name="dimenMarginItemTopBottom">2dp</dimen>
     <dimen name="dimenMarginItemLeftRight">25dp</dimen>
-    <dimen name="dimenMarginItemFood">27dp</dimen>
 
+    <dimen name="dimenMarginItemLeft">2dp</dimen>
+    <dimen name="dimenMarginItemRight">2dp</dimen>
+
+    <dimen name="dimenMarginItemFood">27dp</dimen>
     <dimen name="dimenMarginItemPhoto">45dp</dimen>
 
+    <!-- Radius -->
     <dimen name="searchBarRadius">5dp</dimen>
 
     <!-- Text size -->

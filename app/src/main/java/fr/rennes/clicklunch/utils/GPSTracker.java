@@ -16,6 +16,8 @@ import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
+import fr.rennes.clicklunch.App;
+
 public class GPSTracker extends Service implements LocationListener {
 
     private final Context mContext;
@@ -50,11 +52,20 @@ public class GPSTracker extends Service implements LocationListener {
     public Location getLocation() {
         try {
             locationManager = (LocationManager) mContext.getSystemService(LOCATION_SERVICE);
+
             // Getting GPS status
-            isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                    && locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                // TODO: ask to active permition.
+                isGPSEnabled = true;
+            }
 
             // Getting network status
-            isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                    && locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+                // TODO: ask to active permition.
+                isNetworkEnabled = true;
+            }
 
             if (!isGPSEnabled && !isNetworkEnabled) {
                 // No network provider is enabled
@@ -65,10 +76,10 @@ public class GPSTracker extends Service implements LocationListener {
                             LocationManager.NETWORK_PROVIDER,
                             MIN_TIME_BW_UPDATES,
                             MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+
                     Log.d("Network", "Network");
                     if (locationManager != null) {
-                        location = locationManager
-                                .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                        location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                         if (location != null) {
                             latitude = location.getLatitude();
                             longitude = location.getLongitude();
@@ -82,10 +93,10 @@ public class GPSTracker extends Service implements LocationListener {
                                 LocationManager.GPS_PROVIDER,
                                 MIN_TIME_BW_UPDATES,
                                 MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+
                         Log.d("GPS Enabled", "GPS Enabled");
                         if (locationManager != null) {
-                            location = locationManager
-                                    .getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                            location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                             if (location != null) {
                                 latitude = location.getLatitude();
                                 longitude = location.getLongitude();
@@ -113,7 +124,6 @@ public class GPSTracker extends Service implements LocationListener {
         }
     }
 
-
     /**
      * Function to get latitude
      * */
@@ -125,7 +135,6 @@ public class GPSTracker extends Service implements LocationListener {
         // return latitude
         return latitude;
     }
-
 
     /**
      * Function to get longitude
@@ -204,5 +213,23 @@ public class GPSTracker extends Service implements LocationListener {
     @Override
     public IBinder onBind(Intent arg0) {
         return null;
+    }
+
+    public static String getDistance(Location location)
+    {
+        String result = "";
+        Location currentLocation = new GPSTracker(App.getAppContext()).getLocation();
+
+        if (currentLocation != null  && location != null) {
+            int distanceBetween = (int)currentLocation.distanceTo(location);
+
+            if (distanceBetween / 1000 >= 1) {
+                result = (distanceBetween / 1000) + "," + (distanceBetween % 1000) + "km";
+            } else {
+                result = (int)currentLocation.distanceTo(location) + "m";
+            }
+        }
+
+        return result;
     }
 }

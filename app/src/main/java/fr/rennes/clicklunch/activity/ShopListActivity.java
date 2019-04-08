@@ -1,9 +1,11 @@
 package fr.rennes.clicklunch.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.EditText;
 
 import java.util.ArrayList;
@@ -64,6 +66,17 @@ public class ShopListActivity extends Activity {
         this.initComponent();
 
         this.listShopItemAdapter = new ListShopItemAdapter(tmpShopList);
+        this.listShopItemAdapter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(ShopListActivity.this, ShopDetailActivity.class);
+                int position = lv_shop_list_shops.getChildLayoutPosition(v);
+                Shop selectedShop = ShopListActivity.this.tmpShopList.get(position);
+                myIntent.putExtra(ShopDetailActivity.EXTRA_SHOP, selectedShop);
+                startActivity(myIntent);
+            }
+        });
+
         this.lv_shop_list_shops.setHasFixedSize(true);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
