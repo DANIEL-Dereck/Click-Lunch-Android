@@ -21,7 +21,10 @@ public class FoodListItem {
         }
 
         this.products.add(product);
-
         return this;
+    }
+
+    public String getTitleString() {
+        return this.title.toString();
     }
 }

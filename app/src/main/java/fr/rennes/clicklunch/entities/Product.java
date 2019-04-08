@@ -5,6 +5,8 @@
 
 package fr.rennes.clicklunch.entities;
 
+import java.text.DecimalFormat;
+
 import fr.rennes.clicklunch.enums.ProductType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,4 +27,15 @@ public class Product extends Menu {
     private Category category;
     private ProductType productType;
     private Photo photo;
+
+    public String getPriceString() {
+        String result = "";
+
+        DecimalFormat f = new DecimalFormat();
+        f.setMaximumFractionDigits(2);
+
+        result = f.format(this.price);
+
+        return result;
+    }
 }
