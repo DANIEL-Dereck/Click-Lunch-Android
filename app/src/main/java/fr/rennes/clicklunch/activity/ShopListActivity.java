@@ -64,6 +64,7 @@ public class ShopListActivity extends BaseActivity {
 
         this.initTmpList();
         this.initComponent();
+        this.initMenu();
 
         this.listShopItemAdapter = new ListShopItemAdapter(tmpShopList);
         this.listShopItemAdapter.setOnClickListener(new View.OnClickListener() {

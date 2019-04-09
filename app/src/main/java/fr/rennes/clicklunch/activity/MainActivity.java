@@ -27,6 +27,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initComponent();
+        this.initMenu();
 
         this.btn_tmp_goto_shop_list.setOnClickListener(new View.OnClickListener() {
             @Override

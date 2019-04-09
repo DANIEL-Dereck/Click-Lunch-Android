@@ -4,6 +4,13 @@
     <string name="app_hello">Hello</string>
     <string name="app_list_shop_search">Shop, Categorie</string>
 
+    <string name="ptype_menu">Menus</string>
+    <string name="ptype_starter">Starter</string>
+    <string name="ptype_dish">Dish</string>
+    <string name="ptype_dessert">Dessert</string>
+    <string name="ptype_drink">Drink</string>
+    <string name="ptype_other">Other</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>

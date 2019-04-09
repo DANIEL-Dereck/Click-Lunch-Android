@@ -89,6 +89,7 @@ public class ShopDetailActivity extends BaseActivity {
         setContentView(R.layout.activity_shop_detail);
         this.initComponent();
         this.initTmpList();
+        this.initMenu();
 
         this.foodListAdapter = new FoodListAdapter(this.foodListItems);
         getDataInIntent();

@@ -29,9 +29,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         this.navigationView = findViewById(R.id.nav_view);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void initMenu() {
         this.initToolBar();
         this.setSupportActionBar(this.toolbar);
 
@@ -48,6 +46,11 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         this.toggle.syncState();
 
         this.navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     @Override

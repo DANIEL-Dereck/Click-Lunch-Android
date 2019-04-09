@@ -47,15 +47,21 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListViewHolder> {
 
             if (item.getProducts().get(0) != null && item.getProducts().get(0).getProductType() == ProductType.MENU) {
                 foodListViewHolder.itemView.setBackgroundColor(ContextCompat.getColor(foodListViewHolder.itemView.getContext(), R.color.colorGreenMain));
+                foodListViewHolder.getTv_food_list_product_type().setTextColor(ContextCompat.getColor(foodListViewHolder.itemView.getContext(), R.color.colorBlack));
             } else {
                 foodListViewHolder.itemView.setBackgroundColor(ContextCompat.getColor(foodListViewHolder.itemView.getContext(), R.color.colorWhite));
+                foodListViewHolder.getTv_food_list_product_type().setTextColor(ContextCompat.getColor(foodListViewHolder.itemView.getContext(), R.color.colorOrangeText));
             }
 
             // Set list of product.
-            foodListViewHolder.getRv_food_list_products().setAdapter(new FoodDetailAdapter(item.getProducts()));
-            foodListViewHolder.getRv_food_list_products().setHasFixedSize(true);
+            FoodDetailAdapter foodDetailAdapter = new FoodDetailAdapter(item.getProducts());
+            foodListViewHolder.getRv_food_list_products().setAdapter(foodDetailAdapter);
+            foodListViewHolder.getRv_food_list_products().setHasFixedSize(false);
+//            foodListViewHolder.getRv_food_list_products().getLayoutParams().height
             LinearLayoutManager layoutManager = new LinearLayoutManager(App.getAppContext(), LinearLayoutManager.HORIZONTAL, false);
             foodListViewHolder.getRv_food_list_products().setLayoutManager(layoutManager);
+
+            foodDetailAdapter.notifyDataSetChanged();
         }
     }
 
