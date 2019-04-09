@@ -1,9 +1,11 @@
 package fr.rennes.clicklunch.adapter;
 
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,21 +47,27 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListViewHolder> {
             // Set title.
             foodListViewHolder.getTv_food_list_product_type().setText(item.getTitleString());
 
+            // Get Color.
+            int backgroundColor;
+
             if (item.getProducts().get(0) != null && item.getProducts().get(0).getProductType() == ProductType.MENU) {
-                foodListViewHolder.itemView.setBackgroundColor(ContextCompat.getColor(foodListViewHolder.itemView.getContext(), R.color.colorGreenMain));
+
+                backgroundColor = ContextCompat.getColor(foodListViewHolder.itemView.getContext(), R.color.colorGreenMain);
+                foodListViewHolder.itemView.setBackgroundColor(backgroundColor);
                 foodListViewHolder.getTv_food_list_product_type().setTextColor(ContextCompat.getColor(foodListViewHolder.itemView.getContext(), R.color.colorBlack));
             } else {
-                foodListViewHolder.itemView.setBackgroundColor(ContextCompat.getColor(foodListViewHolder.itemView.getContext(), R.color.colorWhite));
+                backgroundColor = ContextCompat.getColor(foodListViewHolder.itemView.getContext(), R.color.colorWhite);
+                foodListViewHolder.itemView.setBackgroundColor(backgroundColor);
                 foodListViewHolder.getTv_food_list_product_type().setTextColor(ContextCompat.getColor(foodListViewHolder.itemView.getContext(), R.color.colorOrangeText));
             }
 
             // Set list of product.
-            FoodDetailAdapter foodDetailAdapter = new FoodDetailAdapter(item.getProducts());
+            FoodDetailAdapter foodDetailAdapter = new FoodDetailAdapter(item.getProducts(), backgroundColor);
             foodListViewHolder.getRv_food_list_products().setAdapter(foodDetailAdapter);
-            foodListViewHolder.getRv_food_list_products().setHasFixedSize(false);
+            foodListViewHolder.getRv_food_list_products().setHasFixedSize(true);
 //            foodListViewHolder.getRv_food_list_products().getLayoutParams().height
-            LinearLayoutManager layoutManager = new LinearLayoutManager(App.getAppContext(), LinearLayoutManager.HORIZONTAL, false);
-            foodListViewHolder.getRv_food_list_products().setLayoutManager(layoutManager);
+            StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL);
+            foodListViewHolder.getRv_food_list_products().setLayoutManager(staggeredGridLayoutManager);
 
             foodDetailAdapter.notifyDataSetChanged();
         }

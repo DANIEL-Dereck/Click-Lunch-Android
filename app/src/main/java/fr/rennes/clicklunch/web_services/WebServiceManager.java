@@ -12,13 +12,13 @@ import com.loopj.android.http.RequestParams;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
+import fr.rennes.clicklunch.utils.AppUtils;
 
 /**
  * Web service Manager.
  */
 public class WebServiceManager {
     public static final String TAG = "WebServiceManager";
-    public static final String API_DEFAULT_ROUTE = "https://clickandlunch.herokuapp.com/api/v1/";
     protected static final WebServiceManager instance = new WebServiceManager();
 
     public enum WSType
@@ -60,7 +60,7 @@ public class WebServiceManager {
     }
 
     public static void callWS(WSType type, String route, RequestParams requestParams) {
-        String finalRoute = API_DEFAULT_ROUTE + route;
+        String finalRoute = AppUtils.APIROOTE + route;
 //        requestParams.put(requestParams, "1234");
 
         if (type == WSType.POST) {

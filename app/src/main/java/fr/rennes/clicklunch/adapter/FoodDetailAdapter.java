@@ -13,6 +13,7 @@ import java.util.List;
 
 import fr.rennes.clicklunch.R;
 import fr.rennes.clicklunch.entities.Product;
+import fr.rennes.clicklunch.utils.AppUtils;
 import fr.rennes.clicklunch.utils.GPSTracker;
 import fr.rennes.clicklunch.view_holder.FoodDetailViewHolder;
 import fr.rennes.clicklunch.view_holder.ListShopViewHolder;
@@ -23,9 +24,11 @@ public class FoodDetailAdapter extends RecyclerView.Adapter<FoodDetailViewHolder
     public FoodDetailAdapter() {
         this.products  = new ArrayList<>();
     }
+    public int backgroundColor;
 
-    public FoodDetailAdapter(List<Product> products) {
+    public FoodDetailAdapter(List<Product> products, int backgroundColor) {
         this.products = products;
+        this.backgroundColor = backgroundColor;
     }
 
     @NonNull
@@ -49,10 +52,13 @@ public class FoodDetailAdapter extends RecyclerView.Adapter<FoodDetailViewHolder
         foodDetailViewHolder.getIv_food_detail_image().setImageResource(0);
         foodDetailViewHolder.getIv_food_detail_image().setImageDrawable(null);
         foodDetailViewHolder.getIv_food_detail_image().setImageURI(null);
+        foodDetailViewHolder.getIv_food_detail_image().setBackgroundColor(this.backgroundColor);
 
         // Set Image
         if (product.getPhoto() != null) {
             Picasso.get().load(product.getPhoto().getPath()).into(foodDetailViewHolder.getIv_food_detail_image());
+        } else {
+            Picasso.get().load(AppUtils.NOIMG).into(foodDetailViewHolder.getIv_food_detail_image());
         }
     }
 

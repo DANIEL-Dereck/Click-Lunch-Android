@@ -14,14 +14,12 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import fr.rennes.clicklunch.App;
 
 public class GPSTracker extends Service implements LocationListener {
-
-    private final Context mContext;
-
     // Flag for GPS status
     boolean isGPSEnabled = false;
 
@@ -44,24 +42,23 @@ public class GPSTracker extends Service implements LocationListener {
     // Declaring a Location Manager
     protected LocationManager locationManager;
 
-    public GPSTracker(Context context) {
-        this.mContext = context;
+    public GPSTracker() {
         getLocation();
     }
 
     public Location getLocation() {
         try {
-            locationManager = (LocationManager) mContext.getSystemService(LOCATION_SERVICE);
+            locationManager = (LocationManager) App.getAppContext().getSystemService(LOCATION_SERVICE);
 
             // Getting GPS status
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                     && locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
                 // TODO: ask to active permition.
                 isGPSEnabled = true;
             }
 
             // Getting network status
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
                     && locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
                 // TODO: ask to active permition.
                 isNetworkEnabled = true;
@@ -162,7 +159,7 @@ public class GPSTracker extends Service implements LocationListener {
      * On pressing the Settings button it will launch Settings Options.
      * */
     public void showSettingsAlert(){
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(App.getAppContext());
 
         // Setting Dialog Title
         alertDialog.setTitle("GPS is settings");
@@ -174,7 +171,7 @@ public class GPSTracker extends Service implements LocationListener {
         alertDialog.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog,int which) {
                 Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                mContext.startActivity(intent);
+                App.getAppContext().startActivity(intent);
             }
         });
 
@@ -218,7 +215,7 @@ public class GPSTracker extends Service implements LocationListener {
     public static String getDistance(Location location)
     {
         String result = "";
-        Location currentLocation = new GPSTracker(App.getAppContext()).getLocation();
+        Location currentLocation = new GPSTracker().getLocation();
 
         if (currentLocation != null  && location != null) {
             int distanceBetween = (int)currentLocation.distanceTo(location);
