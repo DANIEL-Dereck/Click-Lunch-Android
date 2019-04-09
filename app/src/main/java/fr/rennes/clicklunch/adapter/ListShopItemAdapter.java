@@ -72,7 +72,6 @@ public class ListShopItemAdapter extends RecyclerView.Adapter<ListShopViewHolder
         listShopViewHolder.getTv_list_shop_item_name().setText(selectedShop.getName());
         listShopViewHolder.getTv_list_shop_item_category().setText(selectedShop.getCategoriesString());
 
-
         // Clear image.
         listShopViewHolder.getIv_list_shop_item_image().setImageResource(0);
         listShopViewHolder.getIv_list_shop_item_image().setImageDrawable(null);

@@ -1,6 +1,7 @@
 package fr.rennes.clicklunch.utils;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Service;
 import android.content.Context;
@@ -51,14 +52,14 @@ public class GPSTracker extends Service implements LocationListener {
             locationManager = (LocationManager) App.getAppContext().getSystemService(LOCATION_SERVICE);
 
             // Getting GPS status
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+            if (ContextCompat.checkSelfPermission(App.getAppContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                     && locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
                 // TODO: ask to active permition.
                 isGPSEnabled = true;
             }
 
             // Getting network status
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
+            if (ContextCompat.checkSelfPermission(App.getAppContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
                     && locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
                 // TODO: ask to active permition.
                 isNetworkEnabled = true;

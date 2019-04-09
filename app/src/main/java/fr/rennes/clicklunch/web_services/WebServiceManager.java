@@ -61,7 +61,6 @@ public class WebServiceManager {
 
     public static void callWS(WSType type, String route, RequestParams requestParams) {
         String finalRoute = AppUtils.APIROOTE + route;
-//        requestParams.put(requestParams, "1234");
 
         if (type == WSType.POST) {
             post(requestParams, finalRoute);

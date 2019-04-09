@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <TextView
         android:id="@+id/tv_food_list_product_type"
@@ -17,8 +17,8 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_food_list_products"
-        android:layout_width="@dimen/dimenDefault"
-        android:layout_height="@dimen/dimenDefault"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
