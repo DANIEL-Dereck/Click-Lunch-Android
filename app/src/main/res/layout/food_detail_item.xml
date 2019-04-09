@@ -6,7 +6,7 @@
     <ImageView
         android:id="@+id/iv_food_detail_image"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="125dp"
         android:background="@color/colorImageEmpty"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/dimenMarginItemTopBottom"

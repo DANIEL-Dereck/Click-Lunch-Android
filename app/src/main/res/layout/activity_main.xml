@@ -38,7 +38,7 @@
 
     <Button
         android:id="@+id/btn_tmp_goto_shop_detail"
-        android:text="shopDetial"
+        android:text="Start App"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/colorOrangeText"

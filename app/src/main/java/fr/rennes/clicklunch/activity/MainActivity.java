@@ -19,7 +19,7 @@ public class MainActivity extends BaseActivity {
 
     private void initComponent()
     {
-        this.btn_tmp_goto_shop_list = findViewById(R.id.btn_tmp_goto_shop_list);
+        this.btn_tmp_goto_shop_list = findViewById(R.id.btn_tmp_goto_shop_detail);
     }
 
     @Override
