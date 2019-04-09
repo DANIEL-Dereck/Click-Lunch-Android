@@ -20,8 +20,6 @@ import fr.rennes.clicklunch.view_holder.FoodListViewHolder;
 public class FoodListAdapter extends RecyclerView.Adapter<FoodListViewHolder> {
 
     private List<FoodListItem> foodList;
-    private RecyclerView rv_food_list_products;
-
     public FoodListAdapter() {
         this.foodList = new ArrayList<>();
     }

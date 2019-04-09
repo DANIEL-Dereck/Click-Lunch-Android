@@ -16,7 +16,7 @@ import fr.rennes.clicklunch.entities.CategoryShop;
 import fr.rennes.clicklunch.entities.Photo;
 import fr.rennes.clicklunch.entities.Shop;
 
-public class ShopListActivity extends Activity {
+public class ShopListActivity extends BaseActivity {
 
     public static final int MY_ACTIVITY_CODE = 1; // Activity code
 

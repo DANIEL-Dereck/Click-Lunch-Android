@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
@@ -20,7 +22,7 @@ import android.widget.TextView;
 
 import java.io.Serializable;
 
-public class ShopDetailActivity extends Activity {
+public class ShopDetailActivity extends BaseActivity {
 
     public static final int MY_ACTIVITY_CODE = 2; // Activity code
     public static final String EXTRA_SHOP = "EXTRA_SHOP";
@@ -31,8 +33,8 @@ public class ShopDetailActivity extends Activity {
 
     private TextView tv_shop_detail_shop_name;
     private TextView tv_shop_detail_shop_distance;
-
     private LinearLayout ll_shop_detail_food_list;
+    private RecyclerView rv_shop_detail_food_list;
 
     public ArrayList<FoodListItem> foodListItems = new ArrayList<>();
     private FoodListAdapter foodListAdapter;
@@ -76,6 +78,7 @@ public class ShopDetailActivity extends Activity {
 
     private void initComponent() {
         this.ll_shop_detail_food_list = findViewById(R.id.ll_shop_detail_food_list);
+        this.rv_shop_detail_food_list = findViewById(R.id.rv_shop_detail_food_list);
         this.tv_shop_detail_shop_name = findViewById(R.id.tv_shop_detail_shop_name);
         this.tv_shop_detail_shop_distance = findViewById(R.id.tv_shop_detail_shop_distance);
     }
@@ -104,6 +107,15 @@ public class ShopDetailActivity extends Activity {
             } else {
                 tv_shop_detail_shop_distance.setVisibility(View.GONE);
             }
+
+            this.foodListAdapter = new FoodListAdapter(foodListItems);
+            this.rv_shop_detail_food_list.setHasFixedSize(true);
+
+            LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+            this.rv_shop_detail_food_list.setLayoutManager(layoutManager);
+            this.rv_shop_detail_food_list.setAdapter(this.foodListAdapter);
+
+            this.foodListAdapter.notifyDataSetChanged();
         }
     }
 

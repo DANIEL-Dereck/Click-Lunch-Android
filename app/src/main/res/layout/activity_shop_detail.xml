@@ -34,13 +34,14 @@
 
     </LinearLayout>
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_shop_detail_food_list"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimenDefault"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll_shop_detail_detail">
-    </ListView>
+        app:layout_constraintTop_toBottomOf="@id/ll_shop_detail_food_list">
+    </android.support.v7.widget.RecyclerView>
 
 </android.support.constraint.ConstraintLayout>
