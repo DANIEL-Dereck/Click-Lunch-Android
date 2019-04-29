@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 
@@ -24,6 +26,7 @@ public class ShopListActivity extends BaseActivity {
     private EditText et_shop_list_search_bar;
 
     public ArrayList<Shop> tmpShopList = new ArrayList<>();
+    public ArrayList<Shop> shopList = new ArrayList<>();
     private ListShopItemAdapter listShopItemAdapter;
 
     private void initTmpList()
@@ -66,7 +69,40 @@ public class ShopListActivity extends BaseActivity {
         this.initComponent();
         this.initMenu();
 
-        this.listShopItemAdapter = new ListShopItemAdapter(tmpShopList);
+        //TODO: set shop her after call WS.
+//        this.tmpShopList = new ArrayList<>(new ArrayList<Shop>());
+//        this.tmpShopList = ;
+
+        shopList.addAll(tmpShopList);
+        this.listShopItemAdapter = new ListShopItemAdapter(shopList);
+
+        this.et_shop_list_search_bar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                shopList.removeAll(shopList);
+                for (Shop shop : tmpShopList) {
+
+                    if (shop.getName().toLowerCase().contains(s.toString().toLowerCase())
+                            || shop.getCategoriesString().toLowerCase().contains(s.toString().toLowerCase())) {
+                        shopList.add(shop);
+                    }
+                }
+                ShopListActivity.this.listShopItemAdapter.setShops(shopList);
+                ShopListActivity.this.listShopItemAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        this.listShopItemAdapter.setShops(shopList);
         this.listShopItemAdapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

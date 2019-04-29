@@ -2,7 +2,9 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <ImageView
         android:id="@+id/iv_food_detail_image"
         android:layout_width="match_parent"
@@ -16,10 +18,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        />
+        tools:background="@color/colorMagic" />
+
     <TextView
         android:id="@+id/tv_food_detail_price"
-        android:text="10 €"
         android:textColor="@color/colorBlack"
         android:layout_marginTop="@dimen/dimenMarginItemTopBottom"
         android:layout_marginBottom="@dimen/dimenMarginItemTopBottom"
@@ -32,11 +34,10 @@
         app:layout_constraintTop_toBottomOf="@id/iv_food_detail_image"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        />
+        tools:text="10 €" />
 
     <TextView
         android:id="@+id/tv_food_detail_name"
-        android:text="Express"
         android:textColor="@color/colorBlack"
         android:layout_marginTop="@dimen/dimenMarginItemTopBottom"
         android:layout_marginBottom="@dimen/dimenMarginItemTopBottom"
@@ -49,6 +50,6 @@
         app:layout_constraintTop_toBottomOf="@id/tv_food_detail_price"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        />
+        tools:text="Express" />
 
 </android.support.constraint.ConstraintLayout>

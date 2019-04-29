@@ -13,10 +13,8 @@ import java.util.List;
 
 import fr.rennes.clicklunch.R;
 import fr.rennes.clicklunch.entities.Product;
-import fr.rennes.clicklunch.utils.AppUtils;
-import fr.rennes.clicklunch.utils.GPSTracker;
+import fr.rennes.clicklunch.utils.AppUtil;
 import fr.rennes.clicklunch.view_holder.FoodDetailViewHolder;
-import fr.rennes.clicklunch.view_holder.ListShopViewHolder;
 
 public class FoodDetailAdapter extends RecyclerView.Adapter<FoodDetailViewHolder> {
     private List<Product> products;
@@ -58,7 +56,7 @@ public class FoodDetailAdapter extends RecyclerView.Adapter<FoodDetailViewHolder
         if (product.getPhoto() != null) {
             Picasso.get().load(product.getPhoto().getPath()).into(foodDetailViewHolder.getIv_food_detail_image());
         } else {
-            Picasso.get().load(AppUtils.NOIMG).into(foodDetailViewHolder.getIv_food_detail_image());
+            Picasso.get().load(AppUtil.NOIMG).into(foodDetailViewHolder.getIv_food_detail_image());
         }
     }
 

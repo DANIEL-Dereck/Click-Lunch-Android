@@ -1,10 +1,9 @@
 package fr.rennes.clicklunch.utils;
 
 import android.Manifest;
-import android.app.Activity;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Service;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -14,7 +13,6 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
@@ -47,29 +45,27 @@ public class GPSTracker extends Service implements LocationListener {
         getLocation();
     }
 
+    @SuppressLint("MissingPermission")
     public Location getLocation() {
         try {
             locationManager = (LocationManager) App.getAppContext().getSystemService(LOCATION_SERVICE);
 
+            PermissionUtils.getPermission(PermissionUtils.FINE_LOCATION);
+            PermissionUtils.getPermission(PermissionUtils.COARSE_LOCATION);
             // Getting GPS status
-            if (ContextCompat.checkSelfPermission(App.getAppContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                    && locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                // TODO: ask to active permition.
+            if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
                 isGPSEnabled = true;
             }
 
             // Getting network status
-            if (ContextCompat.checkSelfPermission(App.getAppContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                    && locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-                // TODO: ask to active permition.
+            if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
                 isNetworkEnabled = true;
             }
 
-            if (!isGPSEnabled && !isNetworkEnabled) {
-                // No network provider is enabled
-            } else {
+            if (isGPSEnabled || isNetworkEnabled) {
                 this.canGetLocation = true;
                 if (isNetworkEnabled) {
+
                     locationManager.requestLocationUpdates(
                             LocationManager.NETWORK_PROVIDER,
                             MIN_TIME_BW_UPDATES,

@@ -12,7 +12,7 @@ import com.loopj.android.http.RequestParams;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
-import fr.rennes.clicklunch.utils.AppUtils;
+import fr.rennes.clicklunch.utils.AppUtil;
 
 /**
  * Web service Manager.
@@ -60,7 +60,7 @@ public class WebServiceManager {
     }
 
     public static void callWS(WSType type, String route, RequestParams requestParams) {
-        String finalRoute = AppUtils.APIROOTE + route;
+        String finalRoute = AppUtil.APIROOTE + route;
 
         if (type == WSType.POST) {
             post(requestParams, finalRoute);
