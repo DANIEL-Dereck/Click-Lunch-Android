@@ -31,12 +31,28 @@ public class Shop extends EntityBase {
     private String email;
     private double longitude;
     private double latitude;
+    private String address;
+    private String city;
+    private Photo photo;
 
     private Professional professional;
     private BankAccount bankAccount;
     private List<Configuration> configurations;
     private List<CategoryShop> categories;
-    private List<Photo> photos;
+
+    public String getFullAddress() {
+        String result = "";
+
+        if (this.address != null) {
+            result += this.address;
+        }
+
+        if (this.city != null) {
+            result += "," + this.city;
+        }
+
+        return result;
+    }
 
     public String getCategoriesString()
     {

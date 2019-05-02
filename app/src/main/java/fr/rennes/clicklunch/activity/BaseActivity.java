@@ -16,34 +16,14 @@ import android.view.View;
 import fr.rennes.clicklunch.R;
 
 public abstract class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    private Toolbar toolbar;
-    private FloatingActionButton fab;
-    private DrawerLayout drawer;
-    private ActionBarDrawerToggle toggle;
     private NavigationView navigationView;
 
     private void initToolBar() {
-        this.toolbar = findViewById(R.id.toolbar);
-        this.fab = findViewById(R.id.fab);
-        this.drawer = findViewById(R.id.drawer_layout);
-        this.navigationView = findViewById(R.id.nav_view);
+        this.navigationView = this.findViewById(R.id.nav_view);
     }
 
     protected void initMenu() {
         this.initToolBar();
-        this.setSupportActionBar(this.toolbar);
-
-        this.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-        this.toggle = new ActionBarDrawerToggle(this, this.drawer, this.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        this.drawer.addDrawerListener(this.toggle);
-        this.toggle.syncState();
 
         this.navigationView.setNavigationItemSelectedListener(this);
     }
@@ -51,37 +31,17 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (this.drawer.isDrawerOpen(GravityCompat.START)) {
-            this.drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
+        this.setContentView(getContentView());
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+        return false;
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -94,17 +54,10 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
         }
 
-        this.drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    public abstract int getContentView();
 }

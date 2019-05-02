@@ -52,12 +52,14 @@ public class FoodDetailAdapter extends RecyclerView.Adapter<FoodDetailViewHolder
         foodDetailViewHolder.getIv_food_detail_image().setImageURI(null);
         foodDetailViewHolder.getIv_food_detail_image().setBackgroundColor(this.backgroundColor);
 
-        // Set Image
+        // Set Image.
+        String url = AppUtil.NOIMG;
+
         if (product.getPhoto() != null) {
-            Picasso.get().load(product.getPhoto().getPath()).into(foodDetailViewHolder.getIv_food_detail_image());
-        } else {
-            Picasso.get().load(AppUtil.NOIMG).into(foodDetailViewHolder.getIv_food_detail_image());
+            url = product.getPhoto().getPath();
         }
+
+        Picasso.get().load(url).placeholder(R.drawable.noimage).into(foodDetailViewHolder.getIv_food_detail_image());
     }
 
     @Override

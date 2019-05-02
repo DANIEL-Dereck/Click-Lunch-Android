@@ -10,11 +10,6 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start" >
 
-    <include
-        layout="@layout/app_bar_main"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
     <android.support.design.widget.NavigationView
     android:id="@+id/nav_view"
     android:layout_width="wrap_content"
@@ -24,52 +19,104 @@
     app:headerLayout="@layout/nav_header_main"
     app:menu="@menu/activity_main_drawer"
     tools:context=".activity.MainActivity"
-    android:background="@color/colorGreenMain" />
+    android:background="@color/colorWhite" />
 
-    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activity.ShopDetailActivity"
-        android:background="@color/colorGreenMain">
+        android:background="@color/colorGreenMain"
+        tools:context=".activity.ShopDetailActivity">
 
-        <LinearLayout
+        <android.support.constraint.ConstraintLayout
             android:id="@+id/ll_shop_detail_food_list"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimenDefault"
-            app:layout_constraintTop_toTopOf="parent"
+            android:orientation="vertical"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:orientation="vertical">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/guideline">
+
+            <ImageView
+                android:id="@+id/iv_shop_detail_shop_photo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
 
             <TextView
                 android:id="@+id/tv_shop_detail_shop_name"
-                android:textSize="@dimen/dimenTitleSize"
-                android:textColor="@color/colorWhite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/dimenTitleSize"
+                android:shadowColor="@android:color/black"
+                android:shadowDx="1.5"
+                android:shadowDy="1.3"
+                android:shadowRadius="1.6"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/tv_shop_detail_shop_addresse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/dimenTitleSize"
+                android:shadowColor="@android:color/black"
+                android:shadowDx="1.5"
+                android:shadowDy="1.3"
+                android:shadowRadius="1.6"
+                app:layout_constraintTop_toBottomOf="@+id/tv_shop_detail_shop_name"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                />
 
             <TextView
                 android:id="@+id/tv_shop_detail_shop_distance"
-                android:textSize="@dimen/dimenTextSize"
-                android:textColor="@color/colorWhite"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAlignment="viewStart"/>
+                android:textAlignment="viewStart"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/dimenTextSize"
+                android:shadowColor="@android:color/black"
+                android:shadowDx="1.5"
+                android:shadowDy="1.3"
+                android:shadowRadius="1.6"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_shop_detail_shop_name"
+                />
 
-        </LinearLayout>
+        </android.support.constraint.ConstraintLayout>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_shop_detail_food_list"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimenDefault"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ll_shop_detail_food_list">
+            app:layout_constraintTop_toBottomOf="@+id/guideline">
+
         </android.support.v7.widget.RecyclerView>
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.24" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v4.widget.DrawerLayout>

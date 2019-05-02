@@ -35,11 +35,12 @@ public class ShopListActivity extends BaseActivity {
         forum.setName("Le Forum");
         forum.setLatitude( 48.0460793);
         forum.setLongitude( -1.7412650);
+        forum.setPhoto(new Photo("https://leforumrestaurant.files.wordpress.com/2016/04/cropped-wp_20160216_006.jpg?w=1200"));
+        forum.setAddress("7 rue de lalala");
+        forum.setCity("Bruz");
         forum.setCategories(new ArrayList<CategoryShop>());
         forum.getCategories().add(new CategoryShop("Sanwdich"));
         forum.getCategories().add(new CategoryShop("Pizza"));
-        forum.setPhotos(new ArrayList<Photo>());
-        forum.getPhotos().add(new Photo("https://leforumrestaurant.files.wordpress.com/2016/04/cropped-wp_20160216_006.jpg?w=1200"));
         tmpShopList.add(forum);
 
         for (int i = 0; i < 20; i++) {
@@ -47,6 +48,8 @@ public class ShopListActivity extends BaseActivity {
             item.setName("shop test" + i);
             item.setLongitude(i);
             item.setLatitude(i);
+            item.setAddress(i + " rue de lalal");
+            item.setCity("Rennes");
             item.setCategories(new ArrayList<CategoryShop>());
             item.getCategories().add(new CategoryShop("Pizza" + i));
             item.getCategories().add(new CategoryShop("Burger" + i));
@@ -63,15 +66,10 @@ public class ShopListActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.setContentView(R.layout.activity_shop_list);
 
         this.initTmpList();
         this.initComponent();
         this.initMenu();
-
-        //TODO: set shop her after call WS.
-//        this.tmpShopList = new ArrayList<>(new ArrayList<Shop>());
-//        this.tmpShopList = ;
 
         shopList.addAll(tmpShopList);
         this.listShopItemAdapter = new ListShopItemAdapter(shopList);
@@ -122,5 +120,10 @@ public class ShopListActivity extends BaseActivity {
         this.lv_shop_list_shops.setAdapter(this.listShopItemAdapter);
 
         this.listShopItemAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public int getContentView() {
+        return R.layout.activity_shop_list;
     }
 }

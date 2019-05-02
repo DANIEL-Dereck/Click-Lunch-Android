@@ -23,6 +23,20 @@ public abstract class User extends EntityBase{
     protected String password;
     protected String email;
     protected String phoneNumber;
+    protected String address;
+    protected String city;
 
-    protected Address address;
+    public String getFullAddress() {
+        String result = "";
+
+        if (this.address != null) {
+            result += this.address;
+        }
+
+        if (this.city != null) {
+            result += "," + this.city;
+        }
+
+        return result;
+    }
 }

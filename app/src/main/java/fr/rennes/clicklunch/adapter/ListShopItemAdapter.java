@@ -86,11 +86,13 @@ public class ListShopItemAdapter extends RecyclerView.Adapter<ListShopViewHolder
         listShopViewHolder.getIv_list_shop_item_image().setImageURI(null);
 
         // Set Image.
-        if (selectedShop.getPhotos() != null && selectedShop.getPhotos().size() > 0 && selectedShop.getPhotos().get(0) != null) {
-            Picasso.get().load(selectedShop.getPhotos().get(0).getPath()).into(listShopViewHolder.getIv_list_shop_item_image());
-        } else {
-            Picasso.get().load(AppUtil.NOIMG).into(listShopViewHolder.getIv_list_shop_item_image());
+        String url = AppUtil.NOIMG;
+
+        if (selectedShop.getPhoto() != null) {
+            url = selectedShop.getPhoto().getPath();
         }
+
+        Picasso.get().load(url).placeholder(R.drawable.noimage).into(listShopViewHolder.getIv_list_shop_item_image());
     }
 
     @Override

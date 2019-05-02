@@ -25,8 +25,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        initComponent();
+        this.initComponent();
         this.initMenu();
 
         this.btn_tmp_goto_shop_list.setOnClickListener(new View.OnClickListener() {
@@ -36,5 +35,10 @@ public class MainActivity extends BaseActivity {
                 MainActivity.this.startActivityForResult(intent, ShopListActivity.MY_ACTIVITY_CODE);
             }
         } );
+    }
+
+    @Override
+    public int getContentView() {
+        return R.layout.activity_main;
     }
 }
