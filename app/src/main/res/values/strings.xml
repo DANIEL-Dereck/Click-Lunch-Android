@@ -38,5 +38,6 @@
     <string name="goto_payement">Acceder au payement</string>
     <string name="bought">payer</string>
 
+    <string name="product_added">Le produit a bien été ajouté à votre commande</string>
 
 </resources>

@@ -15,6 +15,7 @@ public class FoodListViewHolder extends RecyclerView.ViewHolder {
     private TextView tv_food_list_product_type;
     private RecyclerView rv_food_list_products;
 
+
     public FoodListViewHolder(@NonNull View itemView) {
         super(itemView);
 

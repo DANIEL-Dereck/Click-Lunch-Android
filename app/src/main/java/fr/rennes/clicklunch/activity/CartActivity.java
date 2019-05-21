@@ -3,7 +3,6 @@ package fr.rennes.clicklunch.activity;
 import android.os.Bundle;
 import android.util.Log;
 
-import fr.rennes.clicklunch.App;
 import fr.rennes.clicklunch.R;
 
 /**
