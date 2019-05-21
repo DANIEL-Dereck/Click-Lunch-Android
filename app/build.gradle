@@ -44,6 +44,10 @@ dependencies {
     // Other
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.android.volley:volley:1.1.1'
+    implementation 'com.novoda:merlin:1.2.0'
+
+    // GeoLocator
+    implementation 'com.github.AravindVijay7:GeoLocator-Android:1.0.2'
 
     // Lombok
     compileOnly 'org.projectlombok:lombok:1.18.4'

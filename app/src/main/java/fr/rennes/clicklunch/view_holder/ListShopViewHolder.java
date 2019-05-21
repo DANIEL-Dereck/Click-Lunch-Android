@@ -8,8 +8,10 @@ import android.widget.TextView;
 
 import fr.rennes.clicklunch.R;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper=false)
 public class ListShopViewHolder extends RecyclerView.ViewHolder {
 
     private TextView tv_list_shop_item_name;

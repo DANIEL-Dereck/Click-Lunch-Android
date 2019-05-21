@@ -5,10 +5,12 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
 
+import fr.rennes.clicklunch.App;
 import fr.rennes.clicklunch.R;
 import fr.rennes.clicklunch.adapter.FoodListAdapter;
 import fr.rennes.clicklunch.entities.Product;
@@ -26,7 +28,11 @@ import java.io.Serializable;
 
 public class ShopDetailActivity extends BaseActivity {
 
-    public static final int MY_ACTIVITY_CODE = 2; // Activity code
+    // Static final attributes.
+    public static final int MY_ACTIVITY_CODE = 0x30;
+    public static final String TAG = "ShopDetailActivity";
+
+    // Extras.
     public static final String EXTRA_SHOP = "EXTRA_SHOP";
     public static final String EXTRA_SHOP_DISTANCE = "EXTRA_SHOP_DISTANCE";
 
@@ -34,6 +40,7 @@ public class ShopDetailActivity extends BaseActivity {
     private int distance = 0;
 
     private ImageView iv_shop_detail_shop_photo;
+    private ImageView iv_shop_detail_shop_cart;
     private TextView tv_shop_detail_shop_addresse;
     private TextView tv_shop_detail_shop_name;
     private TextView tv_shop_detail_shop_distance;
@@ -43,6 +50,7 @@ public class ShopDetailActivity extends BaseActivity {
     private FoodListAdapter foodListAdapter;
 
     private void initTmpList() {
+        Log.d(TAG, "initTmpList: ");
         this.foodListItems.add(fillList(new FoodListItem(), ProductType.MENU));
         this.foodListItems.add(fillList(new FoodListItem(), ProductType.STARTER));
         this.foodListItems.add(fillList(new FoodListItem(), ProductType.DISH));
@@ -52,6 +60,7 @@ public class ShopDetailActivity extends BaseActivity {
     }
 
     private FoodListItem fillList(FoodListItem products, ProductType type) {
+        Log.d(TAG, "fillList: ");
         products.setTitle(type);
 
         for (int i = 0; i < 20; i++) {
@@ -79,7 +88,10 @@ public class ShopDetailActivity extends BaseActivity {
         return products;
     }
 
-    private void initComponent() {
+    @Override
+    protected void initComponent() {
+        Log.d(TAG, "initComponent: ");
+        this.iv_shop_detail_shop_cart = this.findViewById(R.id.iv_shop_detail_shop_cart);
         this.rv_shop_detail_food_list = this.findViewById(R.id.rv_shop_detail_food_list);
         this.tv_shop_detail_shop_addresse = this.findViewById(R.id.tv_shop_detail_shop_addresse);
         this.iv_shop_detail_shop_photo = this.findViewById(R.id.iv_shop_detail_shop_photo);
@@ -89,13 +101,10 @@ public class ShopDetailActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate: ");
         super.onCreate(savedInstanceState);
-        this.initComponent();
         this.initTmpList();
-        this.initMenu();
-
-        this.foodListAdapter = new FoodListAdapter(this.foodListItems);
-        getDataInIntent();
+        this.getDataInIntent();
 
         if (currentShop != null) {
             this.tv_shop_detail_shop_name.setText(this.currentShop.getName());
@@ -109,11 +118,8 @@ public class ShopDetailActivity extends BaseActivity {
 
             Picasso.get().load(url).placeholder(R.drawable.noimage).into(this.iv_shop_detail_shop_photo);
 
-            Location locShop = new Location("Shop");
-            locShop.setLatitude(this.currentShop.getLatitude());
-            locShop.setLongitude(this.currentShop.getLongitude());
-
-            String distance = GPSTracker.getDistance(locShop);
+            Location locShop = GPSTracker.getNewLocation("Shop", this.currentShop.getLatitude(), this.currentShop.getLongitude());
+            String distance = GPSTracker.getDistance(locShop, new Location("current"));
 
             if (!distance.isEmpty()) {
                 this.tv_shop_detail_shop_distance.setText(distance);
@@ -121,7 +127,7 @@ public class ShopDetailActivity extends BaseActivity {
                 this.tv_shop_detail_shop_distance.setVisibility(View.GONE);
             }
 
-            this.foodListAdapter = new FoodListAdapter(this.foodListItems);
+            this.foodListAdapter = new FoodListAdapter(this.foodListItems, this);
             this.rv_shop_detail_food_list.setHasFixedSize(true);
 
             LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -129,15 +135,25 @@ public class ShopDetailActivity extends BaseActivity {
             this.rv_shop_detail_food_list.setAdapter(this.foodListAdapter);
 
             this.foodListAdapter.notifyDataSetChanged();
+
+            this.iv_shop_detail_shop_cart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(ShopDetailActivity.this, CartActivity.class);
+                    ShopDetailActivity.this.startActivity(intent);
+                }
+            });
         }
     }
 
     @Override
     public int getContentView() {
+        Log.d(TAG, "getContentView: ");
         return R.layout.activity_shop_detail;
     }
 
     public void getDataInIntent() {
+        Log.d(TAG, "getDataInIntent: ");
         Intent intent = this.getIntent();
 
         if (intent != null && intent.getExtras() != null) {

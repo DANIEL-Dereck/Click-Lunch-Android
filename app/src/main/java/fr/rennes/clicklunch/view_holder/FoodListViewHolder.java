@@ -7,8 +7,10 @@ import android.widget.TextView;
 
 import fr.rennes.clicklunch.R;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper=false)
 public class FoodListViewHolder extends RecyclerView.ViewHolder {
     private TextView tv_food_list_product_type;
     private RecyclerView rv_food_list_products;

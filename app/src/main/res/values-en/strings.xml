@@ -17,4 +17,25 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="new_account">Create new account</string>
+    <string name="save_account">S\'ENREGISTRER</string>
+
+    <string name="user_lastname">Lastname</string>
+    <string name="user_firstname">Firstname</string>
+    <string name="user_email">Email</string>
+    <string name="user_phone">Phone</string>
+    <string name="user_password">Password</string>
+    <string name="user_password_confirmation">Confirm password</string>
+
+    <string name="ariane_step_1">Récapitulatif</string>
+    <string name="ariane_step_2">Choix de l\'heure</string>
+    <string name="ariane_step_3">Paiement</string>
+    <string name="ariane_step_4">Confirmation</string>
+
+    <string name="cancel">Annuler</string>
+    <string name="add_to_cart">Ajouter au panier</string>
+    <string name="back">Retour</string>
+    <string name="choose_hour">Choisir l`heure</string>
+    <string name="goto_payement">Acceder au payement</string>
+    <string name="bought">payer</string>
 </resources>

@@ -8,8 +8,10 @@ import android.widget.TextView;
 
 import fr.rennes.clicklunch.R;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper=false)
 public class FoodDetailViewHolder extends RecyclerView.ViewHolder {
     private ImageView iv_food_detail_image;
     private TextView tv_food_detail_price;

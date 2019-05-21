@@ -1,52 +1,54 @@
 package fr.rennes.clicklunch.activity;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
+import fr.rennes.clicklunch.App;
 import fr.rennes.clicklunch.R;
 
-public abstract class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+/**
+ * Base of all activities.
+ */
+public abstract class BaseActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
+    public static final String TAG = "BaseActivity";
+
+    /**
+     * Navigation view.
+     */
     private NavigationView navigationView;
-
-    private void initToolBar() {
-        this.navigationView = this.findViewById(R.id.nav_view);
-    }
-
-    protected void initMenu() {
-        this.initToolBar();
-
-        this.navigationView.setNavigationItemSelectedListener(this);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate: ");
         this.setContentView(getContentView());
+        super.onCreate(savedInstanceState);
+        this.initComponent();
+        this.initMenu();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        Log.d(TAG, "onCreateOptionsMenu: ");
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Log.d(TAG, "onOptionsItemSelected: ");
         return false;
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
+    /**
+     * OnNavigationItemSelected.
+     */
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        Log.d(TAG, "onNavigationItemSelected: ");
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -59,5 +61,33 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         return true;
     }
 
+    /**
+     * Init tool bar.
+     */
+    private void initToolBar() {
+        Log.d(TAG, "initToolBar: ");
+        this.navigationView = this.findViewById(R.id.nav_view);
+    }
+
+    /**
+     * Init menu.
+     */
+    protected void initMenu() {
+        Log.d(TAG, "initMenu: ");
+        this.initToolBar();
+        this.navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    // Abstract methods;
+
+    /**
+     * Get contentView.
+     * @return id of view.
+     */
     public abstract int getContentView();
+
+    /**
+     * Init component use in activity.
+     */
+    protected abstract void initComponent();
 }

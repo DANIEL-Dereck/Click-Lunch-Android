@@ -9,6 +9,7 @@ import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
@@ -19,6 +20,7 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @Data
 @Accessors
+@EqualsAndHashCode(callSuper=true)
 public abstract class Menu extends EntityBase {
     private List<Product> products;
 

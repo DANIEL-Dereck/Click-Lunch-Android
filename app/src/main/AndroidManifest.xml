@@ -18,7 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.UserCreationActivity"></activity>
+        <activity android:name=".activity.ProductDetailActivity"></activity>
+        <activity android:name=".activity.CartActivity" />
+        <activity android:name=".activity.UserCreationActivity" />
         <activity
             android:name=".activity.ShopDetailActivity"
             android:screenOrientation="portrait"

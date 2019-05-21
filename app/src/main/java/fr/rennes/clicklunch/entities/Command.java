@@ -5,8 +5,11 @@
 
 package fr.rennes.clicklunch.entities;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
@@ -17,6 +20,8 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @Data
 @Accessors
+@EqualsAndHashCode(callSuper=true)
 public class Command extends EntityBase {
     private int number;
+    private List<CommandLine> commandLines;
 }

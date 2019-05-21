@@ -1,5 +1,6 @@
 package fr.rennes.clicklunch.adapter;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
@@ -19,12 +20,15 @@ import fr.rennes.clicklunch.view_holder.FoodListViewHolder;
 public class FoodListAdapter extends RecyclerView.Adapter<FoodListViewHolder> {
 
     private List<FoodListItem> foodList;
+    private Context context;
+
     public FoodListAdapter() {
         this.foodList = new ArrayList<>();
     }
 
-    public FoodListAdapter(List<FoodListItem> foodList) {
+    public FoodListAdapter(List<FoodListItem> foodList, Context context) {
         this.foodList = foodList;
+        this.context = context;
     }
 
     @NonNull
@@ -59,7 +63,7 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListViewHolder> {
             }
 
             // Set list of product.
-            FoodDetailAdapter foodDetailAdapter = new FoodDetailAdapter(item.getProducts(), backgroundColor);
+            FoodDetailAdapter foodDetailAdapter = new FoodDetailAdapter(item.getProducts(), backgroundColor, context);
             foodListViewHolder.getRv_food_list_products().setAdapter(foodDetailAdapter);
             foodListViewHolder.getRv_food_list_products().setHasFixedSize(true);
             StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL);

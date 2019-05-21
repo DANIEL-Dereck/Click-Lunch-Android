@@ -9,6 +9,16 @@
         <item name="android:colorAccent">@color/colorOrangeText</item>
     </style>
 
+    <style name="TextLabel" parent="Widget.Design.TextInputLayout">
+        <!-- Hint color and label color in FALSE state -->
+        <item name="android:textColorHint">@color/colorHintTextInputLayout</item>
+        <item name="android:textSize">20sp</item>
+        <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
+        <item name="colorAccent">@color/colorOrangeText</item>
+        <item name="colorControlNormal">@color/colorHintTextInputLayout</item>
+        <item name="colorControlActivated">@color/colorOrangeText</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

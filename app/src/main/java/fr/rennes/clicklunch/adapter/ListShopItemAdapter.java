@@ -65,7 +65,7 @@ public class ListShopItemAdapter extends RecyclerView.Adapter<ListShopViewHolder
         locShop.setLatitude(selectedShop.getLatitude());
         locShop.setLongitude(selectedShop.getLongitude());
 
-        String distance = GPSTracker.getDistance(locShop);
+        String distance = "";//GPSTracker.getDistance(locShop);
 
         if (!distance.isEmpty()) {
             listShopViewHolder.getTv_list_shop_item_distance().setText(distance);

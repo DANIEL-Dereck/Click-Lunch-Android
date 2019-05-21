@@ -10,6 +10,7 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Generated;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,6 +24,7 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @Data
 @Accessors
+@EqualsAndHashCode(callSuper=true)
 public class Shop extends EntityBase {
     private String name;
     private String siret;
