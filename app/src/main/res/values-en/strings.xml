@@ -29,15 +29,15 @@
 
     <string name="ariane_step_1">Récapitulatif</string>
     <string name="ariane_step_2">Choix de l\'heure</string>
-    <string name="ariane_step_3">Paiement</string>
+    <string name="ariane_step_3">Payment</string>
     <string name="ariane_step_4">Confirmation</string>
 
-    <string name="cancel">Annuler</string>
-    <string name="add_to_cart">Ajouter au panier</string>
-    <string name="back">Retour</string>
-    <string name="choose_hour">Choisir l`heure</string>
-    <string name="goto_payement">Acceder au payement</string>
-    <string name="bought">payer</string>
+    <string name="cancel">Cancel</string>
+    <string name="add_to_cart">Add to cart</string>
+    <string name="back">Back</string>
+    <string name="choose_hour">Choose time</string>
+    <string name="goto_payement">Access payment</string>
+    <string name="bought">Pay</string>
 
     <string name="product_added">Le produit a bien été ajouté à votre commande</string>
 </resources>

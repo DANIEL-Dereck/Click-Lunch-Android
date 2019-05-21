@@ -4,9 +4,9 @@
     <string name="app_list_shop_search">Restaurant, catégorie</string>
 
     <string name="ptype_menu">Menus</string>
-    <string name="ptype_starter">Entrée</string>
+    <string name="ptype_starter">Entrées</string>
     <string name="ptype_dish">Plats</string>
-    <string name="ptype_dessert">Dessert</string>
+    <string name="ptype_dessert">Desserts</string>
     <string name="ptype_drink">Boissons</string>
     <string name="ptype_other">Autres</string>
 
@@ -15,12 +15,12 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Parametres</string>
+    <string name="action_settings">Paramètres</string>
     <string name="new_account">Créer un compte</string>
     <string name="save_account">S\'ENREGISTRER</string>
 
     <string name="user_lastname">Nom</string>
-    <string name="user_firstname">Prenom</string>
+    <string name="user_firstname">Prénom</string>
     <string name="user_email">Email</string>
     <string name="user_phone">Telephone</string>
     <string name="user_password">Mot de passe</string>
@@ -34,9 +34,9 @@
     <string name="cancel">Annuler</string>
     <string name="add_to_cart">Ajouter au panier</string>
     <string name="back">Retour</string>
-    <string name="choose_hour">Choisir l`heure</string>
-    <string name="goto_payement">Acceder au payement</string>
-    <string name="bought">payer</string>
+    <string name="choose_hour">Choisir l\'heure</string>
+    <string name="goto_payement">Accéder au paiement</string>
+    <string name="bought">Payer</string>
 
     <string name="product_added">Le produit a bien été ajouté à votre commande</string>
 

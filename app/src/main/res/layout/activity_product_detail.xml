@@ -93,7 +93,7 @@
             android:layout_height="wrap_content"
             android:background="@color/colorWhite"
             android:text="@string/cancel"
-            android:textColor="@color/colorOrangeText"
+            android:textColor="@color/colorGrey"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/btn_detail_food_validate"/>

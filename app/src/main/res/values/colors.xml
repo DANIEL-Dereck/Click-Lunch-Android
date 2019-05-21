@@ -11,6 +11,7 @@
     <color name="colorGreenMainDark">#C434B253</color>
     <color name="colorOrangeText">#ED7404</color>
     <color name="colorImageEmpty">#FFFFFF</color>
+    <color name="colorGrey">#8C8181</color>
 
     <color name="colorHintTextInputLayout">#333333</color>
     <color name="colorHint">#40000000</color>
