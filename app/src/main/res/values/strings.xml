@@ -40,7 +40,7 @@
 
     <string name="product_added">Le produit a bien été ajouté à votre commande</string>
     <string name="my_cart">Mon panier</string>
-    <string name="total">TOTAL</string>
+    <string name="total">Total</string>
     <string name="next_schedule">Le prochain créneau est disponible à %schedule%</string>
     <string name="validate_schedule">Valider cet horaire</string>
     <string name="choose_next_schedule">Choisir un autre horaire</string>
@@ -50,4 +50,8 @@
     <string name="cart_number">Numéro de carte</string>
     <string name="cart_validation_date">Date de validité</string>
     <string name="cart_validation_code">Code de vérification</string>
+    <string name="congratulation">Félicitations, votre commande a bien été validée !</string>
+    <string name="command_number">Votre numéro de commande est le %num%</string>
+    <string name="shop_wait">Le restaurant %shopName% vous attend à %schedule%</string>
+    <string name="enjoy_meal">Bon appétit !</string>
 </resources>
