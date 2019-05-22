@@ -27,8 +27,8 @@
     <string name="user_password">Password</string>
     <string name="user_password_confirmation">Confirm password</string>
 
-    <string name="ariane_step_1">Récapitulatif</string>
-    <string name="ariane_step_2">Choix de l\'heure</string>
+    <string name="ariane_step_1">Summary</string>
+    <string name="ariane_step_2">Time selection</string>
     <string name="ariane_step_3">Payment</string>
     <string name="ariane_step_4">Confirmation</string>
 
@@ -38,4 +38,10 @@
     <string name="choose_hour">Choose time</string>
     <string name="goto_payement">Access payment</string>
     <string name="bought">Pay</string>
+<<<<<<< Updated upstream
 </resources>
+=======
+
+    <string name="product_added">The product has been added to your order</string>
+</resources>
+>>>>>>> Stashed changes
