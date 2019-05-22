@@ -26,7 +26,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_food_list_product_type">
+        app:layout_constraintTop_toBottomOf="@+id/tv_food_list_product_type"
+        tools:listitem="@layout/detail_food_item">
 
     </android.support.v7.widget.RecyclerView>
 </android.support.constraint.ConstraintLayout>

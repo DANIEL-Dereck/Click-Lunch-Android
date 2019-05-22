@@ -3,6 +3,7 @@ package fr.rennes.clicklunch.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,11 +18,11 @@ import java.util.List;
 import fr.rennes.clicklunch.App;
 import fr.rennes.clicklunch.R;
 import fr.rennes.clicklunch.adapter.DetailFoodAdapter;
+import fr.rennes.clicklunch.decorator.VerticalSpaceItemDecoration;
 import fr.rennes.clicklunch.entities.Product;
 import fr.rennes.clicklunch.utils.CartLocalStorage;
 
 public class ProductDetailActivity extends BaseActivity {
-
     // Static final attributes.
     public static final int MY_ACTIVITY_CODE = 0x40;
     public static final String TAG = "ProductDetailActivity";
@@ -73,9 +74,11 @@ public class ProductDetailActivity extends BaseActivity {
 
             this.detailFoodAdapter = new DetailFoodAdapter(products, this);
 
-            LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-            this.rv_detail_food_lst_product.setLayoutManager(layoutManager);
+            this.rv_detail_food_lst_product.setLayoutManager(new GridLayoutManager(this, 1));
+            this.rv_detail_food_lst_product.addItemDecoration(new VerticalSpaceItemDecoration(this, R.dimen.dimenMarginDefault));
             this.rv_detail_food_lst_product.setAdapter(detailFoodAdapter);
+            this.rv_detail_food_lst_product.setHasFixedSize(true);
+
 
             btn_detail_food_back.setOnClickListener(new View.OnClickListener() {
                 @Override

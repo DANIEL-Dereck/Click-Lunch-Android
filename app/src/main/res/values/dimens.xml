@@ -24,6 +24,8 @@
     <dimen name="dimenMarginItemFood">27dp</dimen>
     <dimen name="dimenMarginItemPhoto">45dp</dimen>
 
+    <dimen name="dimenMarginDefault">8dp</dimen>
+
     <!-- Radius -->
     <dimen name="searchBarRadius">5dp</dimen>
 
