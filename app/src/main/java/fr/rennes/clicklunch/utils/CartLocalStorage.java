@@ -6,7 +6,7 @@ import java.util.List;
 import fr.rennes.clicklunch.entities.Product;
 
 public class CartLocalStorage {
-    private static List<Product> products = new ArrayList<>();
+    private static List<Product> products;
     private static CartLocalStorage instance;
 
     private CartLocalStorage() {
@@ -16,6 +16,10 @@ public class CartLocalStorage {
     public static CartLocalStorage getInstance() {
         if (instance == null) {
             instance = new CartLocalStorage();
+        }
+
+        if (products == null) {
+            products = new ArrayList<>();
         }
 
         return instance;
@@ -40,6 +44,6 @@ public class CartLocalStorage {
     }
 
     public void clear() {
-        products.removeAll(getAll());
+        products.clear();
     }
 }

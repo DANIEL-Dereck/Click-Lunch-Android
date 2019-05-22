@@ -75,7 +75,6 @@ public class ShopListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         this.initTmpList();
 
-        CartLocalStorage.getInstance().clear();
         shopList.addAll(tmpShopList);
         this.listShopItemAdapter = new ListShopItemAdapter(shopList);
 
@@ -111,6 +110,7 @@ public class ShopListActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "listShopItemAdapter.onClick: ");
+                CartLocalStorage.getInstance().clear();
                 Intent myIntent = new Intent(ShopListActivity.this, ShopDetailActivity.class);
                 int position = lv_shop_list_shops.getChildLayoutPosition(v);
                 Shop selectedShop = ShopListActivity.this.tmpShopList.get(position);
