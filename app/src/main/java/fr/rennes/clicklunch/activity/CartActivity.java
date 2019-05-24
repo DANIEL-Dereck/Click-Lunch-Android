@@ -77,6 +77,8 @@ public class CartActivity extends BaseActivity {
         this.btn_activity_cart_validate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(CartActivity.this, ChooseHourActivity.class);
+                CartActivity.this.startActivity(intent);
             }
         });
 
