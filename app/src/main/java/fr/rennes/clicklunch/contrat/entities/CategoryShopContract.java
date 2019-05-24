@@ -8,4 +8,5 @@ package fr.rennes.clicklunch.contrat.entities;
  * Contract class for CategoryShop.
  */
 public final class CategoryShopContract extends EntityBaseContract {
+    public static final String COLUMN_NAME = "name";
 }

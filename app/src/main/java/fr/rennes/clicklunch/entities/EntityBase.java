@@ -5,13 +5,15 @@
 
 package fr.rennes.clicklunch.entities;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.joda.time.DateTime;
 
 import java.io.Serializable;
 
+import fr.rennes.clicklunch.contrat.entities.EntityBaseContract;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
@@ -23,8 +25,15 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors
 public abstract class EntityBase implements Serializable {
+    @SerializedName(EntityBaseContract.COLUMN_ID)
     protected int id;
+
+    @SerializedName(EntityBaseContract.COLUMN_ISDELETED)
     protected boolean isDeleted;
+
+    @SerializedName(EntityBaseContract.COLUMN_CREATEDAT)
     protected DateTime createdAt;
+
+    @SerializedName(EntityBaseContract.COLUMN_UPDATEDAT)
     protected DateTime updatedAt;
 }

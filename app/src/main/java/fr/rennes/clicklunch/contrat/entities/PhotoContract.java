@@ -9,4 +9,5 @@ package fr.rennes.clicklunch.contrat.entities;
  * Contract class for Photo.
  */
 public final class PhotoContract extends EntityBaseContract {
+    public static final String COLUMN_PATH = "path";
 }

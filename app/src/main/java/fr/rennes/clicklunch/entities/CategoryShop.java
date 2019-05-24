@@ -5,6 +5,9 @@
 
 package fr.rennes.clicklunch.entities;
 
+import com.google.gson.annotations.SerializedName;
+
+import fr.rennes.clicklunch.contrat.entities.CategoryShopContract;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -20,5 +23,6 @@ import lombok.experimental.Accessors;
 @Accessors
 @EqualsAndHashCode(callSuper=true)
 public class CategoryShop extends EntityBase {
+    @SerializedName(CategoryShopContract.COLUMN_NAME)
     private String name;
 }

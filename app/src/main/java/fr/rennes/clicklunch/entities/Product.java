@@ -5,8 +5,11 @@
 
 package fr.rennes.clicklunch.entities;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.text.DecimalFormat;
 
+import fr.rennes.clicklunch.contrat.entities.ProductContract;
 import fr.rennes.clicklunch.enums.ProductType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,11 +26,22 @@ import lombok.experimental.Accessors;
 @Accessors
 @EqualsAndHashCode(callSuper=true)
 public class Product extends Menu {
+    @SerializedName(ProductContract.COLUMN_NAME)
     private String name;
+
+    @SerializedName(ProductContract.COLUMN_PRICE)
     private double price;
+
+    @SerializedName(ProductContract.COLUMN_DESCRIPTION)
     private String description;
+
+    @SerializedName(ProductContract.COLUMN_CATEGORY)
     private Category category;
+
+    @SerializedName(ProductContract.COLUMN_PRODUCTTYPE)
     private ProductType productType;
+
+    @SerializedName(ProductContract.COLUMN_PHOTO)
     private Photo photo;
 
     public String getPriceString() {

@@ -9,4 +9,6 @@ package fr.rennes.clicklunch.contrat.entities;
  * Contract class for CommandLine.
  */
 public final class CommandLineContract extends EntityBaseContract {
+    public static final String COLUMN_QUANTITY = "quantity";
+    public static final String COLUMN_COMMAND = "command";
 }

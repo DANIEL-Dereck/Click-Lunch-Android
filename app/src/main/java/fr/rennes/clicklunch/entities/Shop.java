@@ -5,16 +5,15 @@
 
 package fr.rennes.clicklunch.entities;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
+import fr.rennes.clicklunch.contrat.entities.ShopContract;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Generated;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.experimental.Accessors;
 
 /**
@@ -26,20 +25,37 @@ import lombok.experimental.Accessors;
 @Accessors
 @EqualsAndHashCode(callSuper=true)
 public class Shop extends EntityBase {
+    @SerializedName(ShopContract.COLUMN_NAME)
     private String name;
-    private String siret;
-    private String siren;
+
+    @SerializedName(ShopContract.COLUMN_PHONENUMBER)
     private String phoneNumber;
+
+    @SerializedName(ShopContract.COLUMN_EMAIL)
     private String email;
+
+    @SerializedName(ShopContract.COLUMN_LONGITUDE)
     private double longitude;
+
+    @SerializedName(ShopContract.COLUMN_LATITUDE)
     private double latitude;
+
+    @SerializedName(ShopContract.COLUMN_ADDRESS)
     private String address;
+
+    @SerializedName(ShopContract.COLUMN_POSTALCODE)
+    private String postalCode;
+
+    @SerializedName(ShopContract.COLUMN_CITY)
     private String city;
+
+    @SerializedName(ShopContract.COLUMN_PHOTO)
     private Photo photo;
 
-    private Professional professional;
-    private BankAccount bankAccount;
+    @SerializedName(ShopContract.COLUMN_CONFIGURATIONS)
     private List<Configuration> configurations;
+
+    @SerializedName(ShopContract.COLUMN_CATEGORIES)
     private List<CategoryShop> categories;
 
     public String getFullAddress() {
@@ -50,7 +66,11 @@ public class Shop extends EntityBase {
         }
 
         if (this.city != null) {
-            result += "," + this.city;
+            result += "\n" + this.city;
+
+            if (this.postalCode != null) {
+                result += ", " + this.postalCode;
+            }
         }
 
         return result;
@@ -60,9 +80,11 @@ public class Shop extends EntityBase {
     {
         String result = "";
 
-        for (CategoryShop categoryShop : categories) {
-            result += categoryShop.getName() +
-                    ((categories.size() > 1 && categories.indexOf(categoryShop) != (categories.size() - 1)) ? ", " : "");
+        if (this.categories != null) {
+            for (CategoryShop categoryShop : this.categories) {
+                result += categoryShop.getName() +
+                        ((categories.size() > 1 && categories.indexOf(categoryShop) != (categories.size() - 1)) ? ", " : "");
+            }
         }
 
         return result;

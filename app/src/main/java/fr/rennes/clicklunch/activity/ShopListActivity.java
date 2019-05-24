@@ -2,6 +2,7 @@ package fr.rennes.clicklunch.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import fr.rennes.clicklunch.R;
 import fr.rennes.clicklunch.adapter.ListShopItemAdapter;
@@ -18,6 +20,11 @@ import fr.rennes.clicklunch.entities.CategoryShop;
 import fr.rennes.clicklunch.entities.Photo;
 import fr.rennes.clicklunch.entities.Shop;
 import fr.rennes.clicklunch.utils.CartLocalStorage;
+import fr.rennes.clicklunch.web_services.RetrofitBuilder;
+import fr.rennes.clicklunch.web_services.ws_entity.ShopList;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ShopListActivity extends BaseActivity {
 
@@ -28,10 +35,14 @@ public class ShopListActivity extends BaseActivity {
     private RecyclerView lv_shop_list_shops;
     private EditText et_shop_list_search_bar;
 
-    public ArrayList<Shop> tmpShopList = new ArrayList<>();
-    public ArrayList<Shop> shopList = new ArrayList<>();
+    private ArrayList<Shop> tmpShopList = new ArrayList<>();
+    private ArrayList<Shop> shopList = new ArrayList<>();
     private ListShopItemAdapter listShopItemAdapter;
 
+    private int pageNumber = 1;
+    private boolean inRequest = false;
+
+/*
     private void initTmpList()
     {
         Log.d(TAG, "initTmpList: ");
@@ -45,7 +56,7 @@ public class ShopListActivity extends BaseActivity {
         forum.setCategories(new ArrayList<CategoryShop>());
         forum.getCategories().add(new CategoryShop("Sanwdich"));
         forum.getCategories().add(new CategoryShop("Pizza"));
-        tmpShopList.add(forum);
+//        tmpShopList.add(forum);
 
         for (int i = 0; i < 20; i++) {
             Shop item = new Shop();
@@ -57,9 +68,10 @@ public class ShopListActivity extends BaseActivity {
             item.setCategories(new ArrayList<CategoryShop>());
             item.getCategories().add(new CategoryShop("Pizza" + i));
             item.getCategories().add(new CategoryShop("Burger" + i));
-            tmpShopList.add(item);
+//            tmpShopList.add(item);
         }
     }
+*/
 
     @Override
     protected void initComponent()
@@ -73,9 +85,33 @@ public class ShopListActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate: ");
         super.onCreate(savedInstanceState);
-        this.initTmpList();
+//        this.initTmpList();
 
-        shopList.addAll(tmpShopList);
+//        shopList.addAll(tmpShopList);
+        RetrofitBuilder.getClient().listShop(ShopListActivity.this.pageNumber++).enqueue(new Callback<ShopList>() {
+            @Override
+            public void onResponse(Call<ShopList> call, Response<ShopList> response) {
+                Log.d(TAG, ShopListActivity.TAG + "onResponse: ");
+
+                System.out.println(response.body());
+
+                if (response.body() != null && response.body().getShops() != null && response.body().getShops().size() > 0) {
+                    ShopListActivity.this.shopList.addAll(response.body().getShops());
+                    ShopListActivity.this.tmpShopList.addAll(response.body().getShops());
+
+                    ShopListActivity.this.listShopItemAdapter.notifyDataSetChanged();
+                }
+
+                ShopListActivity.this.inRequest = false;            }
+
+            @Override
+            public void onFailure(Call<ShopList> call, Throwable t) {
+                Log.d(TAG, ShopListActivity.TAG + "onFailure: ");
+
+                ShopListActivity.this.inRequest = false;
+            }
+        });
+
         this.listShopItemAdapter = new ListShopItemAdapter(shopList);
 
         this.et_shop_list_search_bar.addTextChangedListener(new TextWatcher() {
@@ -87,7 +123,7 @@ public class ShopListActivity extends BaseActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 Log.d(TAG, "et_shop_list_search_bar.onTextChanged: ");
-                shopList.removeAll(shopList);
+                shopList.clear();
 
                 for (Shop shop : tmpShopList) {
                     if (shop.getName().toLowerCase().contains(s.toString().toLowerCase())
@@ -121,8 +157,46 @@ public class ShopListActivity extends BaseActivity {
 
         this.lv_shop_list_shops.setHasFixedSize(true);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         this.lv_shop_list_shops.setLayoutManager(layoutManager);
+
+        this.lv_shop_list_shops.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                int visibleCount = layoutManager.getChildCount();
+                int firstVisible = layoutManager.findFirstVisibleItemPosition();
+                int itemsCount = layoutManager.getItemCount();
+
+                if ((visibleCount + firstVisible) == itemsCount && !ShopListActivity.this.inRequest) {
+                    ShopListActivity.this.inRequest = true;
+
+                    RetrofitBuilder.getClient().listShop(ShopListActivity.this.pageNumber++).enqueue(new Callback<ShopList>() {
+                        @Override
+                        public void onResponse(Call<ShopList> call, Response<ShopList> response) {
+                            Log.d(TAG, ShopListActivity.TAG + "onResponse: ");
+
+                            System.out.println(response.body());
+
+                            if (response.body() != null && response.body().getShops() != null && response.body().getShops().size() > 0) {
+                                ShopListActivity.this.shopList.addAll(response.body().getShops());
+                                ShopListActivity.this.tmpShopList.addAll(response.body().getShops());
+
+                                ShopListActivity.this.listShopItemAdapter.notifyDataSetChanged();
+                            }
+
+                            ShopListActivity.this.inRequest = false;            }
+
+                        @Override
+                        public void onFailure(Call<ShopList> call, Throwable t) {
+                            Log.d(TAG, ShopListActivity.TAG + "onFailure: ");
+
+                            ShopListActivity.this.inRequest = false;
+                        }
+                    });                }
+            }
+        });
 
         this.lv_shop_list_shops.setAdapter(this.listShopItemAdapter);
 

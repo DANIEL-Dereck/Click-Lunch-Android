@@ -5,6 +5,9 @@
 
 package fr.rennes.clicklunch.entities;
 
+import com.google.gson.annotations.SerializedName;
+
+import fr.rennes.clicklunch.contrat.entities.BillContract;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -20,8 +23,15 @@ import lombok.experimental.Accessors;
 @Accessors
 @EqualsAndHashCode(callSuper=true)
 public class Bill extends EntityBase {
+    @SerializedName(BillContract.COLUMN_NUMBER)
     private int number;
+
+    @SerializedName(BillContract.COLUMN_COMMAND)
     private Command command;
+
+    @SerializedName(BillContract.COLUMN_SHOP)
     private Shop shop;
+
+    @SerializedName(BillContract.COLUMN_CLIENT)
     private Client client;
 }

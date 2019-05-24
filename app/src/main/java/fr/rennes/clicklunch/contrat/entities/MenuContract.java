@@ -9,4 +9,5 @@ package fr.rennes.clicklunch.contrat.entities;
  * Contract class for Menu.
  */
 public abstract class MenuContract extends EntityBaseContract {
+    public static final String COLUMN_PRODUCTS = "products";
 }

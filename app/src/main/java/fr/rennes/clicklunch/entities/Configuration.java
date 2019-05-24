@@ -5,6 +5,9 @@
 
 package fr.rennes.clicklunch.entities;
 
+import com.google.gson.annotations.SerializedName;
+
+import fr.rennes.clicklunch.contrat.entities.ConfigurationContract;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -20,8 +23,13 @@ import lombok.experimental.Accessors;
 @Accessors
 @EqualsAndHashCode(callSuper=true)
 public class Configuration extends EntityBase {
+    @SerializedName(ConfigurationContract.COLUMN_KEY)
     private String key;
+
+    @SerializedName(ConfigurationContract.COLUMN_VALUE)
     private String value;
+
+    @SerializedName(ConfigurationContract.COLUMN_SHOP)
     private Shop shop;
 
     public Configuration setConfiguration(String key, String value)
@@ -45,5 +53,4 @@ public class Configuration extends EntityBase {
     {
         return this.setConfiguration(key, Boolean.toString(value));
     }
-
 }

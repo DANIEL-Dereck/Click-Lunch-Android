@@ -5,12 +5,14 @@
 
 package fr.rennes.clicklunch.entities;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
+import fr.rennes.clicklunch.contrat.entities.ClientContract;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 /**
@@ -22,5 +24,6 @@ import lombok.experimental.Accessors;
 @Accessors
 @EqualsAndHashCode(callSuper=true)
 public class Client extends User {
+    @SerializedName(ClientContract.COLUMN_BILLS)
     List<Bill> bills;
 }

@@ -9,4 +9,5 @@ package fr.rennes.clicklunch.contrat.entities;
  * Contract class for Client.
  */
 public final class ClientContract extends UserContract {
+    public static final String COLUMN_BILLS = "bills";
 }
