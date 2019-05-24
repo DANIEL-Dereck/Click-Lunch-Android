@@ -19,6 +19,7 @@ import fr.rennes.clicklunch.adapter.ListShopItemAdapter;
 import fr.rennes.clicklunch.entities.CategoryShop;
 import fr.rennes.clicklunch.entities.Photo;
 import fr.rennes.clicklunch.entities.Shop;
+import fr.rennes.clicklunch.utils.AppUtil;
 import fr.rennes.clicklunch.utils.CartLocalStorage;
 import fr.rennes.clicklunch.web_services.RetrofitBuilder;
 import fr.rennes.clicklunch.web_services.ws_entity.ShopList;
@@ -42,37 +43,6 @@ public class ShopListActivity extends BaseActivity {
     private int pageNumber = 1;
     private boolean inRequest = false;
 
-/*
-    private void initTmpList()
-    {
-        Log.d(TAG, "initTmpList: ");
-        Shop forum = new Shop();
-        forum.setName("Le Forum");
-        forum.setLatitude( 48.0460793);
-        forum.setLongitude( -1.7412650);
-        forum.setPhoto(new Photo("https://leforumrestaurant.files.wordpress.com/2016/04/cropped-wp_20160216_006.jpg?w=1200"));
-        forum.setAddress("7 rue de lalala");
-        forum.setCity("Bruz");
-        forum.setCategories(new ArrayList<CategoryShop>());
-        forum.getCategories().add(new CategoryShop("Sanwdich"));
-        forum.getCategories().add(new CategoryShop("Pizza"));
-//        tmpShopList.add(forum);
-
-        for (int i = 0; i < 20; i++) {
-            Shop item = new Shop();
-            item.setName("shop test" + i);
-            item.setLongitude(i);
-            item.setLatitude(i);
-            item.setAddress(i + " rue de lalal");
-            item.setCity("Rennes");
-            item.setCategories(new ArrayList<CategoryShop>());
-            item.getCategories().add(new CategoryShop("Pizza" + i));
-            item.getCategories().add(new CategoryShop("Burger" + i));
-//            tmpShopList.add(item);
-        }
-    }
-*/
-
     @Override
     protected void initComponent()
     {
@@ -85,32 +55,35 @@ public class ShopListActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate: ");
         super.onCreate(savedInstanceState);
-//        this.initTmpList();
 
-//        shopList.addAll(tmpShopList);
-        RetrofitBuilder.getClient().listShop(ShopListActivity.this.pageNumber++).enqueue(new Callback<ShopList>() {
-            @Override
-            public void onResponse(Call<ShopList> call, Response<ShopList> response) {
-                Log.d(TAG, ShopListActivity.TAG + "onResponse: ");
+        if (!AppUtil.MODE_API) {
+            this.initTmpList();
+            shopList.addAll(tmpShopList);
+        } else {
+            RetrofitBuilder.getClient().listShop(ShopListActivity.this.pageNumber++).enqueue(new Callback<ShopList>() {
+                @Override
+                public void onResponse(Call<ShopList> call, Response<ShopList> response) {
+                    Log.d(TAG, ShopListActivity.TAG + "onResponse: ");
 
-                System.out.println(response.body());
+                    System.out.println(response.body());
 
-                if (response.body() != null && response.body().getShops() != null && response.body().getShops().size() > 0) {
-                    ShopListActivity.this.shopList.addAll(response.body().getShops());
-                    ShopListActivity.this.tmpShopList.addAll(response.body().getShops());
+                    if (response.body() != null && response.body().getShops() != null && response.body().getShops().size() > 0) {
+                        ShopListActivity.this.shopList.addAll(response.body().getShops());
+                        ShopListActivity.this.tmpShopList.addAll(response.body().getShops());
 
-                    ShopListActivity.this.listShopItemAdapter.notifyDataSetChanged();
+                        ShopListActivity.this.listShopItemAdapter.notifyDataSetChanged();
+                    }
+
+                    ShopListActivity.this.inRequest = false;            }
+
+                @Override
+                public void onFailure(Call<ShopList> call, Throwable t) {
+                    Log.d(TAG, ShopListActivity.TAG + "onFailure: ");
+
+                    ShopListActivity.this.inRequest = false;
                 }
-
-                ShopListActivity.this.inRequest = false;            }
-
-            @Override
-            public void onFailure(Call<ShopList> call, Throwable t) {
-                Log.d(TAG, ShopListActivity.TAG + "onFailure: ");
-
-                ShopListActivity.this.inRequest = false;
-            }
-        });
+            });
+        }
 
         this.listShopItemAdapter = new ListShopItemAdapter(shopList);
 
@@ -179,7 +152,7 @@ public class ShopListActivity extends BaseActivity {
 
                             System.out.println(response.body());
 
-                            if (response.body() != null && response.body().getShops() != null && response.body().getShops().size() > 0) {
+                            if (response.body() != null && response.body().getShops() != null && response.body().getShops().size() > 0 && AppUtil.MODE_API) {
                                 ShopListActivity.this.shopList.addAll(response.body().getShops());
                                 ShopListActivity.this.tmpShopList.addAll(response.body().getShops());
 
@@ -207,5 +180,35 @@ public class ShopListActivity extends BaseActivity {
     public int getContentView() {
         Log.d(TAG, "getContentView: ");
         return R.layout.activity_shop_list;
+    }
+
+    private void initTmpList()
+    {
+        Log.d(TAG, "initTmpList: ");
+        Shop forum = new Shop();
+        forum.setName("Le Forum");
+        forum.setLatitude( 48.0460793);
+        forum.setLongitude( -1.7412650);
+        forum.setPhoto(new Photo("https://leforumrestaurant.files.wordpress.com/2016/04/cropped-wp_20160216_006.jpg?w=1200"));
+        forum.setAddress("7 rue de lalala");
+        forum.setCity("Bruz");
+        forum.setCategories(new ArrayList<CategoryShop>());
+        forum.getCategories().add(new CategoryShop("Sanwdich"));
+        forum.getCategories().add(new CategoryShop("Pizza"));
+        tmpShopList.add(forum);
+
+        for (int i = 0; i < 20; i++) {
+            Shop item = new Shop();
+            item.setName("shop test" + i);
+            item.setLongitude(i);
+            item.setLatitude(i);
+            item.setAddress(i + " rue de lalal");
+            item.setPhoto(new Photo("https://source.unsplash.com/random"));
+            item.setCity("Rennes");
+            item.setCategories(new ArrayList<CategoryShop>());
+            item.getCategories().add(new CategoryShop("Pizza" + i));
+            item.getCategories().add(new CategoryShop("Burger" + i));
+            tmpShopList.add(item);
+        }
     }
 }
