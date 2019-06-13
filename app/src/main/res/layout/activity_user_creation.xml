@@ -7,17 +7,6 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <android.support.design.widget.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:background="@color/colorWhite"
-        android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_main"
-        app:menu="@menu/activity_main_drawer"
-        tools:context=".activity.MainActivity" />
-
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -76,6 +65,7 @@
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="32dp"
                             android:layout_marginBottom="8dp"
+                            android:textSize="@dimen/dimenTextSize"
                             android:hint="@string/user_lastname"
                             android:inputType="text"
                             android:maxLines="1" />
@@ -99,6 +89,7 @@
                             android:layout_marginRight="32dp"
                             android:layout_marginBottom="8dp"
                             android:hint="@string/user_firstname"
+                            android:textSize="@dimen/dimenTextSize"
                             android:inputType="text"
                             android:maxLines="1" />
 
@@ -121,6 +112,7 @@
                             android:layout_marginRight="32dp"
                             android:layout_marginBottom="8dp"
                             android:hint="@string/user_email"
+                            android:textSize="@dimen/dimenTextSize"
                             android:inputType="textEmailAddress"
                             android:maxLines="1" />
                     </android.support.design.widget.TextInputLayout>
@@ -142,6 +134,7 @@
                             android:layout_marginRight="32dp"
                             android:layout_marginBottom="8dp"
                             android:hint="@string/user_phone"
+                            android:textSize="@dimen/dimenTextSize"
                             android:inputType="phone"
                             android:maxLines="1" />
                     </android.support.design.widget.TextInputLayout>
@@ -163,6 +156,7 @@
                             android:layout_marginRight="32dp"
                             android:layout_marginBottom="8dp"
                             android:hint="@string/user_password"
+                            android:textSize="@dimen/dimenTextSize"
                             android:inputType="textPassword"
                             android:maxLines="1" />
                     </android.support.design.widget.TextInputLayout>
@@ -184,6 +178,7 @@
                             android:layout_marginRight="32dp"
                             android:layout_marginBottom="8dp"
                             android:hint="@string/user_password_confirmation"
+                            android:textSize="@dimen/dimenTextSize"
                             android:inputType="textPassword"
                             android:maxLines="1" />
 

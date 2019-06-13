@@ -1,26 +1,20 @@
+/*************************************
+ * Author: Dereck Daniel <daniel.dereck@gmail.com>
+ * Date: 01/03/2019
+ *************************************/
 package fr.rennes.clicklunch.activity;
 
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import fr.rennes.clicklunch.App;
-import fr.rennes.clicklunch.R;
-
 /**
  * Base of all activities.
  */
-public abstract class BaseActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public abstract class BaseActivity extends AppCompatActivity {
     public static final String TAG = "BaseActivity";
-
-    /**
-     * Navigation view.
-     */
-    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,29 +38,10 @@ public abstract class BaseActivity extends AppCompatActivity
     }
 
     /**
-     * OnNavigationItemSelected.
-     */
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        Log.d(TAG, "onNavigationItemSelected: ");
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        }
-
-        return true;
-    }
-
-    /**
      * Init tool bar.
      */
     private void initToolBar() {
         Log.d(TAG, "initToolBar: ");
-        this.navigationView = this.findViewById(R.id.nav_view);
     }
 
     /**
@@ -75,7 +50,6 @@ public abstract class BaseActivity extends AppCompatActivity
     protected void initMenu() {
         Log.d(TAG, "initMenu: ");
         this.initToolBar();
-        this.navigationView.setNavigationItemSelectedListener(this);
     }
 
     // Abstract methods;

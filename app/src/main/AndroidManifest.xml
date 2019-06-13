@@ -18,7 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.ChooseHourActivity"></activity>
+        <activity android:name=".activity.ConfirmationActivity"></activity>
+        <activity android:name=".activity.PaymentActivity" />
+        <activity android:name=".activity.ChooseHourActivity" />
         <activity android:name=".activity.ProductDetailActivity" />
         <activity android:name=".activity.CartActivity" />
         <activity android:name=".activity.UserCreationActivity" />

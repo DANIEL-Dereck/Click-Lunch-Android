@@ -2,7 +2,6 @@
  * Author: Dereck Daniel <daniel.dereck@gmail.com>
  * Date: 22/02/2019
  **************************/
-
 package fr.rennes.clicklunch.contrat.entities;
 
 /**
@@ -17,7 +16,7 @@ public final class ShopContract extends EntityBaseContract {
     public static final String COLUMN_ADDRESS = "address";
     public static final String COLUMN_CITY = "city";
     public static final String COLUMN_POSTALCODE = "postalCode";
-    public static final String COLUMN_PHOTO = "photo";
+    public static final String COLUMN_PHOTO = "Photos";
     public static final String COLUMN_CONFIGURATIONS = "configurations";
     public static final String COLUMN_CATEGORIES = "categories";
 }

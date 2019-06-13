@@ -1,13 +1,15 @@
+/*************************************
+ * Author: Dereck Daniel <daniel.dereck@gmail.com>
+ * Date: 01/03/2019
+ *************************************/
 package fr.rennes.clicklunch.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -17,6 +19,7 @@ import java.util.List;
 import fr.rennes.clicklunch.R;
 import fr.rennes.clicklunch.adapter.CartItemAdapter;
 import fr.rennes.clicklunch.entities.Product;
+import fr.rennes.clicklunch.utils.AppUtil;
 import fr.rennes.clicklunch.utils.CartLocalStorage;
 
 /**
@@ -82,6 +85,14 @@ public class CartActivity extends BaseActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (AppUtil.IS_EXIT_FLAG_RAISED) {
+            finish();
+        }
     }
 
     /**

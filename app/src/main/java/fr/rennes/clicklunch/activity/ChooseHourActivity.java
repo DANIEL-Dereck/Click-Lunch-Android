@@ -1,8 +1,12 @@
+/*************************************
+ * Author: Dereck Daniel <daniel.dereck@gmail.com>
+ * Date: 01/03/2019
+ *************************************/
 package fr.rennes.clicklunch.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Spannable;
-import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
@@ -10,14 +14,26 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import fr.rennes.clicklunch.R;
+import fr.rennes.clicklunch.utils.AppUtil;
 
 public class ChooseHourActivity extends BaseActivity {
+
+    // Static final attributes.
+    public static final int MY_ACTIVITY_CODE = 0x60;
+    public static final String TAG = "ChooseHourActivity";
 
     private TextView tv_choose_hour_next_schedule;
     private Button btn_activity_choose_hour_change_hour;
     private Button btn_activity_choose_hour_back;
     private Button btn_activity_choose_hour_validate;
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (AppUtil.IS_EXIT_FLAG_RAISED) {
+            finish();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +72,9 @@ public class ChooseHourActivity extends BaseActivity {
         this.btn_activity_choose_hour_validate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(ChooseHourActivity.this, PaymentActivity.class);
+                ChooseHourActivity.this.startActivity(intent);
+
             }
         });
     }

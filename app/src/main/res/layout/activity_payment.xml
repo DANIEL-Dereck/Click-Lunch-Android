@@ -7,12 +7,13 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activity.CartActivity">
+        tools:context=".activity.PaymentActivity">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -33,6 +34,7 @@
                 android:textAlignment="center"
                 android:textColor="@color/colorOrangeText"
                 android:textSize="16sp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toTopOf="@+id/textView2"
                 app:layout_constraintLeft_toLeftOf="@id/textView2"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -41,10 +43,10 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bubble_orange"
+                android:background="@drawable/bubble_gray"
                 android:text="1"
                 android:textAlignment="center"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorBlack"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/horizontal_bar_1"
@@ -110,7 +112,6 @@
                 android:textAlignment="center"
                 android:textColor="@color/colorOrangeText"
                 android:textSize="16sp"
-                android:visibility="gone"
                 app:layout_constraintBottom_toTopOf="@id/textView3"
                 app:layout_constraintLeft_toLeftOf="@id/textView3"
                 app:layout_constraintRight_toRightOf="@id/textView3"
@@ -120,10 +121,10 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bubble_gray"
+                android:background="@drawable/bubble_orange"
                 android:text="3"
                 android:textAlignment="center"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/colorWhite"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/horizontal_bar_3"
@@ -182,85 +183,65 @@
             android:id="@+id/cl_commande"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_margin="8dp"
+            android:layout_margin="@dimen/dimenMarginDefault"
             app:layout_constraintTop_toBottomOf="@id/guideline6"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/cl_buttons"
             >
 
-                <android.support.constraint.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    app:layout_constraintTop_toTopOf="parent"
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                >
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="@dimen/dimenDefault"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ariane_step_3"
+                    android:textColor="@color/colorOrangeText"
+                    android:textSize="@dimen/dimenTextSize"
+                    android:layout_margin="@dimen/dimenMarginDefault"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    >
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:id="@+id/textView6"
-                        android:layout_width="@dimen/dimenDefault"
-                        android:layout_height="wrap_content"
-                        android:text="@string/my_cart"
-                        android:textColor="@color/colorOrangeText"
-                        android:textSize="@dimen/dimenTextSize"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/tv_payment_schedule"
+                    android:layout_width="@dimen/dimenDefault"
+                    android:layout_height="wrap_content"
+                    android:text="@string/command_validate"
+                    android:textColor="@color/colorBlack"
+                    android:layout_margin="@dimen/dimenMarginDefault"
+                    android:gravity="left"
+                    android:textSize="@dimen/dimenTextSize"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView6">
+                </TextView>
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/rv_cart_items"
-                        android:layout_width="@dimen/dimenDefault"
-                        android:layout_height="0dp"
-                        app:layout_constraintBottom_toTopOf="@+id/view"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView6">
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="@dimen/dimenDefault"
+                    android:layout_height="wrap_content"
+                    android:text="@string/good_reception"
+                    android:textColor="@color/colorBlack"
+                    android:layout_margin="@dimen/dimenMarginDefault"
+                    android:gravity="left"
+                    android:textSize="@dimen/dimenTextSize"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_payment_schedule">
 
-                    </android.support.v7.widget.RecyclerView>
+                </TextView>
 
-                    <View
-                        android:id="@+id/view"
-                        android:layout_width="@dimen/dimenDefault"
-                        android:layout_height="1dp"
-                        android:layout_margin="8dp"
-                        android:background="@color/colorBlack"
-                        app:layout_constraintBottom_toTopOf="@+id/textView7"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/rv_cart_items" />
 
-                    <TextView
-                        android:id="@+id/textView7"
-                        android:layout_width="@dimen/dimenDefault"
-                        android:layout_height="wrap_content"
-                        android:text="@string/total"
-                        android:textAllCaps="true"
-                        android:gravity="center"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="@dimen/dimenTextSize"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toLeftOf="@+id/tv_total"
-                        app:layout_constraintTop_toBottomOf="@+id/view" />
-
-                    <TextView
-                        android:id="@+id/tv_total"
-                        android:layout_width="@dimen/dimenDefault"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:textColor="@color/colorOrangeText"
-                        android:textSize="@dimen/dimenTextSize"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintLeft_toRightOf="@+id/textView7"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/view"/>
-
-                </android.support.constraint.ConstraintLayout>
-            <!--</ScrollView>-->
-
+            </android.support.constraint.ConstraintLayout>
         </android.support.constraint.ConstraintLayout>
 
         <android.support.constraint.ConstraintLayout
@@ -282,7 +263,7 @@
                 app:layout_constraintRight_toRightOf="parent" />
 
             <Button
-                android:id="@+id/btn_activity_cart_back"
+                android:id="@+id/btn_activity_payment_back"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@color/colorWhite"
@@ -290,18 +271,18 @@
                 android:textColor="@color/colorGrey"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@+id/btn_activity_cart_validate"
+                app:layout_constraintRight_toLeftOf="@+id/btn_activity_payment_validate"
                 app:layout_constraintTop_toBottomOf="@id/separator1" />
 
             <Button
-                android:id="@+id/btn_activity_cart_validate"
+                android:id="@+id/btn_activity_payment_validate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@color/colorWhite"
-                android:text="@string/choose_hour"
+                android:text="@string/bought"
                 android:textColor="@color/colorOrangeText"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/btn_activity_cart_back"
+                app:layout_constraintLeft_toRightOf="@+id/btn_activity_payment_back"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/separator1" />
 

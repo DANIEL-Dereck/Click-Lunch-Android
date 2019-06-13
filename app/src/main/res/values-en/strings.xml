@@ -46,7 +46,7 @@
     <string name="next_schedule">Le prochain créneau est disponible à %schedule%</string>
     <string name="validate_schedule">Valider cet horaire</string>
     <string name="choose_next_schedule">Choisir un autre horaire</string>
-    <string name="command_validate">Votre commande va être transmise au restaurateur. Elle sera prête à</string>
+    <string name="command_validate">Votre commande va être transmise au restaurateur. Elle sera prête à %schedule%</string>
     <string name="good_reception">Sous réserve de réception du paiement par carte bancaire.</string>
     <string name="cart_titular">Titulaire de la carte bancaire</string>
     <string name="cart_number">Numéro de carte</string>
@@ -56,4 +56,9 @@
     <string name="command_number">Votre numéro de commande est le %num%</string>
     <string name="shop_wait">Le restaurant %shopName% vous attend à %schedule%</string>
     <string name="enjoy_meal">Bon appétit !</string>
+    <string name="back_shop_list">Back to the shop list</string>
+
+    <string name="sign_in">Sign in</string>
+    <string name="sign_out">Sign out</string>
+    <string name="no_account">No account? Create one!</string>
 </resources>

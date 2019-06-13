@@ -1,3 +1,7 @@
+/*************************************
+ * Author: Dereck Daniel <daniel.dereck@gmail.com>
+ * Date: 01/03/2019
+ *************************************/
 package fr.rennes.clicklunch.web_services;
 
 import fr.rennes.clicklunch.utils.AppUtil;

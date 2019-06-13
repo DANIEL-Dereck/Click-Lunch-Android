@@ -1,3 +1,7 @@
+/*************************************
+ * Author: Dereck Daniel <daniel.dereck@gmail.com>
+ * Date: 01/03/2019
+ *************************************/
 package fr.rennes.clicklunch.utils;
 
 import android.content.Context;
@@ -13,6 +17,7 @@ import fr.rennes.clicklunch.App;
 final public class SharedPrefsUtils {
 
     public static final String SHARED_USER = "SHARED_USER";
+    public static final String TOKEN = "TOKEN";
 
     public static int getUser() {
         return getIntegerPreference(App.getAppContext(), SHARED_USER, -1);
@@ -20,6 +25,14 @@ final public class SharedPrefsUtils {
 
     public static void setUser(int userId) {
         setIntegerPreference(App.getAppContext(), SHARED_USER, userId);
+    }
+
+    public static String getToekn() {
+        return getStringPreference(App.getAppContext(), TOKEN);
+    }
+
+    public static void setToken(String toekn) {
+        setStringPreference(App.getAppContext(), TOKEN, toekn);
     }
 
     private SharedPrefsUtils() {}

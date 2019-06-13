@@ -1,3 +1,7 @@
+/*************************************
+ * Author: Dereck Daniel <daniel.dereck@gmail.com>
+ * Date: 01/03/2019
+ *************************************/
 package fr.rennes.clicklunch.activity;
 
 import android.content.Intent;
@@ -10,7 +14,6 @@ import android.widget.ImageView;
 
 import java.util.ArrayList;
 
-import fr.rennes.clicklunch.App;
 import fr.rennes.clicklunch.R;
 import fr.rennes.clicklunch.adapter.FoodListAdapter;
 import fr.rennes.clicklunch.entities.Product;
@@ -19,12 +22,19 @@ import fr.rennes.clicklunch.utils.AppUtil;
 import fr.rennes.clicklunch.utils.FoodListItem;
 import fr.rennes.clicklunch.entities.Shop;
 import fr.rennes.clicklunch.utils.GPSTracker;
+import fr.rennes.clicklunch.web_services.RetrofitBuilder;
+import fr.rennes.clicklunch.web_services.ws_entity.ProductList;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 import android.view.View;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class ShopDetailActivity extends BaseActivity {
 
@@ -38,6 +48,7 @@ public class ShopDetailActivity extends BaseActivity {
 
     private Shop currentShop;
     private int distance = 0;
+    private boolean inRequest = false;
 
     private ImageView iv_shop_detail_shop_photo;
     private ImageView iv_shop_detail_shop_cart;
@@ -88,6 +99,46 @@ public class ShopDetailActivity extends BaseActivity {
         return products;
     }
 
+    private void initFoodList() {
+        // Init Menu list
+        FoodListItem foodListItems = new FoodListItem();
+        foodListItems.setTitle(ProductType.MENU);
+        this.foodListItems.add(foodListItems);
+
+        // Init Starter List
+        foodListItems = new FoodListItem();
+        foodListItems.setTitle(ProductType.STARTER);
+        this.foodListItems.add(foodListItems);
+
+        // Init Dish List
+        foodListItems = new FoodListItem();
+        foodListItems.setTitle(ProductType.DISH);
+        this.foodListItems.add(foodListItems);
+
+        // Init Dessert List
+        foodListItems = new FoodListItem();
+        foodListItems.setTitle(ProductType.DESSERT);
+        this.foodListItems.add(foodListItems);
+
+        // Init Drink List
+        foodListItems = new FoodListItem();
+        foodListItems.setTitle(ProductType.DRINK);
+        this.foodListItems.add(foodListItems);
+
+        // Init Other List
+        foodListItems = new FoodListItem();
+        foodListItems.setTitle(ProductType.OTHER);
+        this.foodListItems.add(foodListItems);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (AppUtil.IS_EXIT_FLAG_RAISED) {
+            finish();
+        }
+    }
+
     @Override
     protected void initComponent() {
         Log.d(TAG, "initComponent: ");
@@ -103,17 +154,63 @@ public class ShopDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate: ");
         super.onCreate(savedInstanceState);
-        this.initTmpList();
         this.getDataInIntent();
+        this.initFoodList();
 
         if (currentShop != null) {
+            this.foodListAdapter = new FoodListAdapter(this.foodListItems, this);
+            this.rv_shop_detail_food_list.setHasFixedSize(true);
+
+            LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+            this.rv_shop_detail_food_list.setLayoutManager(layoutManager);
+            this.rv_shop_detail_food_list.setAdapter(this.foodListAdapter);
+
+            this.foodListAdapter.notifyDataSetChanged();
+
+            if (!AppUtil.MODE_API) {
+                this.initTmpList();
+            } else {
+                RetrofitBuilder.getClient().listProduct(ShopDetailActivity.this.currentShop.getId()).enqueue(new Callback<ProductList>() {
+                    @Override
+                    public void onResponse(Call<ProductList> call, Response<ProductList> response) {
+                        Log.d(TAG, ShopDetailActivity.TAG + "onResponse: ");
+
+                        System.out.println(response.body());
+
+                        if (response.body() != null && response.body().getProducts() != null && response.body().getProducts().size() > 0) {
+                            for (Product product : response.body().getProducts()) {
+                                for (FoodListItem foodListItem : foodListItems) {
+                                    if (product.getProductType() == foodListItem.getTitle()) {
+                                        foodListItem.addProduct(product);
+                                    }
+                                }
+                            }
+
+                            List<FoodListItem> items = new ArrayList<>();
+                            items.addAll(foodListItems);
+                            foodListItems.clear();
+                            ShopDetailActivity.this.foodListAdapter.notifyDataSetChanged();
+                            foodListItems.addAll(items);
+                            ShopDetailActivity.this.foodListAdapter.notifyDataSetChanged();
+                        }
+
+                        ShopDetailActivity.this.inRequest = false;
+                    }
+
+                    @Override
+                    public void onFailure(Call<ProductList> call, Throwable t) {
+                        Log.d(TAG, ShopDetailActivity.TAG + "onFailure: ");
+                        ShopDetailActivity.this.inRequest = false;
+                    }
+                });
+            }
+
             this.tv_shop_detail_shop_name.setText(this.currentShop.getName());
             this.tv_shop_detail_shop_addresse.setText(this.currentShop.getFullAddress());
-
             String url = AppUtil.NOIMG;
 
-            if (this.currentShop.getPhoto() != null) {
-                url = this.currentShop.getPhoto().getPath();
+            if (this.currentShop.getPhotos() != null && this.currentShop.getPhotos().size() > 0) {
+                url = this.currentShop.getPhotos().get(0).getUrl();
             }
 
             Picasso.get().load(url).placeholder(R.drawable.noimage).into(this.iv_shop_detail_shop_photo);
@@ -126,15 +223,6 @@ public class ShopDetailActivity extends BaseActivity {
             } else {
                 this.tv_shop_detail_shop_distance.setVisibility(View.GONE);
             }
-
-            this.foodListAdapter = new FoodListAdapter(this.foodListItems, this);
-            this.rv_shop_detail_food_list.setHasFixedSize(true);
-
-            LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-            this.rv_shop_detail_food_list.setLayoutManager(layoutManager);
-            this.rv_shop_detail_food_list.setAdapter(this.foodListAdapter);
-
-            this.foodListAdapter.notifyDataSetChanged();
 
             this.iv_shop_detail_shop_cart.setOnClickListener(new View.OnClickListener() {
                 @Override

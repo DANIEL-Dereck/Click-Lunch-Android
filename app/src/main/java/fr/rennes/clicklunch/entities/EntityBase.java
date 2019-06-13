@@ -2,14 +2,12 @@
  * Author: Dereck Daniel <daniel.dereck@gmail.com>
  * Date: 22/02/2019
  *************************************/
-
 package fr.rennes.clicklunch.entities;
 
 import com.google.gson.annotations.SerializedName;
 
-import org.joda.time.DateTime;
-
 import java.io.Serializable;
+import java.util.Date;
 
 import fr.rennes.clicklunch.contrat.entities.EntityBaseContract;
 import lombok.AllArgsConstructor;
@@ -32,8 +30,8 @@ public abstract class EntityBase implements Serializable {
     protected boolean isDeleted;
 
     @SerializedName(EntityBaseContract.COLUMN_CREATEDAT)
-    protected DateTime createdAt;
+    protected Date createdAt;
 
     @SerializedName(EntityBaseContract.COLUMN_UPDATEDAT)
-    protected DateTime updatedAt;
+    protected Date updatedAt;
 }

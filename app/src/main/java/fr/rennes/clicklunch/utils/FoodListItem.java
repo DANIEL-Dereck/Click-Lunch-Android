@@ -1,6 +1,11 @@
+/*************************************
+ * Author: Dereck Daniel <daniel.dereck@gmail.com>
+ * Date: 01/03/2019
+ *************************************/
 package fr.rennes.clicklunch.utils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import fr.rennes.clicklunch.App;
 import fr.rennes.clicklunch.R;
@@ -8,14 +13,16 @@ import fr.rennes.clicklunch.entities.Product;
 import fr.rennes.clicklunch.enums.ProductType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 public class FoodListItem {
     private ProductType title;
     private ArrayList<Product> products;
+
+    public FoodListItem() {
+        this.products = new ArrayList<>();
+    }
 
     public FoodListItem addProduct(Product product) {
         if (this.products == null) {
@@ -23,6 +30,15 @@ public class FoodListItem {
         }
 
         this.products.add(product);
+        return this;
+    }
+
+    public FoodListItem addProducts(List<Product> products) {
+        if (this.products == null) {
+            this.products = new ArrayList<>();
+        }
+
+        this.products.addAll(products);
         return this;
     }
 

@@ -1,9 +1,12 @@
+/*************************************
+ * Author: Dereck Daniel <daniel.dereck@gmail.com>
+ * Date: 01/03/2019
+ *************************************/
 package fr.rennes.clicklunch.activity;
 
 import android.os.Bundle;
 import android.util.Log;
 
-import fr.rennes.clicklunch.App;
 import fr.rennes.clicklunch.R;
 
 public class UserCreationActivity extends BaseActivity {

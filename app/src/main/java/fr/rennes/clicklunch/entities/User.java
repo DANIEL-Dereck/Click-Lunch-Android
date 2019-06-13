@@ -2,7 +2,6 @@
  * Author: Dereck Daniel <daniel.dereck@gmail.com>
  * Date: 22/02/2019
  *************************************/
-
 package fr.rennes.clicklunch.entities;
 
 import com.google.gson.annotations.SerializedName;
@@ -47,6 +46,10 @@ public abstract class User extends EntityBase {
     @SerializedName(UserContract.COLUMN_CITY)
     protected String city;
 
+    /**
+     * Get the full address
+     * @return addresse with city and postalcode.
+     */
     public String getFullAddress() {
         String result = "";
 

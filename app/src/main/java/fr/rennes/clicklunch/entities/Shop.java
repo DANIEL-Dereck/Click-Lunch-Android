@@ -2,7 +2,6 @@
  * Author: Dereck Daniel <daniel.dereck@gmail.com>
  * Date: 22/02/2019
  *************************************/
-
 package fr.rennes.clicklunch.entities;
 
 import com.google.gson.annotations.SerializedName;
@@ -50,7 +49,7 @@ public class Shop extends EntityBase {
     private String city;
 
     @SerializedName(ShopContract.COLUMN_PHOTO)
-    private Photo photo;
+    private List<Photo> photos;
 
     @SerializedName(ShopContract.COLUMN_CONFIGURATIONS)
     private List<Configuration> configurations;
@@ -58,6 +57,10 @@ public class Shop extends EntityBase {
     @SerializedName(ShopContract.COLUMN_CATEGORIES)
     private List<CategoryShop> categories;
 
+    /**
+     * Get the full address
+     * @return addresse with city and postalcode.
+     */
     public String getFullAddress() {
         String result = "";
 
@@ -76,6 +79,10 @@ public class Shop extends EntityBase {
         return result;
     }
 
+    /**
+     * Get all categories in string.
+     * @return string who content all catégories.
+     */
     public String getCategoriesString()
     {
         String result = "";

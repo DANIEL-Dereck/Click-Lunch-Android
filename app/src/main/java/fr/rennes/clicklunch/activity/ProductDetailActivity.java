@@ -1,10 +1,13 @@
+/*************************************
+ * Author: Dereck Daniel <daniel.dereck@gmail.com>
+ * Date: 01/03/2019
+ *************************************/
 package fr.rennes.clicklunch.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -15,7 +18,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.rennes.clicklunch.App;
 import fr.rennes.clicklunch.R;
 import fr.rennes.clicklunch.adapter.DetailFoodAdapter;
 import fr.rennes.clicklunch.decorator.VerticalSpaceItemDecoration;

@@ -1,9 +1,9 @@
+/*************************************
+ * Author: Dereck Daniel <daniel.dereck@gmail.com>
+ * Date: 01/03/2019
+ *************************************/
 package fr.rennes.clicklunch.web_services;
 
-import java.util.List;
-
-import fr.rennes.clicklunch.entities.Product;
-import fr.rennes.clicklunch.entities.Shop;
 import fr.rennes.clicklunch.web_services.ws_entity.ProductList;
 import fr.rennes.clicklunch.web_services.ws_entity.ShopList;
 import retrofit2.Call;

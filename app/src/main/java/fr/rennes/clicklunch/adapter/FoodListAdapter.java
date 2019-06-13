@@ -1,3 +1,7 @@
+/*************************************
+ * Author: Dereck Daniel <daniel.dereck@gmail.com>
+ * Date: 01/03/2019
+ *************************************/
 package fr.rennes.clicklunch.adapter;
 
 import android.content.Context;
@@ -44,15 +48,21 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListViewHolder> {
     public void onBindViewHolder(@NonNull FoodListViewHolder foodListViewHolder, int i) {
         FoodListItem item = this.foodList.get(i);
 
-        if (item.getProducts() != null && item.getProducts().size() > 0) {
-            // Set title.
+        if (item.getProducts() == null || item.getProducts().size() <= 0) {
+            foodListViewHolder.getRv_food_list_products().setVisibility(View.GONE);
+            foodListViewHolder.getTv_food_list_product_type().setVisibility(View.GONE);
+        } else {
+            foodListViewHolder.getRv_food_list_products().setVisibility(View.VISIBLE);
+            foodListViewHolder.getTv_food_list_product_type().setVisibility(View.VISIBLE);
+        }
+
+        // Set title.
             foodListViewHolder.getTv_food_list_product_type().setText(item.getTitleString());
 
             // Get Color.
             int backgroundColor;
 
-            if (item.getProducts().get(0) != null && item.getProducts().get(0).getProductType() == ProductType.MENU) {
-
+            if (item != null && item.getProducts().size() > 0 && item.getProducts().get(0) != null && item.getProducts().get(0).getProductType() == ProductType.MENU) {
                 backgroundColor = ContextCompat.getColor(foodListViewHolder.itemView.getContext(), R.color.colorGreenMain);
                 foodListViewHolder.itemView.setBackgroundColor(backgroundColor);
                 foodListViewHolder.getTv_food_list_product_type().setTextColor(ContextCompat.getColor(foodListViewHolder.itemView.getContext(), R.color.colorBlack));
@@ -70,7 +80,6 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListViewHolder> {
             foodListViewHolder.getRv_food_list_products().setLayoutManager(staggeredGridLayoutManager);
 
             foodDetailAdapter.notifyDataSetChanged();
-        }
     }
 
     @Override

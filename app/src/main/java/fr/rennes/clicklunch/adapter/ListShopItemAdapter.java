@@ -1,3 +1,7 @@
+/*************************************
+ * Author: Dereck Daniel <daniel.dereck@gmail.com>
+ * Date: 01/03/2019
+ *************************************/
 package fr.rennes.clicklunch.adapter;
 
 import android.location.Location;
@@ -15,7 +19,6 @@ import java.util.List;
 import fr.rennes.clicklunch.R;
 import fr.rennes.clicklunch.entities.Shop;
 import fr.rennes.clicklunch.utils.AppUtil;
-import fr.rennes.clicklunch.utils.GPSTracker;
 import fr.rennes.clicklunch.view_holder.ListShopViewHolder;
 
 public class ListShopItemAdapter extends RecyclerView.Adapter<ListShopViewHolder>{
@@ -88,8 +91,8 @@ public class ListShopItemAdapter extends RecyclerView.Adapter<ListShopViewHolder
         // Set Image.
         String url = AppUtil.NOIMG;
 
-        if (selectedShop.getPhoto() != null) {
-            url = selectedShop.getPhoto().getPath();
+        if (selectedShop.getPhotos() != null && selectedShop.getPhotos().size() > 0) {
+            url = selectedShop.getPhotos().get(0).getUrl();
         }
 
         Picasso.get().load(url).placeholder(R.drawable.noimage).into(listShopViewHolder.getIv_list_shop_item_image());

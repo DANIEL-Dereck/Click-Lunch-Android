@@ -1,3 +1,7 @@
+/*************************************
+ * Author: Dereck Daniel <daniel.dereck@gmail.com>
+ * Date: 01/03/2019
+ *************************************/
 package fr.rennes.clicklunch.adapter;
 
 import android.content.Context;
@@ -53,7 +57,7 @@ public class DetailFoodAdapter extends RecyclerView.Adapter<DetailFoodViewHolder
         String url = AppUtil.NOIMG;
 
         if (product.getPhoto() != null) {
-            url = product.getPhoto().getPath();
+            url = product.getPhoto().getUrl();
         }
 
         Picasso.get().load(url).placeholder(R.drawable.noimage).into(detailFoodViewHolder.getIv_detail_food_item_image());

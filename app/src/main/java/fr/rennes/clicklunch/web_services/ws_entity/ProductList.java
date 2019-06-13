@@ -1,3 +1,7 @@
+/*************************************
+ * Author: Dereck Daniel <daniel.dereck@gmail.com>
+ * Date: 01/03/2019
+ *************************************/
 package fr.rennes.clicklunch.web_services.ws_entity;
 
 import com.google.gson.annotations.SerializedName;
@@ -13,6 +17,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductList {
-    @SerializedName("data")
+    @SerializedName("result")
     private List<Product> products;
 }

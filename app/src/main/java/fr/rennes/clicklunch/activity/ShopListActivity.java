@@ -1,3 +1,7 @@
+/*************************************
+ * Author: Dereck Daniel <daniel.dereck@gmail.com>
+ * Date: 01/03/2019
+ *************************************/
 package fr.rennes.clicklunch.activity;
 
 import android.content.Intent;
@@ -44,6 +48,14 @@ public class ShopListActivity extends BaseActivity {
     private boolean inRequest = false;
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        if (AppUtil.IS_EXIT_FLAG_RAISED) {
+            AppUtil.IS_EXIT_FLAG_RAISED = false;
+        }
+    }
+
+    @Override
     protected void initComponent()
     {
         Log.d(TAG, "initComponent: ");
@@ -55,6 +67,13 @@ public class ShopListActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate: ");
         super.onCreate(savedInstanceState);
+
+        this.listShopItemAdapter = new ListShopItemAdapter(shopList);
+        this.lv_shop_list_shops.setHasFixedSize(true);
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        this.lv_shop_list_shops.setLayoutManager(layoutManager);
+        this.lv_shop_list_shops.setAdapter(this.listShopItemAdapter);
+        this.listShopItemAdapter.notifyDataSetChanged();
 
         if (!AppUtil.MODE_API) {
             this.initTmpList();
@@ -84,8 +103,6 @@ public class ShopListActivity extends BaseActivity {
                 }
             });
         }
-
-        this.listShopItemAdapter = new ListShopItemAdapter(shopList);
 
         this.et_shop_list_search_bar.addTextChangedListener(new TextWatcher() {
             @Override
@@ -128,11 +145,6 @@ public class ShopListActivity extends BaseActivity {
             }
         });
 
-        this.lv_shop_list_shops.setHasFixedSize(true);
-
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        this.lv_shop_list_shops.setLayoutManager(layoutManager);
-
         this.lv_shop_list_shops.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
@@ -170,10 +182,6 @@ public class ShopListActivity extends BaseActivity {
                     });                }
             }
         });
-
-        this.lv_shop_list_shops.setAdapter(this.listShopItemAdapter);
-
-        this.listShopItemAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -185,11 +193,14 @@ public class ShopListActivity extends BaseActivity {
     private void initTmpList()
     {
         Log.d(TAG, "initTmpList: ");
+        List<Photo> photos = new ArrayList<>();
+        photos.add(new Photo("https://leforumrestaurant.files.wordpress.com/2016/04/cropped-wp_20160216_006.jpg?w=1200"));
+
         Shop forum = new Shop();
         forum.setName("Le Forum");
         forum.setLatitude( 48.0460793);
         forum.setLongitude( -1.7412650);
-        forum.setPhoto(new Photo("https://leforumrestaurant.files.wordpress.com/2016/04/cropped-wp_20160216_006.jpg?w=1200"));
+        forum.setPhotos(photos);
         forum.setAddress("7 rue de lalala");
         forum.setCity("Bruz");
         forum.setCategories(new ArrayList<CategoryShop>());
@@ -197,13 +208,17 @@ public class ShopListActivity extends BaseActivity {
         forum.getCategories().add(new CategoryShop("Pizza"));
         tmpShopList.add(forum);
 
+
         for (int i = 0; i < 20; i++) {
+            photos = new ArrayList<>();
+            photos.add(new Photo("https://source.unsplash.com/random"));
+
             Shop item = new Shop();
             item.setName("shop test" + i);
             item.setLongitude(i);
             item.setLatitude(i);
             item.setAddress(i + " rue de lalal");
-            item.setPhoto(new Photo("https://source.unsplash.com/random"));
+            item.setPhotos(photos);
             item.setCity("Rennes");
             item.setCategories(new ArrayList<CategoryShop>());
             item.getCategories().add(new CategoryShop("Pizza" + i));
