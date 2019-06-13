@@ -77,7 +77,7 @@ public class FoodDetailAdapter extends RecyclerView.Adapter<FoodDetailViewHolder
                 if (context != null) {
                     Intent intent = new Intent((Activity) context, ProductDetailActivity.class);
                     intent.putExtra(ProductDetailActivity.EXTRA_PRODUCT, product);
-                    ((Activity) context).startActivity(intent);
+                    ((Activity) context).startActivityForResult(intent, ProductDetailActivity.MY_ACTIVITY_CODE);
                 }
             }
         });

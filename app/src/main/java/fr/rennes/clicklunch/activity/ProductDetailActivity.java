@@ -85,6 +85,7 @@ public class ProductDetailActivity extends BaseActivity {
             btn_detail_food_back.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    setResult(RESULT_CANCELED);
                     finish();
                 }
             });
@@ -93,8 +94,7 @@ public class ProductDetailActivity extends BaseActivity {
                 @Override
                 public void onClick(View v) {
                     CartLocalStorage.getInstance().addProduct(selectedProduct);
-                    final ViewGroup viewGroup = (ViewGroup) ((ViewGroup) ProductDetailActivity.this.findViewById(android.R.id.content)).getChildAt(0);
-                    Snackbar.make(viewGroup, R.string.product_added, Snackbar.LENGTH_SHORT).show();
+                    setResult(RESULT_OK);
                     finish();
                 }
             });

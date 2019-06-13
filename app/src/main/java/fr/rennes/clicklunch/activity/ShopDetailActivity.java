@@ -7,9 +7,13 @@ package fr.rennes.clicklunch.activity;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
@@ -132,8 +136,23 @@ public class ShopDetailActivity extends BaseActivity {
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == ProductDetailActivity.MY_ACTIVITY_CODE) {
+            if (resultCode == RESULT_OK) {
+                final ViewGroup viewGroup = (ViewGroup) ((ViewGroup) ShopDetailActivity.this.findViewById(android.R.id.content)).getChildAt(0);
+                Snackbar snackbar = Snackbar.make(viewGroup, R.string.product_added, Snackbar.LENGTH_LONG);
+                snackbar.getView().setBackgroundColor(ContextCompat.getColor(this, R.color.colorOrangeText));
+                snackbar.show();
+            }
+        }
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
+
         if (AppUtil.IS_EXIT_FLAG_RAISED) {
             finish();
         }
