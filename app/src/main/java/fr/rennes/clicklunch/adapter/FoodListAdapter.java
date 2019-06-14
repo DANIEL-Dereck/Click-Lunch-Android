@@ -7,6 +7,7 @@ package fr.rennes.clicklunch.adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
@@ -76,8 +77,10 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListViewHolder> {
             FoodDetailAdapter foodDetailAdapter = new FoodDetailAdapter(item.getProducts(), backgroundColor, context);
             foodListViewHolder.getRv_food_list_products().setAdapter(foodDetailAdapter);
             foodListViewHolder.getRv_food_list_products().setHasFixedSize(true);
-            StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL);
-            foodListViewHolder.getRv_food_list_products().setLayoutManager(staggeredGridLayoutManager);
+
+            LinearLayoutManager layoutManager = new LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false);
+
+            foodListViewHolder.getRv_food_list_products().setLayoutManager(layoutManager);
 
             foodDetailAdapter.notifyDataSetChanged();
     }

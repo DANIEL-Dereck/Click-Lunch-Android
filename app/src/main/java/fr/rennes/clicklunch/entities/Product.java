@@ -7,6 +7,7 @@ package fr.rennes.clicklunch.entities;
 import com.google.gson.annotations.SerializedName;
 
 import java.text.DecimalFormat;
+import java.util.List;
 
 import fr.rennes.clicklunch.contrat.entities.ProductContract;
 import fr.rennes.clicklunch.enums.ProductType;
@@ -41,7 +42,7 @@ public class Product extends Menu {
     private ProductType productType;
 
     @SerializedName(ProductContract.COLUMN_PHOTO)
-    private Photo photo;
+    private List<Photo> photos;
 
     public String getPriceString() {
         String result = "";

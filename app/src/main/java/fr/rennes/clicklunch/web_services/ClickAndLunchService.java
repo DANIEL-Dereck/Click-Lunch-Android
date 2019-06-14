@@ -4,6 +4,9 @@
  *************************************/
 package fr.rennes.clicklunch.web_services;
 
+import java.util.List;
+
+import fr.rennes.clicklunch.entities.Product;
 import fr.rennes.clicklunch.web_services.ws_entity.ProductList;
 import fr.rennes.clicklunch.web_services.ws_entity.ShopList;
 import retrofit2.Call;
@@ -19,5 +22,5 @@ public interface ClickAndLunchService {
     Call<ShopList> SearchListShop(@Path("search") String search);
 
     @GET("shops/{shopId}/products")
-    Call<ProductList> listProduct(@Path("shopId") int shopId);
+    Call<List<Product>> listProduct(@Path("shopId") int shopId);
 }

@@ -189,15 +189,15 @@ public class ShopDetailActivity extends BaseActivity {
             if (!AppUtil.MODE_API) {
                 this.initTmpList();
             } else {
-                RetrofitBuilder.getClient().listProduct(ShopDetailActivity.this.currentShop.getId()).enqueue(new Callback<ProductList>() {
+                RetrofitBuilder.getClient().listProduct(ShopDetailActivity.this.currentShop.getId()).enqueue(new Callback<List<Product>>() {
                     @Override
-                    public void onResponse(Call<ProductList> call, Response<ProductList> response) {
+                    public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
                         Log.d(TAG, ShopDetailActivity.TAG + "onResponse: ");
 
                         System.out.println(response.body());
 
-                        if (response.body() != null && response.body().getProducts() != null && response.body().getProducts().size() > 0) {
-                            for (Product product : response.body().getProducts()) {
+                        if (response.body() != null && response.body() != null && response.body().size() > 0) {
+                            for (Product product : response.body()) {
                                 for (FoodListItem foodListItem : foodListItems) {
                                     if (product.getProductType() == foodListItem.getTitle()) {
                                         foodListItem.addProduct(product);
@@ -207,9 +207,6 @@ public class ShopDetailActivity extends BaseActivity {
 
                             List<FoodListItem> items = new ArrayList<>();
                             items.addAll(foodListItems);
-                            foodListItems.clear();
-                            ShopDetailActivity.this.foodListAdapter.notifyDataSetChanged();
-                            foodListItems.addAll(items);
                             ShopDetailActivity.this.foodListAdapter.notifyDataSetChanged();
                         }
 
@@ -217,7 +214,7 @@ public class ShopDetailActivity extends BaseActivity {
                     }
 
                     @Override
-                    public void onFailure(Call<ProductList> call, Throwable t) {
+                    public void onFailure(Call<List<Product>> call, Throwable t) {
                         Log.d(TAG, ShopDetailActivity.TAG + "onFailure: ");
                         ShopDetailActivity.this.inRequest = false;
                     }

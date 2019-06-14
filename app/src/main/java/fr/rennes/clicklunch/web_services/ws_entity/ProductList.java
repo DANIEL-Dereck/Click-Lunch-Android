@@ -17,6 +17,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductList {
-    @SerializedName("result")
+    @SerializedName("")
     private List<Product> products;
 }

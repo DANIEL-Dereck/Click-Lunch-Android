@@ -56,8 +56,8 @@ public class DetailFoodAdapter extends RecyclerView.Adapter<DetailFoodViewHolder
         // Set Image.
         String url = AppUtil.NOIMG;
 
-        if (product.getPhoto() != null) {
-            url = product.getPhoto().getUrl();
+        if (product.getPhotos() != null && product.getPhotos().size() > 0 && product.getPhotos().get(0) != null) {
+            url = product.getPhotos().get(0).getUrl();
         }
 
         Picasso.get().load(url).placeholder(R.drawable.noimage).into(detailFoodViewHolder.getIv_detail_food_item_image());
