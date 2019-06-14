@@ -12,17 +12,21 @@ import fr.rennes.clicklunch.contrat.entities.ClientContract;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 /**
  * Class Client.
  */
-//@NoArgsConstructor
+@NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Accessors
 @EqualsAndHashCode(callSuper=true)
 public class Client extends User {
     @SerializedName(ClientContract.COLUMN_BILLS)
-    List<Bill> bills;
+    private List<Bill> bills;
+
+    @SerializedName(ClientContract.COLUMN_ROLE)
+    private String role = "CUSTOMER";
 }

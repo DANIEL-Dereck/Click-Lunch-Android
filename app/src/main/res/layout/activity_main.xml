@@ -100,6 +100,7 @@
                 android:textAlignment="center"
                 android:textColor="@color/colorGrey"
                 android:textSize="@dimen/dimenTextSize"
+                android:layout_marginBottom="@dimen/dimenMarginDefault"
                 app:layout_constraintBottom_toTopOf="@id/btn_tmp_goto_shop_detail"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent" />

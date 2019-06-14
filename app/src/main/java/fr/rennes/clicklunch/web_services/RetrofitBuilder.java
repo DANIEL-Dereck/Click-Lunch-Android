@@ -9,6 +9,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitBuilder {
+    public static final String KEY_AUTH_TOKEN = "x-auth-token";
+
     public static ClickAndLunchService getClient() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(AppUtil.APIROOTE)

@@ -12,8 +12,23 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+
+import java.util.Calendar;
+import java.util.Date;
 
 import fr.rennes.clicklunch.R;
+import fr.rennes.clicklunch.entities.Client;
+import fr.rennes.clicklunch.utils.EmailUtils;
+import fr.rennes.clicklunch.utils.SharedPrefsUtils;
+import fr.rennes.clicklunch.web_services.RetrofitBuilder;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class UserCreationActivity extends BaseActivity {
 
@@ -66,8 +81,82 @@ public class UserCreationActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         this.resetText();
 
+        this.et_user_creation_lastname.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
 
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.toString().equals("")) {
+                    UserCreationActivity.this.til_user_creation_lastname.setError(
+                            UserCreationActivity.this.getString(R.string.validation_lastname));
+                } else {
+                    UserCreationActivity.this.til_user_creation_lastname.setError(null);
+                }
+            }
+        });
+
+        this.et_user_creation_firstname.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.toString().equals("")) {
+                    UserCreationActivity.this.til_user_creation_firstname.setError(
+                            UserCreationActivity.this.getString(R.string.validation_firstname));
+                } else {
+                    UserCreationActivity.this.til_user_creation_firstname.setError(null);
+                }
+            }
+        });
+
+        this.et_user_creation_email.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.toString().equals("")) {
+                    UserCreationActivity.this.til_user_creation_email.setError(
+                            UserCreationActivity.this.getString(R.string.validation_email));
+                } else {
+                    if (!EmailUtils.isEmailValid(s.toString())) {
+                        UserCreationActivity.this.til_user_creation_email.setError(
+                                UserCreationActivity.this.getString(R.string.validation_email_schema));
+                    } else {
+                        UserCreationActivity.this.til_user_creation_email.setError(null);
+                    }
+                }
+            }
+        });
+
+        this.et_user_creation_phone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.toString().equals("")) {
+                    UserCreationActivity.this.til_user_creation_phone.setError(
+                            UserCreationActivity.this.getString(R.string.validation_phone));
+                } else {
+                    UserCreationActivity.this.til_user_creation_phone.setError(null);
+                }
+            }
+        });
 
         this.et_user_creation_password.addTextChangedListener(new TextWatcher() {
             @Override
@@ -79,13 +168,15 @@ public class UserCreationActivity extends BaseActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if (s.toString().equals("")) {
-                    UserCreationActivity.this.til_user_creation_password.setError("Enter à password");
+                    UserCreationActivity.this.til_user_creation_password.setError(
+                            UserCreationActivity.this.getString(R.string.validation_password));
                 } else {
                     UserCreationActivity.this.til_user_creation_password.setError(null);
 
                     if (!s.toString().equals(UserCreationActivity.this.et_user_creation_password_confirmation.getText().toString())
-                            && !UserCreationActivity.this.et_user_creation_password_confirmation.getText().toString().equals("")) {
-                        UserCreationActivity.this.til_user_creation_password_confirmation.setError("not same password");
+                            || UserCreationActivity.this.et_user_creation_password_confirmation.getText().toString().equals("")) {
+                        UserCreationActivity.this.til_user_creation_password_confirmation.setError(
+                                UserCreationActivity.this.getString(R.string.validation_password_same));
                     } else {
                         UserCreationActivity.this.til_user_creation_password_confirmation.setError(null);
                     }
@@ -104,7 +195,8 @@ public class UserCreationActivity extends BaseActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals(UserCreationActivity.this.et_user_creation_password.getText().toString())) {
-                    UserCreationActivity.this.til_user_creation_password_confirmation.setError("not same password");
+                    UserCreationActivity.this.til_user_creation_password_confirmation.setError(
+                            UserCreationActivity.this.getString(R.string.validation_password_confirmation));
                 } else {
                     UserCreationActivity.this.til_user_creation_password_confirmation.setError(null);
                 }
@@ -114,7 +206,47 @@ public class UserCreationActivity extends BaseActivity {
         this.btn_user_creation_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (validateForm()) {
 
+                    Client client = new Client();
+                    client.setFirstname(UserCreationActivity.this.et_user_creation_firstname.getText().toString());
+                    client.setLastname(UserCreationActivity.this.et_user_creation_lastname.getText().toString());
+                    client.setEmail(UserCreationActivity.this.et_user_creation_email.getText().toString());
+                    client.setPhoneNumber(UserCreationActivity.this.et_user_creation_phone.getText().toString());
+                    client.setPassword(UserCreationActivity.this.et_user_creation_password.getText().toString());
+
+                    Date currentTime = Calendar.getInstance().getTime();
+                    client.setCreatedAt(currentTime);
+                    client.setUpdatedAt(currentTime);
+
+                    RetrofitBuilder.getClient().addUser(client).enqueue(new Callback<Client>() {
+                        @Override
+                        public void onResponse(Call<Client> call, Response<Client> response) {
+                            Log.d(TAG, "onResponse: ");
+                            if (response.code() == 200 || response.code() == 201) {
+                                SharedPrefsUtils.setToken(response.headers().get("X-Auth-Token"));
+                                finish();
+                            } else {
+                                Toast.makeText(
+                                        UserCreationActivity.this,
+                                        UserCreationActivity.this.getText(R.string.fail_sign_up),
+                                        Toast.LENGTH_SHORT
+                                ).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Client> call, Throwable t) {
+                            Log.d(TAG, "onFailure: " + call.toString());
+
+                            Toast.makeText(
+                                    UserCreationActivity.this,
+                                    UserCreationActivity.this.getText(R.string.fail_sign_up),
+                                    Toast.LENGTH_SHORT
+                            ).show();
+                        }
+                    });
+                }
             }
         });
     }
@@ -123,6 +255,74 @@ public class UserCreationActivity extends BaseActivity {
     public int getContentView() {
         Log.d(TAG, "getContentView: ");
         return R.layout.activity_user_creation;
+    }
+
+    private boolean validateForm() {
+        boolean result = false;
+
+        if (this.et_user_creation_lastname.getText().toString().equals("")) {
+            this.til_user_creation_lastname.setError(this.getString(R.string.validation_lastname));
+        } else {
+            this.til_user_creation_lastname.setError(null);
+        }
+
+        if (this.et_user_creation_firstname.getText().toString().equals("")) {
+            this.til_user_creation_firstname.setError(this.getString(R.string.validation_firstname));
+        } else {
+            this.til_user_creation_firstname.setError(null);
+        }
+
+        if (this.et_user_creation_email.getText().toString().equals("")) {
+            this.til_user_creation_email.setError(this.getString(R.string.validation_email));
+        } else {
+            if (!EmailUtils.isEmailValid(this.et_user_creation_email.getText().toString())) {
+                this.til_user_creation_email.setError(this.getString(R.string.validation_email_schema));
+            } else {
+                this.til_user_creation_email.setError(null);
+            }
+        }
+
+        if (this.et_user_creation_phone.getText().toString().equals("")) {
+            this.til_user_creation_phone.setError(this.getString(R.string.validation_phone));
+        } else {
+            this.til_user_creation_phone.setError(null);
+        }
+
+        if (this.et_user_creation_password.getText().toString().equals("")) {
+            this.til_user_creation_password.setError(this.getString(R.string.validation_password));
+        } else {
+            this.til_user_creation_password.setError(null);
+
+            if (!this.et_user_creation_password.getText().toString().equals(this.et_user_creation_password_confirmation.getText().toString())
+                    || this.et_user_creation_password_confirmation.getText().toString().equals("")) {
+                this.til_user_creation_password_confirmation.setError(this.getString(R.string.validation_password_same));
+            } else {
+                this.til_user_creation_password_confirmation.setError(null);
+            }
+        }
+
+        if (this.et_user_creation_password_confirmation.getText().toString().equals("")) {
+            this.til_user_creation_password_confirmation.setError(this.getString(R.string.validation_password_confirmation_empty));
+        } else {
+            if (!this.et_user_creation_password_confirmation.getText().toString().equals(this.et_user_creation_password.getText().toString())) {
+                this.til_user_creation_password_confirmation.setError(this.getString(R.string.validation_password_confirmation));
+            } else {
+                this.til_user_creation_password_confirmation.setError(null);
+            }
+        }
+
+        if (
+                this.til_user_creation_lastname.getError() == null &&
+                this.til_user_creation_firstname.getError() == null &&
+                this.til_user_creation_email.getError() == null &&
+                this.til_user_creation_phone.getError() == null &&
+                this.til_user_creation_password.getError() == null &&
+                this.til_user_creation_password_confirmation.getError() == null
+        ) {
+            result = true;
+        }
+
+        return result;
     }
 
     private void resetText() {

@@ -61,4 +61,16 @@
     <string name="sign_in">Sign in</string>
     <string name="sign_out">Sign out</string>
     <string name="no_account">No account? Create one!</string>
+
+    <string name="validation_firstname">Firstname can\'t be empty.</string>
+    <string name="validation_lastname">Lastname can\'t be empty.</string>
+    <string name="validation_email">Email can\'t be empty.</string>
+    <string name="validation_email_schema">Email schema dupond@mail.com</string>
+    <string name="validation_phone">Phone number can\'t be empty.</string>
+    <string name="validation_password">Password can\'t be empty.</string>
+    <string name="validation_password_confirmation">Confirmation password can\'t be empty.</string>
+    <string name="validation_password_confirmation_empty">Confirmation password can\'t be empty.</string>
+    <string name="validation_password_same">Confirmation password can\'t be different than password.</string>
+
+    <string name="fail_sign_up">Erreur lors de la création du compte, essayer ultérieurement.</string>
 </resources>

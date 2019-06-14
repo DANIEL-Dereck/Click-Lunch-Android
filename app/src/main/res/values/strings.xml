@@ -60,4 +60,16 @@
     <string name="sign_in">Connexion</string>
     <string name="sign_out">Déconnexion</string>
     <string name="no_account">Pas encore de compte ? Inscrivez-vous</string>
+
+    <string name="validation_firstname">Le Prénom ne peut pas être vide.</string>
+    <string name="validation_lastname">Le Nom ne peut pas être vide</string>
+    <string name="validation_email">L\'Email ne peut pas être vide.</string>
+    <string name="validation_email_schema">L\'Email doit respecter le format: dupond@mail.com</string>
+    <string name="validation_phone">Le Téléphone ne peut pas être vide.</string>
+    <string name="validation_password">Le Mot de passe ne peut pas être vide.</string>
+    <string name="validation_password_confirmation_empty">La Confirmation du mot de passe ne peut pas être vide.</string>
+    <string name="validation_password_confirmation">La Confirmation du mot de passe ne peut pas être vide.</string>
+    <string name="validation_password_same">La Confirmation du mot de passe n\'est pas identique au mot de passe.</string>
+
+    <string name="fail_sign_up">Erreur lors de la création du compte, essayer ultérieurement.</string>
 </resources>
