@@ -61,15 +61,25 @@
     <string name="sign_out">Déconnexion</string>
     <string name="no_account">Pas encore de compte ? Inscrivez-vous</string>
 
-    <string name="validation_firstname">Le Prénom ne peut pas être vide.</string>
-    <string name="validation_lastname">Le Nom ne peut pas être vide</string>
-    <string name="validation_email">L\'Email ne peut pas être vide.</string>
-    <string name="validation_email_schema">L\'Email doit respecter le format: dupond@mail.com</string>
-    <string name="validation_phone">Le Téléphone ne peut pas être vide.</string>
-    <string name="validation_password">Le Mot de passe ne peut pas être vide.</string>
+    <string name="validation_lastname_empty">Le Prénom ne peut pas être vide.</string>
+    <string name="validation_lastname_bad_size">Le Prénom doit être entre 3 et 100 caractéres.</string>
+    <string name="validation_lastname_bad_schema">Le Prénom ne respect le format: a-z A-Z À-ÿ 0-9 and - \' ".</string>
+
+    <string name="validation_firstname_empty">Le Nom ne peut pas être vide.</string>
+    <string name="validation_firstname_bad_size">Le Nom doit être entre 3 et 100 caractére.</string>
+    <string name="validation_firstname_bad_schema">Le Nom ne respect le format: a-z A-Z À-ÿ 0-9 and - \' ".</string>
+
+    <string name="validation_email_empty">L\'Email ne peut pas être vide.</string>
+    <string name="validation_email_bad_schema">L\'Email doit respecter le format: dupond@mail.com</string>
+
+    <string name="validation_phone_empty">Le Téléphone ne peut pas être vide.</string>
+    <string name="validation_phone_bad_size">Le Téléphone ne respect pas le format: 0689898989 ou +33689898989.</string>
+
+    <string name="validation_password_empty">Le Mot de passe ne peut pas être vide.</string>
+    <string name="validation_password_bas_size">Le Mot de passe doit être entre 5 et 1024 caractéres.</string>
+
     <string name="validation_password_confirmation_empty">La Confirmation du mot de passe ne peut pas être vide.</string>
-    <string name="validation_password_confirmation">La Confirmation du mot de passe ne peut pas être vide.</string>
-    <string name="validation_password_same">La Confirmation du mot de passe n\'est pas identique au mot de passe.</string>
+    <string name="validation_password_not_same">La Confirmation du mot de passe n\'est pas identique au mot de passe.</string>
 
     <string name="fail_sign_up">Erreur lors de la création du compte, essayer ultérieurement.</string>
 </resources>

@@ -14,16 +14,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-
 import java.util.Calendar;
 import java.util.Date;
 
 import fr.rennes.clicklunch.R;
 import fr.rennes.clicklunch.entities.Client;
-import fr.rennes.clicklunch.utils.EmailUtils;
+import fr.rennes.clicklunch.utils.ValidatorUtils;
 import fr.rennes.clicklunch.utils.SharedPrefsUtils;
 import fr.rennes.clicklunch.web_services.RetrofitBuilder;
 import retrofit2.Call;
@@ -92,7 +88,13 @@ public class UserCreationActivity extends BaseActivity {
             public void afterTextChanged(Editable s) {
                 if (s.toString().equals("")) {
                     UserCreationActivity.this.til_user_creation_lastname.setError(
-                            UserCreationActivity.this.getString(R.string.validation_lastname));
+                            UserCreationActivity.this.getString(R.string.validation_lastname_empty));
+                } else if (ValidatorUtils.isNameValid(s.toString())) {
+                    UserCreationActivity.this.til_user_creation_lastname.setError(
+                            UserCreationActivity.this.getString(R.string.validation_lastname_bad_schema));
+                } else if (s.toString().length() < 3 || s.toString().length() > 100) {
+                    UserCreationActivity.this.til_user_creation_lastname.setError(
+                            UserCreationActivity.this.getString(R.string.validation_lastname_bad_size));
                 } else {
                     UserCreationActivity.this.til_user_creation_lastname.setError(null);
                 }
@@ -110,7 +112,13 @@ public class UserCreationActivity extends BaseActivity {
             public void afterTextChanged(Editable s) {
                 if (s.toString().equals("")) {
                     UserCreationActivity.this.til_user_creation_firstname.setError(
-                            UserCreationActivity.this.getString(R.string.validation_firstname));
+                            UserCreationActivity.this.getString(R.string.validation_firstname_empty));
+                } else if (ValidatorUtils.isNameValid(s.toString())) {
+                    UserCreationActivity.this.til_user_creation_firstname.setError(
+                            UserCreationActivity.this.getString(R.string.validation_firstname_bad_schema));
+                } else if (s.toString().length() < 3 || s.toString().length() > 100) {
+                    UserCreationActivity.this.til_user_creation_firstname.setError(
+                            UserCreationActivity.this.getString(R.string.validation_firstname_bad_size));
                 } else {
                     UserCreationActivity.this.til_user_creation_firstname.setError(null);
                 }
@@ -128,14 +136,12 @@ public class UserCreationActivity extends BaseActivity {
             public void afterTextChanged(Editable s) {
                 if (s.toString().equals("")) {
                     UserCreationActivity.this.til_user_creation_email.setError(
-                            UserCreationActivity.this.getString(R.string.validation_email));
+                            UserCreationActivity.this.getString(R.string.validation_email_empty));
+                } else if (ValidatorUtils.isEmailValid(s.toString())) {
+                    UserCreationActivity.this.til_user_creation_email.setError(
+                            UserCreationActivity.this.getString(R.string.validation_email_bad_schema));
                 } else {
-                    if (!EmailUtils.isEmailValid(s.toString())) {
-                        UserCreationActivity.this.til_user_creation_email.setError(
-                                UserCreationActivity.this.getString(R.string.validation_email_schema));
-                    } else {
-                        UserCreationActivity.this.til_user_creation_email.setError(null);
-                    }
+                    UserCreationActivity.this.til_user_creation_email.setError(null);
                 }
             }
         });
@@ -151,7 +157,10 @@ public class UserCreationActivity extends BaseActivity {
             public void afterTextChanged(Editable s) {
                 if (s.toString().equals("")) {
                     UserCreationActivity.this.til_user_creation_phone.setError(
-                            UserCreationActivity.this.getString(R.string.validation_phone));
+                            UserCreationActivity.this.getString(R.string.validation_phone_empty));
+                } else if (ValidatorUtils.isPhoneValid(s.toString())) {
+                    UserCreationActivity.this.til_user_creation_phone.setError(
+                            UserCreationActivity.this.getString(R.string.validation_phone_bad_size));
                 } else {
                     UserCreationActivity.this.til_user_creation_phone.setError(null);
                 }
@@ -169,17 +178,16 @@ public class UserCreationActivity extends BaseActivity {
             public void afterTextChanged(Editable s) {
                 if (s.toString().equals("")) {
                     UserCreationActivity.this.til_user_creation_password.setError(
-                            UserCreationActivity.this.getString(R.string.validation_password));
+                            UserCreationActivity.this.getString(R.string.validation_password_empty));
+                } else if (s.toString().length() < 5 || s.toString().length() > 1024) {
+                    UserCreationActivity.this.til_user_creation_password.setError(
+                            UserCreationActivity.this.getString(R.string.validation_password_bas_size));
+                } else if (!s.toString().equals(UserCreationActivity.this.et_user_creation_password_confirmation.getText().toString())
+                        || UserCreationActivity.this.et_user_creation_password_confirmation.getText().toString().equals("")) {
+                    UserCreationActivity.this.til_user_creation_password_confirmation.setError(
+                            UserCreationActivity.this.getString(R.string.validation_password_not_same));
                 } else {
                     UserCreationActivity.this.til_user_creation_password.setError(null);
-
-                    if (!s.toString().equals(UserCreationActivity.this.et_user_creation_password_confirmation.getText().toString())
-                            || UserCreationActivity.this.et_user_creation_password_confirmation.getText().toString().equals("")) {
-                        UserCreationActivity.this.til_user_creation_password_confirmation.setError(
-                                UserCreationActivity.this.getString(R.string.validation_password_same));
-                    } else {
-                        UserCreationActivity.this.til_user_creation_password_confirmation.setError(null);
-                    }
                 }
             }
         });
@@ -196,7 +204,7 @@ public class UserCreationActivity extends BaseActivity {
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals(UserCreationActivity.this.et_user_creation_password.getText().toString())) {
                     UserCreationActivity.this.til_user_creation_password_confirmation.setError(
-                            UserCreationActivity.this.getString(R.string.validation_password_confirmation));
+                            UserCreationActivity.this.getString(R.string.validation_password_not_same));
                 } else {
                     UserCreationActivity.this.til_user_creation_password_confirmation.setError(null);
                 }
@@ -259,56 +267,63 @@ public class UserCreationActivity extends BaseActivity {
 
     private boolean validateForm() {
         boolean result = false;
+        String lastname = this.et_user_creation_lastname.getText().toString();
+        String firstname = this.et_user_creation_firstname.getText().toString();
+        String email = this.et_user_creation_email.getText().toString();
+        String phone = this.et_user_creation_phone.getText().toString();
+        String password = this.et_user_creation_password.getText().toString();
+        String confirmationPassword = this.et_user_creation_password_confirmation.getText().toString();
 
-        if (this.et_user_creation_lastname.getText().toString().equals("")) {
-            this.til_user_creation_lastname.setError(this.getString(R.string.validation_lastname));
+        if (lastname.equals("")) {
+            this.til_user_creation_lastname.setError(this.getString(R.string.validation_lastname_empty));
+        } else if (ValidatorUtils.isNameValid(lastname)) {
+            this.til_user_creation_lastname.setError(this.getString(R.string.validation_lastname_bad_schema));
+        } else if (lastname.length() < 3 || lastname.length() > 100) {
+            this.til_user_creation_lastname.setError(this.getString(R.string.validation_lastname_bad_size));
         } else {
             this.til_user_creation_lastname.setError(null);
         }
 
-        if (this.et_user_creation_firstname.getText().toString().equals("")) {
-            this.til_user_creation_firstname.setError(this.getString(R.string.validation_firstname));
+        if (firstname.equals("")) {
+            this.til_user_creation_firstname.setError(this.getString(R.string.validation_firstname_empty));
+        } else if (ValidatorUtils.isNameValid(firstname)) {
+            this.til_user_creation_firstname.setError(this.getString(R.string.validation_firstname_bad_schema));
+        } else if (firstname.length() < 3 || firstname.length() > 100) {
+            this.til_user_creation_firstname.setError(this.getString(R.string.validation_firstname_bad_size));
         } else {
             this.til_user_creation_firstname.setError(null);
         }
 
-        if (this.et_user_creation_email.getText().toString().equals("")) {
-            this.til_user_creation_email.setError(this.getString(R.string.validation_email));
+        if (email.equals("")) {
+            this.til_user_creation_email.setError(this.getString(R.string.validation_email_empty));
+        } else if (ValidatorUtils.isEmailValid(email)) {
+            this.til_user_creation_email.setError(this.getString(R.string.validation_email_bad_schema));
         } else {
-            if (!EmailUtils.isEmailValid(this.et_user_creation_email.getText().toString())) {
-                this.til_user_creation_email.setError(this.getString(R.string.validation_email_schema));
-            } else {
-                this.til_user_creation_email.setError(null);
-            }
+            this.til_user_creation_email.setError(null);
         }
 
-        if (this.et_user_creation_phone.getText().toString().equals("")) {
-            this.til_user_creation_phone.setError(this.getString(R.string.validation_phone));
+        if (phone.equals("")) {
+            this.til_user_creation_phone.setError(this.getString(R.string.validation_phone_empty));
+        } else if (ValidatorUtils.isPhoneValid(phone)) {
+            this.til_user_creation_phone.setError(this.getString(R.string.validation_phone_bad_size));
         } else {
             this.til_user_creation_phone.setError(null);
         }
 
-        if (this.et_user_creation_password.getText().toString().equals("")) {
-            this.til_user_creation_password.setError(this.getString(R.string.validation_password));
+        if (password.equals("")) {
+            this.til_user_creation_password.setError(this.getString(R.string.validation_password_empty));
+        } else if (password.length() < 5 || password.length() > 1024) {
+            this.til_user_creation_password.setError(this.getString(R.string.validation_password_bas_size));
         } else {
             this.til_user_creation_password.setError(null);
-
-            if (!this.et_user_creation_password.getText().toString().equals(this.et_user_creation_password_confirmation.getText().toString())
-                    || this.et_user_creation_password_confirmation.getText().toString().equals("")) {
-                this.til_user_creation_password_confirmation.setError(this.getString(R.string.validation_password_same));
-            } else {
-                this.til_user_creation_password_confirmation.setError(null);
-            }
         }
 
-        if (this.et_user_creation_password_confirmation.getText().toString().equals("")) {
+        if (confirmationPassword.equals("")) {
             this.til_user_creation_password_confirmation.setError(this.getString(R.string.validation_password_confirmation_empty));
+        } else if (!confirmationPassword.equals(password)) {
+            this.til_user_creation_password_confirmation.setError(this.getString(R.string.validation_password_not_same));
         } else {
-            if (!this.et_user_creation_password_confirmation.getText().toString().equals(this.et_user_creation_password.getText().toString())) {
-                this.til_user_creation_password_confirmation.setError(this.getString(R.string.validation_password_confirmation));
-            } else {
-                this.til_user_creation_password_confirmation.setError(null);
-            }
+            this.til_user_creation_password_confirmation.setError(null);
         }
 
         if (

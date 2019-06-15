@@ -13,10 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.JsonObject;
-
 import fr.rennes.clicklunch.R;
-import fr.rennes.clicklunch.entities.Client;
 import fr.rennes.clicklunch.utils.SharedPrefsUtils;
 import fr.rennes.clicklunch.web_services.RetrofitBuilder;
 import fr.rennes.clicklunch.web_services.ws_entity.Login;
