@@ -237,10 +237,117 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_payment_schedule">
-
                 </TextView>
 
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView7"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    >
 
+                    <TextView
+                        android:id="@+id/tv_payment_card_titular"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/titular"
+                        android:textColor="@color/colorOrangeText"
+                        android:textSize="@dimen/dimenTextSize"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        />
+
+                    <EditText
+                        android:id="@+id/et_payment_card_titular"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_payment_card_titular"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_payment_card_number"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/card_number"
+                        android:textColor="@color/colorOrangeText"
+                        android:textSize="@dimen/dimenTextSize"
+                        app:layout_constraintTop_toBottomOf="@+id/et_payment_card_titular"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        />
+
+                    <EditText
+                        android:id="@+id/et_payment_card_number"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_payment_card_number"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        />
+
+                    <android.support.constraint.ConstraintLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/et_payment_card_number"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        >
+
+                        <TextView
+                            android:id="@+id/tv_payment_card_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/cart_validation_date"
+                            android:textColor="@color/colorOrangeText"
+                            android:textSize="@dimen/dimenTextSize"
+                            android:gravity="center"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toLeftOf="@id/tv_payment_card_code"
+                            app:layout_constraintBottom_toTopOf="@id/et_payment_card_date"
+                            />
+
+                        <EditText
+                            android:id="@+id/et_payment_card_date"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@id/tv_payment_card_date"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toLeftOf="@+id/tv_payment_card_date"
+                            app:layout_constraintRight_toRightOf="@+id/tv_payment_card_date"
+                            />
+
+                        <TextView
+                            android:id="@+id/tv_payment_card_code"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/verification_code"
+                            android:textColor="@color/colorOrangeText"
+                            android:textSize="@dimen/dimenTextSize"
+                            android:gravity="center"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintLeft_toRightOf="@id/tv_payment_card_date"
+                            app:layout_constraintRight_toRightOf="parent"
+                            />
+
+                        <EditText
+                            android:id="@+id/et_payment_card_code"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@id/tv_payment_card_code"
+                            app:layout_constraintLeft_toLeftOf="@+id/tv_payment_card_code"
+                            app:layout_constraintRight_toRightOf="@+id/tv_payment_card_code"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            />
+
+S                    </android.support.constraint.ConstraintLayout>
+                </android.support.constraint.ConstraintLayout>
             </android.support.constraint.ConstraintLayout>
         </android.support.constraint.ConstraintLayout>
 

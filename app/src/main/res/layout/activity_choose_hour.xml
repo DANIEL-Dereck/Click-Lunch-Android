@@ -235,10 +235,52 @@ android:fitsSystemWindows="true">
                 android:textColor="@color/colorOrangeText"
                 android:layout_margin="@dimen/dimenMarginDefault"
                 app:layout_constraintTop_toBottomOf="@+id/tv_choose_hour_next_schedule"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"/>
 
-            <!-- Add Hour selector -->
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/cl_activity_choose_hour_selector"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/btn_activity_choose_hour_change_hour"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent">
+
+                <Spinner
+                    android:id="@+id/spi_activity_choose_hour_hour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/separator"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                </Spinner>
+
+                <TextView
+                    android:id="@+id/separator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text=":"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    />
+
+                <Spinner
+                    android:id="@+id/spi_activity_choose_hour_minutes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@+id/separator"
+                    >
+                </Spinner>
+            </android.support.constraint.ConstraintLayout>
         </android.support.constraint.ConstraintLayout>
     </android.support.constraint.ConstraintLayout>
 

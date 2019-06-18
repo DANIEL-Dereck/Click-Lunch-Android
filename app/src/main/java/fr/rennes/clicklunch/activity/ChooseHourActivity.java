@@ -6,11 +6,14 @@ package fr.rennes.clicklunch.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import fr.rennes.clicklunch.R;
@@ -22,10 +25,16 @@ public class ChooseHourActivity extends BaseActivity {
     public static final int MY_ACTIVITY_CODE = 0x60;
     public static final String TAG = "ChooseHourActivity";
 
+    public String[] hours = {"12","13"};
+    public String[] minutes = {"0", "15", "30", "45"};
+
     private TextView tv_choose_hour_next_schedule;
     private Button btn_activity_choose_hour_change_hour;
     private Button btn_activity_choose_hour_back;
     private Button btn_activity_choose_hour_validate;
+    private ConstraintLayout cl_activity_choose_hour_selector;
+    private Spinner spi_activity_choose_hour_hour;
+    private Spinner spi_activity_choose_hour_minutes;
 
     @Override
     protected void onResume() {
@@ -39,7 +48,16 @@ public class ChooseHourActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // TODO: get the first free schedule.
+        ArrayAdapter<CharSequence> adapterHour = ArrayAdapter.createFromResource(this, R.array.choose_hour, android.R.layout.simple_spinner_item);
+        adapterHour.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        this.spi_activity_choose_hour_hour.setAdapter(adapterHour);
+
+        ArrayAdapter<CharSequence> adapterMinutes = ArrayAdapter.createFromResource(this, R.array.choose_minutes, android.R.layout.simple_spinner_item);
+        adapterMinutes.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        this.spi_activity_choose_hour_minutes.setAdapter(adapterMinutes);
+
+        ChooseHourActivity.this.cl_activity_choose_hour_selector.setVisibility(View.GONE);
+
         String hour = "12:30";
         String text = this.tv_choose_hour_next_schedule.getText().toString();
         int limit = text.indexOf("%schedule%");
@@ -58,7 +76,11 @@ public class ChooseHourActivity extends BaseActivity {
         this.btn_activity_choose_hour_change_hour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: insert code to prompt something to change hour.
+                if (ChooseHourActivity.this.cl_activity_choose_hour_selector.getVisibility() == View.GONE) {
+                    ChooseHourActivity.this.cl_activity_choose_hour_selector.setVisibility(View.VISIBLE);
+                } else {
+                    ChooseHourActivity.this.cl_activity_choose_hour_selector.setVisibility(View.GONE);
+                }
             }
         });
 
@@ -90,5 +112,8 @@ public class ChooseHourActivity extends BaseActivity {
         this.btn_activity_choose_hour_change_hour = this.findViewById(R.id.btn_activity_choose_hour_change_hour);
         this.btn_activity_choose_hour_validate = this.findViewById(R.id.btn_activity_choose_hour_validate);
         this.btn_activity_choose_hour_back = this.findViewById(R.id.btn_activity_choose_hour_back);
+        this.cl_activity_choose_hour_selector = this.findViewById(R.id.cl_activity_choose_hour_selector);
+        this.spi_activity_choose_hour_hour = this.findViewById(R.id.spi_activity_choose_hour_hour);
+        this.spi_activity_choose_hour_minutes = this.findViewById(R.id.spi_activity_choose_hour_minutes);
     }
 }
