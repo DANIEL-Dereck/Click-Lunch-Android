@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import fr.rennes.clicklunch.R;
 import fr.rennes.clicklunch.utils.AppUtil;
+import fr.rennes.clicklunch.utils.CartLocalStorage;
 
 public class ChooseHourActivity extends BaseActivity {
 
@@ -58,7 +59,7 @@ public class ChooseHourActivity extends BaseActivity {
 
         ChooseHourActivity.this.cl_activity_choose_hour_selector.setVisibility(View.GONE);
 
-        String hour = "12:30";
+        String hour = "12:00";
         String text = this.tv_choose_hour_next_schedule.getText().toString();
         int limit = text.indexOf("%schedule%");
         text = text.replace("%schedule%", hour);
@@ -94,6 +95,17 @@ public class ChooseHourActivity extends BaseActivity {
         this.btn_activity_choose_hour_validate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (ChooseHourActivity.this.spi_activity_choose_hour_hour.getVisibility() == View.VISIBLE &&
+                        ChooseHourActivity.this.spi_activity_choose_hour_minutes.getVisibility() == View.VISIBLE) {
+                    CartLocalStorage.getInstance().setRecuperationHour(
+                            ChooseHourActivity.this.spi_activity_choose_hour_hour.getSelectedItem().toString(),
+                            ChooseHourActivity.this.spi_activity_choose_hour_minutes.getSelectedItem().toString()
+                    );
+                } else {
+                    CartLocalStorage.getInstance().setRecuperationHour("12","30");
+                }
+
                 Intent intent = new Intent(ChooseHourActivity.this, PaymentActivity.class);
                 ChooseHourActivity.this.startActivity(intent);
 

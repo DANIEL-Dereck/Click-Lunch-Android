@@ -6,9 +6,10 @@ package fr.rennes.clicklunch.entities;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
 import java.util.List;
 
-import fr.rennes.clicklunch.contrat.entities.CommandContract;
+import fr.rennes.clicklunch.contrat.entities.OrderContract;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -16,17 +17,20 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 /**
- * Class Command.
+ * Class Order.
  */
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Accessors
 @EqualsAndHashCode(callSuper=true)
-public class Command extends EntityBase {
-    @SerializedName(CommandContract.COLUMN_NUMBER)
+public class Order extends EntityBase {
+    @SerializedName(OrderContract.COLUMN_NUMBER)
     private int number;
 
-    @SerializedName(CommandContract.COLUMN_COMMANDLINES)
-    private List<CommandLine> commandLines;
+    @SerializedName(OrderContract.COLUMN_ORDERDETAIL)
+    private List<OrderDetail> orderDetails;
+
+    @SerializedName(OrderContract.COLUMN_RECOVERYTIME)
+    private Date recoveryTime;
 }

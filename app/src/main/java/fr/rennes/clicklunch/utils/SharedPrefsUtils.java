@@ -19,11 +19,11 @@ final public class SharedPrefsUtils {
     public static final String SHARED_USER = "SHARED_USER";
     public static final String TOKEN = "TOKEN";
 
-    public static int getUser() {
+    public static int getUserId() {
         return getIntegerPreference(App.getAppContext(), SHARED_USER, -1);
     }
 
-    public static void setUser(int userId) {
+    public static void setUserId(int userId) {
         setIntegerPreference(App.getAppContext(), SHARED_USER, userId);
     }
 

@@ -82,6 +82,7 @@ public class MainActivity extends BaseActivity {
                         if (response.code() == 200 || response.code() == 201) {
                             if (response.body() != null) {
                                 SharedPrefsUtils.setToken(response.body().getToken());
+                                SharedPrefsUtils.setUserId(response.body().getClient().getId());
                             }
 
                             Intent intent = new Intent(MainActivity.this, ShopListActivity.class);

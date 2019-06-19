@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import fr.rennes.clicklunch.R;
 import fr.rennes.clicklunch.utils.AppUtil;
+import fr.rennes.clicklunch.utils.CartLocalStorage;
 
 public class PaymentActivity extends BaseActivity {
 
@@ -38,7 +39,7 @@ public class PaymentActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        String hour = "12:30";
+        String hour = CartLocalStorage.getInstance().getHourString();
         String text = this.tv_payment_schedule.getText().toString();
         int limit = text.indexOf("%schedule%");
         text = text.replace("%schedule%", hour);

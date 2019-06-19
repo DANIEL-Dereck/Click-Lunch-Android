@@ -233,6 +233,7 @@ public class UserCreationActivity extends BaseActivity {
                             Log.d(TAG, "onResponse: ");
                             if (response.code() == 200 || response.code() == 201) {
                                 SharedPrefsUtils.setToken(response.headers().get("X-Auth-Token"));
+                                SharedPrefsUtils.setUserId(response.body().getId());
                                 finish();
                             } else {
                                 Toast.makeText(

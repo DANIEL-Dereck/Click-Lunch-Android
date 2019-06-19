@@ -5,9 +5,10 @@
 package fr.rennes.clicklunch.contrat.entities;
 
 /**
- * Contract class for CommandLine.
+ * Contract class for OrderDetail.
  */
-public final class CommandLineContract extends EntityBaseContract {
+public final class OrderDetailContract extends EntityBaseContract {
     public static final String COLUMN_QUANTITY = "quantity";
-    public static final String COLUMN_COMMAND = "command";
+    public static final String COLUMN_ORDER = "order";
+    public static final String COLUMN_PRODUCT = "product";
 }

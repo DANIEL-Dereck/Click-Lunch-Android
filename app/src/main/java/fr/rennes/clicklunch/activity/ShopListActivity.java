@@ -14,6 +14,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,7 @@ import fr.rennes.clicklunch.entities.Photo;
 import fr.rennes.clicklunch.entities.Shop;
 import fr.rennes.clicklunch.utils.AppUtil;
 import fr.rennes.clicklunch.utils.CartLocalStorage;
+import fr.rennes.clicklunch.utils.SharedPrefsUtils;
 import fr.rennes.clicklunch.web_services.RetrofitBuilder;
 import fr.rennes.clicklunch.web_services.ws_entity.ShopList;
 import retrofit2.Call;
@@ -39,6 +41,7 @@ public class ShopListActivity extends BaseActivity {
 
     private RecyclerView lv_shop_list_shops;
     private EditText et_shop_list_search_bar;
+    private ImageView logout;
 
     private ArrayList<Shop> tmpShopList = new ArrayList<>();
     private ArrayList<Shop> shopList = new ArrayList<>();
@@ -50,6 +53,11 @@ public class ShopListActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        if (SharedPrefsUtils.getToekn().equals("")) {
+            finish();
+        }
+
         if (AppUtil.IS_EXIT_FLAG_RAISED) {
             AppUtil.IS_EXIT_FLAG_RAISED = false;
         }
@@ -61,6 +69,7 @@ public class ShopListActivity extends BaseActivity {
         Log.d(TAG, "initComponent: ");
         this.lv_shop_list_shops = findViewById(R.id.lv_shop_list_shops);
         this.et_shop_list_search_bar = findViewById(R.id.et_shop_list_search_bar);
+        this.logout = findViewById(R.id.logout);
     }
 
     @Override
@@ -74,6 +83,17 @@ public class ShopListActivity extends BaseActivity {
         this.lv_shop_list_shops.setLayoutManager(layoutManager);
         this.lv_shop_list_shops.setAdapter(this.listShopItemAdapter);
         this.listShopItemAdapter.notifyDataSetChanged();
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPrefsUtils.setToken("");
+                SharedPrefsUtils.setUserId(-1);
+
+                Intent intent = new Intent(ShopListActivity.this, MainActivity.class);
+                ShopListActivity.this.startActivity(intent);
+            }
+        });
 
         if (!AppUtil.MODE_API) {
             this.initTmpList();
@@ -136,11 +156,13 @@ public class ShopListActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "listShopItemAdapter.onClick: ");
-                CartLocalStorage.getInstance().clear();
+
                 Intent myIntent = new Intent(ShopListActivity.this, ShopDetailActivity.class);
                 int position = lv_shop_list_shops.getChildLayoutPosition(v);
                 Shop selectedShop = ShopListActivity.this.tmpShopList.get(position);
                 myIntent.putExtra(ShopDetailActivity.EXTRA_SHOP, selectedShop);
+                CartLocalStorage.getInstance().clear();
+                CartLocalStorage.getInstance().setShop(selectedShop);
                 startActivity(myIntent);
             }
         });

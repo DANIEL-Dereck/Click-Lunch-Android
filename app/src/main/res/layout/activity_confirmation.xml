@@ -219,14 +219,14 @@
                     android:text="@string/congratulation"
                     android:textColor="@color/colorBlack"
                     android:textSize="@dimen/dimenTextSize"
-                    app:layout_constraintBottom_toTopOf="@+id/textView8"
+                    app:layout_constraintBottom_toTopOf="@+id/tv_order_number"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
                 <TextView
-                    android:id="@+id/textView8"
+                    android:id="@+id/tv_order_number"
                     android:layout_width="@dimen/dimenDefault"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimenMarginDefault"
@@ -234,14 +234,14 @@
                     android:text="@string/command_number"
                     android:textColor="@color/colorOrangeText"
                     android:textSize="@dimen/dimenTextSize"
-                    app:layout_constraintBottom_toTopOf="@+id/textView9"
+                    app:layout_constraintBottom_toTopOf="@+id/tv_order_detail"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
                 <TextView
-                    android:id="@+id/textView9"
+                    android:id="@+id/tv_order_detail"
                     android:layout_width="@dimen/dimenDefault"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimenMarginDefault"
@@ -254,7 +254,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView8" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_order_number" />
 
                 <TextView
                     android:id="@+id/textView10"
@@ -268,7 +268,7 @@
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView9" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_order_detail" />
 
             </android.support.constraint.ConstraintLayout>
         </android.support.constraint.ConstraintLayout>

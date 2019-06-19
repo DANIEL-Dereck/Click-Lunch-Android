@@ -26,7 +26,7 @@ public class Bill extends EntityBase {
     private int number;
 
     @SerializedName(BillContract.COLUMN_COMMAND)
-    private Command command;
+    private Order order;
 
     @SerializedName(BillContract.COLUMN_SHOP)
     private Shop shop;
