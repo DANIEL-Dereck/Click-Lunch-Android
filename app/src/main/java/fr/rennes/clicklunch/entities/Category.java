@@ -4,6 +4,7 @@
  *************************************/
 package fr.rennes.clicklunch.entities;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import fr.rennes.clicklunch.contrat.entities.CategoryContract;
@@ -22,6 +23,7 @@ import lombok.experimental.Accessors;
 @Accessors
 @EqualsAndHashCode(callSuper=true)
 public class Category extends EntityBase {
+    @Expose
     @SerializedName(CategoryContract.COLUMN_NAME)
     private String name;
 }

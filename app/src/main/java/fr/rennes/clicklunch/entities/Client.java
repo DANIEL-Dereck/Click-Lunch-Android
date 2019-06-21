@@ -4,6 +4,7 @@
  *************************************/
 package fr.rennes.clicklunch.entities;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -24,9 +25,11 @@ import lombok.experimental.Accessors;
 @Accessors
 @EqualsAndHashCode(callSuper=true)
 public class Client extends User {
+    @Expose
     @SerializedName(ClientContract.COLUMN_BILLS)
     private List<Bill> bills;
 
+    @Expose
     @SerializedName(ClientContract.COLUMN_ROLE)
     private String role = "CUSTOMER";
 }

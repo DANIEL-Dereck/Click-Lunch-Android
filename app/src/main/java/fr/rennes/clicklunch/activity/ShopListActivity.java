@@ -54,7 +54,7 @@ public class ShopListActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
 
-        if (SharedPrefsUtils.getToekn().equals("")) {
+        if (SharedPrefsUtils.getToken().equals("")) {
             finish();
         }
 
@@ -99,7 +99,7 @@ public class ShopListActivity extends BaseActivity {
             this.initTmpList();
             shopList.addAll(tmpShopList);
         } else {
-            RetrofitBuilder.getClient().listShop(ShopListActivity.this.pageNumber++).enqueue(new Callback<ShopList>() {
+            RetrofitBuilder.getGsonClient().listShop(ShopListActivity.this.pageNumber++).enqueue(new Callback<ShopList>() {
                 @Override
                 public void onResponse(Call<ShopList> call, Response<ShopList> response) {
                     Log.d(TAG, ShopListActivity.TAG + "onResponse: ");
@@ -179,7 +179,7 @@ public class ShopListActivity extends BaseActivity {
                 if ((visibleCount + firstVisible) == itemsCount && !ShopListActivity.this.inRequest) {
                     ShopListActivity.this.inRequest = true;
 
-                    RetrofitBuilder.getClient().listShop(ShopListActivity.this.pageNumber++).enqueue(new Callback<ShopList>() {
+                    RetrofitBuilder.getGsonClient().listShop(ShopListActivity.this.pageNumber++).enqueue(new Callback<ShopList>() {
                         @Override
                         public void onResponse(Call<ShopList> call, Response<ShopList> response) {
                             Log.d(TAG, ShopListActivity.TAG + "onResponse: ");

@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Login {
-    @SerializedName("client")
+    @SerializedName("user")
     private Client client;
 
     @SerializedName("message")

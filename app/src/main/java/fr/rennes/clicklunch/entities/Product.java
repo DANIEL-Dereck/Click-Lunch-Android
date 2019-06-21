@@ -4,6 +4,7 @@
  *************************************/
 package fr.rennes.clicklunch.entities;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.text.DecimalFormat;
@@ -26,21 +27,27 @@ import lombok.experimental.Accessors;
 @Accessors
 @EqualsAndHashCode(callSuper=true)
 public class Product extends Menu {
+    @Expose
     @SerializedName(ProductContract.COLUMN_NAME)
     private String name;
 
+    @Expose
     @SerializedName(ProductContract.COLUMN_PRICE)
     private double price;
 
+    @Expose
     @SerializedName(ProductContract.COLUMN_DESCRIPTION)
     private String description;
 
+    @Expose
     @SerializedName(ProductContract.COLUMN_CATEGORY)
     private Category category;
 
+    @Expose
     @SerializedName(ProductContract.COLUMN_PRODUCTTYPE)
     private ProductType productType;
 
+    @Expose
     @SerializedName(ProductContract.COLUMN_PHOTO)
     private List<Photo> photos;
 

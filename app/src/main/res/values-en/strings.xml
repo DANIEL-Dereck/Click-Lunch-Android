@@ -83,6 +83,7 @@
     <string name="validation_password_not_same">La Confirmation du mot de passe n\'est pas identique au mot de passe.</string>
 
     <string name="fail_sign_up">Erreur lors de la création du compte, essayer ultérieurement.</string>
+    <string name="fail_pass_order">Une erreur est survenue, verifier vôtre commande ou essayer ultérieurement.</string>
 
     <string name="titular">Titulaire de la carte bancaire</string>
     <string name="card_number">Numéro de carte</string>
@@ -96,7 +97,7 @@
     </string-array>
 
     <string-array name="choose_minutes">
-        <item>0</item>
+        <item>00</item>
         <item>15</item>
         <item>30</item>
         <item>45</item>

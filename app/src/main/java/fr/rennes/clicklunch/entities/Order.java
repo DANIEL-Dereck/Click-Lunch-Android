@@ -4,6 +4,7 @@
  *************************************/
 package fr.rennes.clicklunch.entities;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
@@ -25,12 +26,15 @@ import lombok.experimental.Accessors;
 @Accessors
 @EqualsAndHashCode(callSuper=true)
 public class Order extends EntityBase {
+    @Expose
     @SerializedName(OrderContract.COLUMN_NUMBER)
-    private int number;
+    private transient String number;
 
+    @Expose
     @SerializedName(OrderContract.COLUMN_ORDERDETAIL)
     private List<OrderDetail> orderDetails;
 
+    @Expose
     @SerializedName(OrderContract.COLUMN_RECOVERYTIME)
     private Date recoveryTime;
 }

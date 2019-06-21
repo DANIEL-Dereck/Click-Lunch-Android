@@ -21,7 +21,7 @@ public class ValidatorUtils {
     public static final String  PHONE_REGEX = "/(0|\\+33|0033)[1-9][0-9]{8}/";
 
     public static boolean isEmailValid(String str) {
-        return ValidatorUtils.isValid(str, EMAIL_REGEX);
+        return !ValidatorUtils.isValid(str, EMAIL_REGEX);
     }
 
     public static boolean isNameValid(String str) {

@@ -4,6 +4,7 @@
  *************************************/
 package fr.rennes.clicklunch.entities;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import fr.rennes.clicklunch.contrat.entities.ConfigurationContract;
@@ -22,12 +23,15 @@ import lombok.experimental.Accessors;
 @Accessors
 @EqualsAndHashCode(callSuper=true)
 public class Configuration extends EntityBase {
+    @Expose
     @SerializedName(ConfigurationContract.COLUMN_KEY)
     private String key;
 
+    @Expose
     @SerializedName(ConfigurationContract.COLUMN_VALUE)
     private String value;
 
+    @Expose
     @SerializedName(ConfigurationContract.COLUMN_SHOP)
     private Shop shop;
 

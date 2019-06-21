@@ -4,6 +4,7 @@
  *************************************/
 package fr.rennes.clicklunch.entities;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -23,15 +24,19 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors
 public abstract class EntityBase implements Serializable {
+    @Expose
     @SerializedName(EntityBaseContract.COLUMN_ID)
     protected int id;
 
+    @Expose
     @SerializedName(EntityBaseContract.COLUMN_ISDELETED)
     protected boolean isDeleted;
 
+    @Expose
     @SerializedName(EntityBaseContract.COLUMN_CREATEDAT)
     protected Date createdAt;
 
+    @Expose
     @SerializedName(EntityBaseContract.COLUMN_UPDATEDAT)
     protected Date updatedAt;
 }

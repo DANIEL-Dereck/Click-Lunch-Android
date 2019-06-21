@@ -9,10 +9,10 @@ import java.util.List;
 import fr.rennes.clicklunch.entities.Client;
 import fr.rennes.clicklunch.entities.Product;
 import fr.rennes.clicklunch.web_services.ws_entity.Login;
+import fr.rennes.clicklunch.web_services.ws_entity.RetrofitOrder;
 import fr.rennes.clicklunch.web_services.ws_entity.ShopList;
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
@@ -35,5 +35,6 @@ public interface ClickAndLunchService {
     @POST("auth/login")
     Call<Login> login(@Body Login login);
 
-
+    @POST("/api/v1/orders/shops/{shopId}/customers/{customerId}")
+    Call<RetrofitOrder.RetrofitOrderResult> passOrder(@Path("shopId") int shopId, @Path("customerId") int userId, @Body RetrofitOrder order, @Header("x-auth-token") String token);
 }

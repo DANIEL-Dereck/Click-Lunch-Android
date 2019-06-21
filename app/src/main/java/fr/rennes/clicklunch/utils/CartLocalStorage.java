@@ -12,8 +12,11 @@ import fr.rennes.clicklunch.entities.Order;
 import fr.rennes.clicklunch.entities.OrderDetail;
 import fr.rennes.clicklunch.entities.Product;
 import fr.rennes.clicklunch.entities.Shop;
+import fr.rennes.clicklunch.web_services.ws_entity.RetrofitOrder;
+import fr.rennes.clicklunch.web_services.ws_entity.RetrofitOrderDetail;
 
 public class CartLocalStorage {
+    private static Order lastOrder;
     private static Shop shop;
     private static List<Product> products;
     private static CartLocalStorage instance;
@@ -79,6 +82,7 @@ public class CartLocalStorage {
 
         for (Product product : products) {
             OrderDetail line = new OrderDetail();
+            line.setProductId(product.getId());
             line.setQuantity(1);
             line.setProduct(product);
             line.setOrder(result);
@@ -88,7 +92,28 @@ public class CartLocalStorage {
         result.setRecoveryTime(recuperationDate);
         result.setOrderDetails(lines);
 
+        lastOrder = result;
         return result;
+    }
+
+    public RetrofitOrder cartToRetrofitOrder() {
+        RetrofitOrder newOrder = new RetrofitOrder();
+        List<RetrofitOrderDetail> lines = new ArrayList();
+
+        for (Product product : products) {
+            if (!containId(lines, product.getId())) {
+                RetrofitOrderDetail line = new RetrofitOrderDetail();
+                line.setId(product.getId());
+                line.setQuantity(countProductWithId(product.getId()));
+                lines.add(line);
+            }
+        }
+
+        newOrder.setProducts(lines);
+        newOrder.setRecoveryTime(getHourString());
+
+        cartToOrder();
+        return newOrder;
     }
 
     public String getHourString() {
@@ -97,5 +122,46 @@ public class CartLocalStorage {
 
     public String getShopName() {
         return shop.getName();
+    }
+
+    public int getShopId() {
+        return shop.getId();
+    }
+
+    public Order getLastOrder() {
+        return lastOrder;
+    }
+
+    public void setOrderNumber(String orderNumber) {
+        if (orderNumber == null) {
+            lastOrder.setNumber("UNKNOWN_ORDER_NUMBER");
+        } else {
+            lastOrder.setNumber(orderNumber);
+        }
+    }
+
+    private int countProductWithId(int id) {
+        int nb = 0;
+
+        for (Product product : products) {
+            if (product.getId() == id) {
+                nb++;
+            }
+        }
+
+        return nb;
+    }
+
+    private boolean containId(List<RetrofitOrderDetail> lines, int id) {
+        boolean result = false;
+
+        for (RetrofitOrderDetail line : lines) {
+            if (line.getId() == id) {
+                result = true;
+                break;
+            }
+        }
+
+        return result;
     }
 }

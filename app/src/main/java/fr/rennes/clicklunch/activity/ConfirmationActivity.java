@@ -29,7 +29,7 @@ public class ConfirmationActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        String orderNumber = "XXXXXXXXX";
+        String orderNumber = CartLocalStorage.getInstance().getLastOrder().getNumber();
         String text = this.tv_order_number.getText().toString().replace("%num%", orderNumber);
         this.tv_order_number.setText(text);
 

@@ -4,6 +4,7 @@
  *************************************/
 package fr.rennes.clicklunch.entities;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import fr.rennes.clicklunch.contrat.entities.PhotoContract;
@@ -22,6 +23,7 @@ import lombok.experimental.Accessors;
 @Accessors
 @EqualsAndHashCode(callSuper=true)
 public class Photo extends EntityBase {
+    @Expose
     @SerializedName(PhotoContract.COLUMN_URL)
     private String url;
 }

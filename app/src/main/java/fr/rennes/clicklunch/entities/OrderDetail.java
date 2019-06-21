@@ -4,7 +4,10 @@
  *************************************/
 package fr.rennes.clicklunch.entities;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
 
 import fr.rennes.clicklunch.contrat.entities.OrderDetailContract;
 import lombok.AllArgsConstructor;
@@ -20,14 +23,20 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @Data
 @Accessors
-@EqualsAndHashCode(callSuper=true)
-public class OrderDetail extends EntityBase {
+public class OrderDetail implements Serializable {
+    @Expose
+    @SerializedName(OrderDetailContract.COLUMN_ID)
+    private int productId;
+
+    @Expose
     @SerializedName(OrderDetailContract.COLUMN_QUANTITY)
     private int quantity;
 
+    @Expose
     @SerializedName(OrderDetailContract.COLUMN_PRODUCT)
-    private Product product;
+    private transient Product product;
 
+    @Expose(serialize = false, deserialize = false)
     @SerializedName(OrderDetailContract.COLUMN_ORDER)
-    private Order order;
+    private transient Order order;
 }

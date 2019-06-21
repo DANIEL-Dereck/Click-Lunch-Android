@@ -27,7 +27,7 @@ final public class SharedPrefsUtils {
         setIntegerPreference(App.getAppContext(), SHARED_USER, userId);
     }
 
-    public static String getToekn() {
+    public static String getToken() {
         return getStringPreference(App.getAppContext(), TOKEN);
     }
 

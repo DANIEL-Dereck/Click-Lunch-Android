@@ -27,7 +27,6 @@ import fr.rennes.clicklunch.utils.FoodListItem;
 import fr.rennes.clicklunch.entities.Shop;
 import fr.rennes.clicklunch.utils.GPSTracker;
 import fr.rennes.clicklunch.web_services.RetrofitBuilder;
-import fr.rennes.clicklunch.web_services.ws_entity.ProductList;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -189,7 +188,7 @@ public class ShopDetailActivity extends BaseActivity {
             if (!AppUtil.MODE_API) {
                 this.initTmpList();
             } else {
-                RetrofitBuilder.getClient().listProduct(ShopDetailActivity.this.currentShop.getId()).enqueue(new Callback<List<Product>>() {
+                RetrofitBuilder.getGsonClient().listProduct(ShopDetailActivity.this.currentShop.getId()).enqueue(new Callback<List<Product>>() {
                     @Override
                     public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
                         Log.d(TAG, ShopDetailActivity.TAG + "onResponse: ");

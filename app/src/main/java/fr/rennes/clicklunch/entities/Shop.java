@@ -4,6 +4,7 @@
  *************************************/
 package fr.rennes.clicklunch.entities;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -24,36 +25,47 @@ import lombok.experimental.Accessors;
 @Accessors
 @EqualsAndHashCode(callSuper=true)
 public class Shop extends EntityBase {
+    @Expose
     @SerializedName(ShopContract.COLUMN_NAME)
     private String name;
 
+    @Expose
     @SerializedName(ShopContract.COLUMN_PHONENUMBER)
     private String phoneNumber;
 
+    @Expose
     @SerializedName(ShopContract.COLUMN_EMAIL)
     private String email;
 
+    @Expose
     @SerializedName(ShopContract.COLUMN_LONGITUDE)
     private double longitude;
 
+    @Expose
     @SerializedName(ShopContract.COLUMN_LATITUDE)
     private double latitude;
 
+    @Expose
     @SerializedName(ShopContract.COLUMN_ADDRESS)
     private String address;
 
+    @Expose
     @SerializedName(ShopContract.COLUMN_POSTALCODE)
     private String postalCode;
 
+    @Expose
     @SerializedName(ShopContract.COLUMN_CITY)
     private String city;
 
+    @Expose
     @SerializedName(ShopContract.COLUMN_PHOTO)
     private List<Photo> photos;
 
+    @Expose
     @SerializedName(ShopContract.COLUMN_CONFIGURATIONS)
     private List<Configuration> configurations;
 
+    @Expose
     @SerializedName(ShopContract.COLUMN_CATEGORIES)
     private List<CategoryShop> categories;
 

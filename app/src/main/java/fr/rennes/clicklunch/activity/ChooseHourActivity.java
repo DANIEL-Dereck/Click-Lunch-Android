@@ -26,9 +26,6 @@ public class ChooseHourActivity extends BaseActivity {
     public static final int MY_ACTIVITY_CODE = 0x60;
     public static final String TAG = "ChooseHourActivity";
 
-    public String[] hours = {"12","13"};
-    public String[] minutes = {"0", "15", "30", "45"};
-
     private TextView tv_choose_hour_next_schedule;
     private Button btn_activity_choose_hour_change_hour;
     private Button btn_activity_choose_hour_back;
@@ -96,14 +93,13 @@ public class ChooseHourActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-                if (ChooseHourActivity.this.spi_activity_choose_hour_hour.getVisibility() == View.VISIBLE &&
-                        ChooseHourActivity.this.spi_activity_choose_hour_minutes.getVisibility() == View.VISIBLE) {
+                if (ChooseHourActivity.this.cl_activity_choose_hour_selector.getVisibility() == View.VISIBLE) {
                     CartLocalStorage.getInstance().setRecuperationHour(
                             ChooseHourActivity.this.spi_activity_choose_hour_hour.getSelectedItem().toString(),
                             ChooseHourActivity.this.spi_activity_choose_hour_minutes.getSelectedItem().toString()
                     );
                 } else {
-                    CartLocalStorage.getInstance().setRecuperationHour("12","30");
+                    CartLocalStorage.getInstance().setRecuperationHour("12","00");
                 }
 
                 Intent intent = new Intent(ChooseHourActivity.this, PaymentActivity.class);

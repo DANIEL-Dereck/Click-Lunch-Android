@@ -182,12 +182,14 @@ public class UserCreationActivity extends BaseActivity {
                 } else if (s.toString().length() < 5 || s.toString().length() > 1024) {
                     UserCreationActivity.this.til_user_creation_password.setError(
                             UserCreationActivity.this.getString(R.string.validation_password_bas_size));
-                } else if (!s.toString().equals(UserCreationActivity.this.et_user_creation_password_confirmation.getText().toString())
-                        || UserCreationActivity.this.et_user_creation_password_confirmation.getText().toString().equals("")) {
-                    UserCreationActivity.this.til_user_creation_password_confirmation.setError(
-                            UserCreationActivity.this.getString(R.string.validation_password_not_same));
                 } else {
                     UserCreationActivity.this.til_user_creation_password.setError(null);
+
+                    if (!s.toString().equals(UserCreationActivity.this.et_user_creation_password_confirmation.getText().toString())
+                            || UserCreationActivity.this.et_user_creation_password_confirmation.getText().toString().equals("")) {
+                        UserCreationActivity.this.til_user_creation_password_confirmation.setError(
+                                UserCreationActivity.this.getString(R.string.validation_password_not_same));
+                    }
                 }
             }
         });
@@ -227,7 +229,7 @@ public class UserCreationActivity extends BaseActivity {
                     client.setCreatedAt(currentTime);
                     client.setUpdatedAt(currentTime);
 
-                    RetrofitBuilder.getClient().addUser(client).enqueue(new Callback<Client>() {
+                    RetrofitBuilder.getGsonClient().addUser(client).enqueue(new Callback<Client>() {
                         @Override
                         public void onResponse(Call<Client> call, Response<Client> response) {
                             Log.d(TAG, "onResponse: ");

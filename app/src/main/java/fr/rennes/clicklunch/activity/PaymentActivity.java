@@ -9,13 +9,23 @@ import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import fr.rennes.clicklunch.R;
+import fr.rennes.clicklunch.entities.Order;
 import fr.rennes.clicklunch.utils.AppUtil;
 import fr.rennes.clicklunch.utils.CartLocalStorage;
+import fr.rennes.clicklunch.utils.SharedPrefsUtils;
+import fr.rennes.clicklunch.web_services.ConverterFactory;
+import fr.rennes.clicklunch.web_services.RetrofitBuilder;
+import fr.rennes.clicklunch.web_services.ws_entity.RetrofitOrder;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PaymentActivity extends BaseActivity {
 
@@ -65,10 +75,38 @@ public class PaymentActivity extends BaseActivity {
         this.btn_activity_payment_validate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PaymentActivity.this, ConfirmationActivity.class);
-                AppUtil.IS_EXIT_FLAG_RAISED = true;
-                PaymentActivity.this.startActivity(intent);
 
+                ConverterFactory converterFactory = new ConverterFactory();
+
+                RetrofitBuilder.getGsonClient().passOrder(
+                        CartLocalStorage.getInstance().getShopId(),
+                        SharedPrefsUtils.getUserId(),
+                        CartLocalStorage.getInstance().cartToRetrofitOrder(),
+                        SharedPrefsUtils.getToken()
+                ).enqueue(new Callback<RetrofitOrder.RetrofitOrderResult>() {
+                    @Override
+                    public void onResponse(Call<RetrofitOrder.RetrofitOrderResult> call, Response<RetrofitOrder.RetrofitOrderResult> response) {
+                        Log.d(TAG, "onResponse: ");
+
+                        if (response.code() == 200 || response.code() == 201) {
+                            CartLocalStorage.getInstance().setOrderNumber(response.body().getNumber());
+                            Intent intent = new Intent(PaymentActivity.this, ConfirmationActivity.class);
+                            AppUtil.IS_EXIT_FLAG_RAISED = true;
+                            PaymentActivity.this.startActivity(intent);
+                        } else {
+                            Toast.makeText(
+                                    PaymentActivity.this,
+                                    PaymentActivity.this.getText(R.string.fail_pass_order),
+                                    Toast.LENGTH_SHORT
+                            ).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<RetrofitOrder.RetrofitOrderResult> call, Throwable t) {
+                        Log.d(TAG, "onFailure: ");
+                    }
+                });
             }
         });
     }

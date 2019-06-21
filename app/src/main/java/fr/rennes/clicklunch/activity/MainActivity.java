@@ -46,7 +46,7 @@ public class MainActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
 
-        if (SharedPrefsUtils.getToekn() != null && !SharedPrefsUtils.getToekn().equals("")) {
+        if (SharedPrefsUtils.getToken() != null && !SharedPrefsUtils.getToken().equals("")) {
             Intent intent = new Intent(MainActivity.this, ShopListActivity.class);
             MainActivity.this.startActivityForResult(intent, ShopListActivity.MY_ACTIVITY_CODE);
         }
@@ -57,7 +57,7 @@ public class MainActivity extends BaseActivity {
         Log.d(TAG, "onCreate: ");
         super.onCreate(savedInstanceState);
 
-        if (SharedPrefsUtils.getToekn() != null && !SharedPrefsUtils.getToekn().equals("")) {
+        if (SharedPrefsUtils.getToken() != null && !SharedPrefsUtils.getToken().equals("")) {
             Intent intent = new Intent(MainActivity.this, ShopListActivity.class);
             MainActivity.this.startActivityForResult(intent, ShopListActivity.MY_ACTIVITY_CODE);
         }
@@ -74,7 +74,7 @@ public class MainActivity extends BaseActivity {
                 login.setEmail(MainActivity.this.et_connection_email.getText().toString());
                 login.setPassword(MainActivity.this.et_connection_password.getText().toString());
 
-                RetrofitBuilder.getClient().login(login).enqueue(new Callback<Login>() {
+                RetrofitBuilder.getGsonClient().login(login).enqueue(new Callback<Login>() {
                     @Override
                     public void onResponse(Call<Login> call, Response<Login> response) {
                         Log.d(TAG, "onResponse: ");

@@ -4,6 +4,7 @@
  *************************************/
 package fr.rennes.clicklunch.entities;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -24,6 +25,7 @@ import lombok.experimental.Accessors;
 @Accessors
 @EqualsAndHashCode(callSuper=true)
 public abstract class Menu extends EntityBase {
+    @Expose
     @SerializedName(MenuContract.COLUMN_PRODUCTS)
     private List<Product> products;
 
