@@ -16,7 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import fr.rennes.clicklunch.R;
-import fr.rennes.clicklunch.entities.Order;
 import fr.rennes.clicklunch.utils.AppUtil;
 import fr.rennes.clicklunch.utils.CartLocalStorage;
 import fr.rennes.clicklunch.utils.SharedPrefsUtils;

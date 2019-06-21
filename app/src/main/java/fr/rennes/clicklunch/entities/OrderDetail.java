@@ -12,7 +12,6 @@ import java.io.Serializable;
 import fr.rennes.clicklunch.contrat.entities.OrderDetailContract;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 

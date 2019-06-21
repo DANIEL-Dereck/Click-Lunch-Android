@@ -20,7 +20,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 public class GsonRequest<T> extends Request<T> {
-//    private final Gson gson = initGson();
     private final Class<T> clazz;
     private final Map<String, String> headers;
     private final Response.Listener<T> listener;

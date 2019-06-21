@@ -7,6 +7,9 @@ package fr.rennes.clicklunch.utils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Validator to check form validation fields.
+ */
 public class ValidatorUtils {
 
     public static final String EMAIL_REGEX = "^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"

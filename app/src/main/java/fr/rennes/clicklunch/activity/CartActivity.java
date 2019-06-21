@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -80,8 +81,17 @@ public class CartActivity extends BaseActivity {
         this.btn_activity_cart_validate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CartActivity.this, ChooseHourActivity.class);
-                CartActivity.this.startActivity(intent);
+
+                if (CartLocalStorage.getInstance().countItems() > 0) {
+                    Intent intent = new Intent(CartActivity.this, ChooseHourActivity.class);
+                    CartActivity.this.startActivity(intent);
+                } else {
+                    Toast.makeText(
+                            CartActivity.this,
+                            CartActivity.this.getText(R.string.cart_empty),
+                            Toast.LENGTH_SHORT
+                    ).show();
+                }
             }
         });
 

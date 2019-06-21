@@ -1,8 +1,11 @@
+/*************************************
+ * Author: Dereck Daniel <daniel.dereck@gmail.com>
+ * Date: 01/03/2019
+ *************************************/
 package fr.rennes.clicklunch.web_services.ws_entity;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.Date;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -28,7 +31,7 @@ public class RetrofitOrder {
     @Accessors
     @Data
     public class RetrofitOrderResult extends RetrofitOrder {
-        @SerializedName("order_number")
+        @SerializedName("orderNumber")
         private String number;
     }
 }

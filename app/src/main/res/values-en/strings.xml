@@ -89,6 +89,7 @@
     <string name="card_number">Numéro de carte</string>
     <string name="validity_card">Date de validité</string>
     <string name="verification_code">Code de vérification</string>
+    <string name="cart_empty">Le panier ne peut pas être vide.</string>
 
     <string-array name="choose_hour">
         <item>12</item>
