@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.util.Calendar;
@@ -50,6 +51,7 @@ public class UserCreationActivity extends BaseActivity {
 
     // Validation button
     private Button btn_user_creation_save;
+    private ProgressBar user_creation_loader;
 
     @Override
     protected void initComponent() {
@@ -69,6 +71,7 @@ public class UserCreationActivity extends BaseActivity {
         this.til_user_creation_password_confirmation = this.findViewById(R.id.til_user_creation_password_confirmation);
 
         this.btn_user_creation_save = this.findViewById(R.id.btn_user_creation_save);
+        this.user_creation_loader = this.findViewById(R.id.user_creation_loader);
     }
 
     @Override
@@ -218,6 +221,9 @@ public class UserCreationActivity extends BaseActivity {
             public void onClick(View v) {
                 if (validateForm()) {
 
+                    UserCreationActivity.this.btn_user_creation_save.setVisibility(View.GONE);
+                    UserCreationActivity.this.user_creation_loader.setVisibility(View.VISIBLE);
+
                     Client client = new Client();
                     client.setFirstname(UserCreationActivity.this.et_user_creation_firstname.getText().toString());
                     client.setLastname(UserCreationActivity.this.et_user_creation_lastname.getText().toString());
@@ -244,6 +250,9 @@ public class UserCreationActivity extends BaseActivity {
                                         Toast.LENGTH_SHORT
                                 ).show();
                             }
+
+                            UserCreationActivity.this.btn_user_creation_save.setVisibility(View.VISIBLE);
+                            UserCreationActivity.this.user_creation_loader.setVisibility(View.GONE);
                         }
 
                         @Override
@@ -255,6 +264,9 @@ public class UserCreationActivity extends BaseActivity {
                                     UserCreationActivity.this.getText(R.string.fail_sign_up),
                                     Toast.LENGTH_SHORT
                             ).show();
+
+                            UserCreationActivity.this.btn_user_creation_save.setVisibility(View.VISIBLE);
+                            UserCreationActivity.this.user_creation_loader.setVisibility(View.GONE);
                         }
                     });
                 }

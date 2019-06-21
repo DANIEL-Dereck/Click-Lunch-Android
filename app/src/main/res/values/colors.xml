@@ -16,7 +16,7 @@
     <color name="colorHint">#40000000</color>
     <color name="colorMagic">#211294</color>
 
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#ED7404</color>
+    <color name="colorPrimaryDark">#ED7404</color>
+    <color name="colorAccent">#ED7404</color>
 </resources>

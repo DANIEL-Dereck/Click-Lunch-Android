@@ -6,12 +6,14 @@ package fr.rennes.clicklunch.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +37,8 @@ public class PaymentActivity extends BaseActivity {
     private Button btn_activity_payment_back;
     private Button btn_activity_payment_validate;
     private TextView tv_payment_schedule;
+    private ConstraintLayout cl_payment;
+    private ProgressBar payment_loader;
 
     @Override
     protected void onResume() {
@@ -47,6 +51,12 @@ public class PaymentActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (AppUtil.PAYMENT_ENABLE) {
+            this.cl_payment.setVisibility(View.VISIBLE);
+        } else {
+            this.cl_payment.setVisibility(View.GONE);
+        }
 
         String hour = CartLocalStorage.getInstance().getHourString();
         String text = this.tv_payment_schedule.getText().toString();
@@ -75,7 +85,9 @@ public class PaymentActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-                ConverterFactory converterFactory = new ConverterFactory();
+                PaymentActivity.this.btn_activity_payment_validate.setVisibility(View.GONE);
+                PaymentActivity.this.btn_activity_payment_back.setVisibility(View.GONE);
+                PaymentActivity.this.payment_loader.setVisibility(View.VISIBLE);
 
                 RetrofitBuilder.getGsonClient().passOrder(
                         CartLocalStorage.getInstance().getShopId(),
@@ -99,11 +111,19 @@ public class PaymentActivity extends BaseActivity {
                                     Toast.LENGTH_SHORT
                             ).show();
                         }
+
+                        PaymentActivity.this.btn_activity_payment_validate.setVisibility(View.VISIBLE);
+                        PaymentActivity.this.btn_activity_payment_back.setVisibility(View.VISIBLE);
+                        PaymentActivity.this.payment_loader.setVisibility(View.GONE);
                     }
 
                     @Override
                     public void onFailure(Call<RetrofitOrder.RetrofitOrderResult> call, Throwable t) {
                         Log.d(TAG, "onFailure: ");
+
+                        PaymentActivity.this.btn_activity_payment_validate.setVisibility(View.VISIBLE);
+                        PaymentActivity.this.btn_activity_payment_back.setVisibility(View.VISIBLE);
+                        PaymentActivity.this.payment_loader.setVisibility(View.GONE);
                     }
                 });
             }
@@ -120,5 +140,7 @@ public class PaymentActivity extends BaseActivity {
         this.btn_activity_payment_back = this.findViewById(R.id.btn_activity_payment_back);
         this.btn_activity_payment_validate = this.findViewById(R.id.btn_activity_payment_validate);
         this.tv_payment_schedule = this.findViewById(R.id.tv_payment_schedule);
+        this.cl_payment = this.findViewById(R.id.cl_payment);
+        this.payment_loader = this.findViewById(R.id.payment_loader);
     }
 }

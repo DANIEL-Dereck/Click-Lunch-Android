@@ -101,20 +101,44 @@
                 android:textColor="@color/colorGrey"
                 android:textSize="@dimen/dimenTextSize"
                 android:layout_marginBottom="@dimen/dimenMarginDefault"
-                app:layout_constraintBottom_toTopOf="@id/btn_tmp_goto_shop_detail"
+                app:layout_constraintBottom_toTopOf="@id/cl_tmp_goto_shop_detail"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent" />
 
-            <Button
-                android:id="@+id/btn_tmp_goto_shop_detail"
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/cl_tmp_goto_shop_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorWhite"
-                android:text="@string/sign_in"
-                android:textColor="@color/colorOrangeText"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent" />
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                >
+
+                <Button
+                    android:id="@+id/btn_tmp_goto_shop_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:text="@string/sign_in"
+                    android:textColor="@color/colorOrangeText"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent" />
+
+                <ProgressBar
+                    android:id="@+id/main_loader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/AppTheme"
+                    android:visibility="gone"
+                    android:indeterminate="true"
+                    android:indeterminateTintMode="src_atop"
+                    android:indeterminateTint="@color/colorOrangeText"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent" />
+
+            </android.support.constraint.ConstraintLayout>
 
         </android.support.constraint.ConstraintLayout>
 

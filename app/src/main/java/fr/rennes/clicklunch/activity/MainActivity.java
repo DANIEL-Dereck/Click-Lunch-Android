@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,15 +32,17 @@ public class MainActivity extends BaseActivity {
     private TextView tv_create_new_account;
     private EditText et_connection_email;
     private EditText et_connection_password;
+    private ProgressBar loader;
 
     @Override
     protected void initComponent()
     {
         Log.d(TAG, "initComponent: ");
-        this.btn_tmp_goto_shop_list = findViewById(R.id.btn_tmp_goto_shop_detail);
-        this.tv_create_new_account = findViewById(R.id.tv_create_new_account);
-        this.et_connection_email = findViewById(R.id.et_connection_email);
-        this.et_connection_password = findViewById(R.id.et_connection_password);
+        this.btn_tmp_goto_shop_list = this.findViewById(R.id.btn_tmp_goto_shop_detail);
+        this.tv_create_new_account = this.findViewById(R.id.tv_create_new_account);
+        this.et_connection_email = this.findViewById(R.id.et_connection_email);
+        this.et_connection_password = this.findViewById(R.id.et_connection_password);
+        this.loader = this.findViewById(R.id.main_loader);
     }
 
     @Override
@@ -70,6 +73,9 @@ public class MainActivity extends BaseActivity {
             public void onClick(View v) {
                 Log.d(TAG, "btn_tmp_goto_shop_list.onClick: ");
 
+                MainActivity.this.loader.setVisibility(View.VISIBLE);
+                MainActivity.this.btn_tmp_goto_shop_list.setVisibility(View.GONE);
+
                 Login login = new Login();
                 login.setEmail(MainActivity.this.et_connection_email.getText().toString());
                 login.setPassword(MainActivity.this.et_connection_password.getText().toString());
@@ -78,6 +84,9 @@ public class MainActivity extends BaseActivity {
                     @Override
                     public void onResponse(Call<Login> call, Response<Login> response) {
                         Log.d(TAG, "onResponse: ");
+
+                        MainActivity.this.loader.setVisibility(View.GONE);
+                        MainActivity.this.btn_tmp_goto_shop_list.setVisibility(View.VISIBLE);
 
                         if (response.code() == 200 || response.code() == 201) {
                             if (response.body() != null) {
@@ -99,6 +108,9 @@ public class MainActivity extends BaseActivity {
                     @Override
                     public void onFailure(Call<Login> call, Throwable t) {
                         Log.d(TAG, "onFailure: ");
+
+                        MainActivity.this.loader.setVisibility(View.GONE);
+                        MainActivity.this.btn_tmp_goto_shop_list.setVisibility(View.VISIBLE);
                     }
                 });
             }

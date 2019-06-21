@@ -24,4 +24,9 @@ public class AppUtil {
      * Exit flag.
      */
     public static Boolean IS_EXIT_FLAG_RAISED = false;
+
+    /**
+     * Enable or disable payment.
+     */
+    public static boolean PAYMENT_ENABLE = true;
 }
