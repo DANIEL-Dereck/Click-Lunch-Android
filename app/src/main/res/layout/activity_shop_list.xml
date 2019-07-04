@@ -31,7 +31,7 @@
                 android:id="@+id/logout"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:src="@drawable/menu"
+                android:src="@drawable/baseline_person_black_18"
                 android:layout_marginStart="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
