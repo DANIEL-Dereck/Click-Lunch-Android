@@ -89,43 +89,51 @@ public class PaymentActivity extends BaseActivity {
                 PaymentActivity.this.btn_activity_payment_back.setVisibility(View.GONE);
                 PaymentActivity.this.payment_loader.setVisibility(View.VISIBLE);
 
-                RetrofitBuilder.getGsonClient().passOrder(
-                        CartLocalStorage.getInstance().getShopId(),
-                        SharedPrefsUtils.getUserId(),
-                        CartLocalStorage.getInstance().cartToRetrofitOrder(),
-                        SharedPrefsUtils.getToken()
-                ).enqueue(new Callback<RetrofitOrder.RetrofitOrderResult>() {
-                    @Override
-                    public void onResponse(Call<RetrofitOrder.RetrofitOrderResult> call, Response<RetrofitOrder.RetrofitOrderResult> response) {
-                        Log.d(TAG, "onResponse: ");
+                if (!AppUtil.MODE_API) {
+                    CartLocalStorage.getInstance().cartToRetrofitOrder();
+                    CartLocalStorage.getInstance().setOrderNumber("DEMO_ORDER_NUMBER");
+                    Intent intent = new Intent(PaymentActivity.this, ConfirmationActivity.class);
+                    AppUtil.IS_EXIT_FLAG_RAISED = true;
+                    PaymentActivity.this.startActivity(intent);
+                } else {
+                    RetrofitBuilder.getGsonClient().passOrder(
+                            CartLocalStorage.getInstance().getShopId(),
+                            SharedPrefsUtils.getUserId(),
+                            CartLocalStorage.getInstance().cartToRetrofitOrder(),
+                            SharedPrefsUtils.getToken()
+                    ).enqueue(new Callback<RetrofitOrder.RetrofitOrderResult>() {
+                        @Override
+                        public void onResponse(Call<RetrofitOrder.RetrofitOrderResult> call, Response<RetrofitOrder.RetrofitOrderResult> response) {
+                            Log.d(TAG, "onResponse: ");
 
-                        if (response.code() == 200 || response.code() == 201) {
-                            CartLocalStorage.getInstance().setOrderNumber(response.body().getNumber());
-                            Intent intent = new Intent(PaymentActivity.this, ConfirmationActivity.class);
-                            AppUtil.IS_EXIT_FLAG_RAISED = true;
-                            PaymentActivity.this.startActivity(intent);
-                        } else {
-                            Toast.makeText(
-                                    PaymentActivity.this,
-                                    PaymentActivity.this.getText(R.string.fail_pass_order),
-                                    Toast.LENGTH_SHORT
-                            ).show();
+                            if (response.code() == 200 || response.code() == 201) {
+                                CartLocalStorage.getInstance().setOrderNumber(response.body().getNumber());
+                                Intent intent = new Intent(PaymentActivity.this, ConfirmationActivity.class);
+                                AppUtil.IS_EXIT_FLAG_RAISED = true;
+                                PaymentActivity.this.startActivity(intent);
+                            } else {
+                                Toast.makeText(
+                                        PaymentActivity.this,
+                                        PaymentActivity.this.getText(R.string.fail_pass_order),
+                                        Toast.LENGTH_SHORT
+                                ).show();
+                            }
+
+                            PaymentActivity.this.btn_activity_payment_validate.setVisibility(View.VISIBLE);
+                            PaymentActivity.this.btn_activity_payment_back.setVisibility(View.VISIBLE);
+                            PaymentActivity.this.payment_loader.setVisibility(View.GONE);
                         }
 
-                        PaymentActivity.this.btn_activity_payment_validate.setVisibility(View.VISIBLE);
-                        PaymentActivity.this.btn_activity_payment_back.setVisibility(View.VISIBLE);
-                        PaymentActivity.this.payment_loader.setVisibility(View.GONE);
-                    }
+                        @Override
+                        public void onFailure(Call<RetrofitOrder.RetrofitOrderResult> call, Throwable t) {
+                            Log.d(TAG, "onFailure: ");
 
-                    @Override
-                    public void onFailure(Call<RetrofitOrder.RetrofitOrderResult> call, Throwable t) {
-                        Log.d(TAG, "onFailure: ");
-
-                        PaymentActivity.this.btn_activity_payment_validate.setVisibility(View.VISIBLE);
-                        PaymentActivity.this.btn_activity_payment_back.setVisibility(View.VISIBLE);
-                        PaymentActivity.this.payment_loader.setVisibility(View.GONE);
-                    }
-                });
+                            PaymentActivity.this.btn_activity_payment_validate.setVisibility(View.VISIBLE);
+                            PaymentActivity.this.btn_activity_payment_back.setVisibility(View.VISIBLE);
+                            PaymentActivity.this.payment_loader.setVisibility(View.GONE);
+                        }
+                    });
+                }
             }
         });
     }

@@ -18,7 +18,7 @@ public class AppUtil {
     /**
      * Use the application with API data or fixtures.
      */
-    public static Boolean MODE_API = true;
+    public static Boolean MODE_API = false;
 
     /**
      * Exit flag.

@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import fr.rennes.clicklunch.R;
+import fr.rennes.clicklunch.utils.AppUtil;
 import fr.rennes.clicklunch.utils.SharedPrefsUtils;
 import fr.rennes.clicklunch.web_services.RetrofitBuilder;
 import fr.rennes.clicklunch.web_services.ws_entity.Login;
@@ -80,39 +81,48 @@ public class MainActivity extends BaseActivity {
                 login.setEmail(MainActivity.this.et_connection_email.getText().toString());
                 login.setPassword(MainActivity.this.et_connection_password.getText().toString());
 
-                RetrofitBuilder.getGsonClient().login(login).enqueue(new Callback<Login>() {
-                    @Override
-                    public void onResponse(Call<Login> call, Response<Login> response) {
-                        Log.d(TAG, "onResponse: ");
+                if (AppUtil.MODE_API) {
+                    RetrofitBuilder.getGsonClient().login(login).enqueue(new Callback<Login>() {
+                        @Override
+                        public void onResponse(Call<Login> call, Response<Login> response) {
+                            Log.d(TAG, "onResponse: ");
 
-                        MainActivity.this.loader.setVisibility(View.GONE);
-                        MainActivity.this.btn_tmp_goto_shop_list.setVisibility(View.VISIBLE);
+                            MainActivity.this.loader.setVisibility(View.GONE);
+                            MainActivity.this.btn_tmp_goto_shop_list.setVisibility(View.VISIBLE);
 
-                        if (response.code() == 200 || response.code() == 201) {
-                            if (response.body() != null) {
-                                SharedPrefsUtils.setToken(response.body().getToken());
-                                SharedPrefsUtils.setUserId(response.body().getClient().getId());
+                            if (response.code() == 200 || response.code() == 201) {
+                                if (response.body() != null) {
+                                    SharedPrefsUtils.setToken(response.body().getToken());
+                                    SharedPrefsUtils.setUserId(response.body().getClient().getId());
+                                }
+
+                                Intent intent = new Intent(MainActivity.this, ShopListActivity.class);
+                                MainActivity.this.startActivityForResult(intent, ShopListActivity.MY_ACTIVITY_CODE);
+                            } else {
+                                Toast.makeText(
+                                        MainActivity.this,
+                                        MainActivity.this.getText(R.string.fail_sign_up),
+                                        Toast.LENGTH_SHORT
+                                ).show();
                             }
-
-                            Intent intent = new Intent(MainActivity.this, ShopListActivity.class);
-                            MainActivity.this.startActivityForResult(intent, ShopListActivity.MY_ACTIVITY_CODE);
-                        } else {
-                            Toast.makeText(
-                                    MainActivity.this,
-                                    MainActivity.this.getText(R.string.fail_sign_up),
-                                    Toast.LENGTH_SHORT
-                            ).show();
                         }
-                    }
 
-                    @Override
-                    public void onFailure(Call<Login> call, Throwable t) {
-                        Log.d(TAG, "onFailure: ");
+                        @Override
+                        public void onFailure(Call<Login> call, Throwable t) {
+                            Log.d(TAG, "onFailure: ");
 
-                        MainActivity.this.loader.setVisibility(View.GONE);
-                        MainActivity.this.btn_tmp_goto_shop_list.setVisibility(View.VISIBLE);
-                    }
-                });
+                            MainActivity.this.loader.setVisibility(View.GONE);
+                            MainActivity.this.btn_tmp_goto_shop_list.setVisibility(View.VISIBLE);
+                        }
+                    });
+                } else {
+                    SharedPrefsUtils.setToken("DEMO_TOKEN");
+                    SharedPrefsUtils.setUserId(1);
+
+                    Intent intent = new Intent(MainActivity.this, ShopListActivity.class);
+                    MainActivity.this.startActivityForResult(intent, ShopListActivity.MY_ACTIVITY_CODE);
+                }
+
             }
         });
 
